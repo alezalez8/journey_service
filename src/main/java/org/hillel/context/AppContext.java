@@ -26,7 +26,7 @@ public final class AppContext {
         final String property = properties.getProperty(beanName);
         if (property == null)
             throw new IllegalArgumentException("bean with name " + beanName + " not found");
-            final T bean = (T)Class.forName(beanName).newInstance();
+            final T bean = (T)Class.forName(property).newInstance();
             beanStorage.put(beanName, bean);
             return bean;
         }
