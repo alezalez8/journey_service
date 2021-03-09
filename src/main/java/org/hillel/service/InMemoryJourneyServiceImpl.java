@@ -14,7 +14,7 @@ public class InMemoryJourneyServiceImpl implements JourneyService {
     {
         storage.put("Odessa->Kiev", createJourney("Odessa", "Kiev"));
         storage.put("Kiev->Odessa", createJourney("Kiev", "Odessa"));
-        storage.put("Lviv-Kiev", createJourney("Lviv", "Kiev"));
+        storage.put("Lviv->Kiev", createJourney("Lviv", "Kiev"));
 
     }
 

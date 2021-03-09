@@ -16,13 +16,15 @@ public class TicketClient {
 
     public Collection<Journey> find(String stationFrom, String stationTo, LocalDate dateFrom, LocalDate dateTo) {
         // TODO check input params
+
         return journeyService.find(stationFrom, stationTo, dateFrom, dateTo);
     }
 
     public static void main(String[] args) {
         final JourneyService journeyService = new InMemoryJourneyServiceImpl();
-        TicketClient client = new TicketClient(journeyService);
+        final TicketClient client = new TicketClient(journeyService);
         System.out.println(client.find("Odessa", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
+
 
 
     }
