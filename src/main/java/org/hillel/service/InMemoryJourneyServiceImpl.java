@@ -10,6 +10,12 @@ import java.util.*;
 public class InMemoryJourneyServiceImpl implements JourneyService {
     // there should be DB
     private Map<String, List<Journey>> storage = new HashMap<>();
+    private final String id;
+
+
+    public InMemoryJourneyServiceImpl(String identify) {
+        id = identify;
+    }
 
     {
         storage.put("Odessa->Kiev", createJourney("Odessa", "Kiev"));
