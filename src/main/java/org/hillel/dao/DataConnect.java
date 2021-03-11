@@ -18,32 +18,18 @@ public class DataConnect {
     static final String USER = "postgres";
     static final String PASS = "postgres";
     static final String sql = "SELECT * FROM schedule_service";
-    //private Map<String, List<Journey>> storage = new HashMap<>();
+    static final String sqlCity = "SELECT * FROM schedule_service where ";
 
-    /*public static void main(String[] argv) throws SQLException {
-        driverOK();
 
-        *//*try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
-            e.printStackTrace();
-            return;
-        }*//*
 
-        System.out.println("PostgreSQL JDBC Driver successfully connected");
-        Connection connection = null;
-
+    public static void main(String[] args) {
         getBD();
-
-
-    }*/
+    }
 
     public static Map<String, List<Journey>> getBD() {
-        driverOK();
-        System.out.println("PostgreSQL JDBC Driver successfully connected");
-        //Connection connection = null;
-        getBD();
+        //driverOK();
+        //System.out.println("PostgreSQL JDBC Driver successfully connected");
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
        /* SimpleDateFormat format1 = new SimpleDateFormat();
         format1.applyPattern("yyyy-MM-dd");*/
@@ -58,12 +44,13 @@ public class DataConnect {
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                String from = resultSet.getString(2);
-                String to = resultSet.getString(3);
-                LocalDate departure = LocalDate.parse(resultSet.getString(4));
-                LocalDate arrival = LocalDate.parse(resultSet.getString(5));
+                String from = resultSet.getString("station_from");
+                String to = resultSet.getString("station_to");
+                LocalDate departure = LocalDate.parse(resultSet.getString("departure"));
+                LocalDate arrival = LocalDate.parse(resultSet.getString("arrival"));
+                System.out.println(from + "->" + to + "   dep: " + departure + "  arr: " + arrival);
 
-                storage.put((from + "->" + to), new Journey(from, to, departure, arrival));
+
 
             }
             resultSet.close();
