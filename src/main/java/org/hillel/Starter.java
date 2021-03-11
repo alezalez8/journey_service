@@ -23,8 +23,8 @@ public class Starter {
         final JourneyService journeyService = applicationContext.getBean(JourneyService.class);
 
         //final JourneyService journeyService = AppContext.getBean("journeyService");
-        System.out.println(journeyService.find("Odessa", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
-        System.out.println(journeyService.find("Odessa", "Kiev", LocalDate.now(), LocalDate.now().plusDays(0).plusDays(1)));
+        System.out.println(journeyService.find("Lviv", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
+       // System.out.println(journeyService.find("Odessa", "Kiev", LocalDate.now(), LocalDate.now().plusDays(0).plusDays(1)));
 
 
     }

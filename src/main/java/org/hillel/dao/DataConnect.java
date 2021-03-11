@@ -15,50 +15,30 @@ public class DataConnect {
     static final String USER = "postgres";
     static final String PASS = "postgres";
     static final String sql = "SELECT * FROM schedule_service";
-    static final String sqlCity = "SELECT * FROM schedule_service where ";
+    static List<Journey> journeys = new ArrayList<>();
 
 
-    public static void main(String[] args) {
-        getBD();
-    }
+    public  List<Journey> getBD() {
 
-    public static List<Journey> getBD() {
-        //driverOK();
-        //System.out.println("PostgreSQL JDBC Driver successfully connected");
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-       /* SimpleDateFormat format1 = new SimpleDateFormat();
-        format1.applyPattern("yyyy-MM-dd");*/
-
-
-        List<Journey> journeys = new ArrayList<>();
-        //Connection connection;
         try {
             Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            connectedOK(connection);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                String from = resultSet.getString("station_from");
-                String to = resultSet.getString("station_to");
+                String stationFrom = resultSet.getString("station_from");
+                String stationTo = resultSet.getString("station_to");
                 LocalDate departure = LocalDate.parse(resultSet.getString("departure"));
                 LocalDate arrival = LocalDate.parse(resultSet.getString("arrival"));
-                journeys.add(new Journey(from, to, departure, arrival));
-
-                //System.out.println(from + "->" + to + "   dep: " + departure + "  arr: " + arrival);
-
-
+                journeys.add(new Journey(stationFrom, stationTo, departure, arrival));
             }
             resultSet.close();
             statement.close();
             connection.close();
 
-
         } catch (SQLException e) {
             System.out.println("Connection Failed");
             e.printStackTrace();
-            //return;
         }
         return journeys;
     }

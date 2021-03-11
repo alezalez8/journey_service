@@ -6,30 +6,26 @@ import org.hillel.dao.DataConnect;
 import java.time.LocalDate;
 import java.util.*;
 
-public class TicketClientDB implements JourneyService {
-    // there should be DB
-    //private Map<String, List<Journey>> storage = new HashMap<>();
-    //private Map<String, List<Journey>> storage = DataConnect.getBD();
+public class TicketClientDB  {
+    private JourneyService journeyService;
 
-
-
-
-
-
-    private List<Journey> createJourney(String from, String to) {
-        return Arrays.asList(
-                new Journey(from, to, LocalDate.now(), LocalDate.now().plusDays(1)),
-                new Journey(from, to, LocalDate.now().plusDays(1), LocalDate.now().plusDays(2)),
-                new Journey(from, to, LocalDate.now().plusDays(2), LocalDate.now().plusDays(3))
-        );
+    public TicketClientDB(JourneyService journeyService) {
+        this.journeyService = journeyService;
     }
 
-
-    @Override
     public Collection<Journey> find(String stationFrom, String stationTo, LocalDate dateFrom, LocalDate dateTo) {
+        // TODO check input params
 
-       // return Collections.unmodifiableList(out);
-        return null;
+        return journeyService.find(stationFrom, stationTo, dateFrom, dateTo);
+    }
+
+    public static void main(String[] args) {
+        final InDBJourneyServiceImpl journeyService = new InDBJourneyServiceImpl();
+        final TicketClientDB client = new TicketClientDB(journeyService);
+        System.out.println(client.find("Odessa", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1)));
+
+
+
     }
 
 }
