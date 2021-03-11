@@ -9,17 +9,12 @@ import java.util.*;
 public class TicketClientDB implements JourneyService {
     // there should be DB
     //private Map<String, List<Journey>> storage = new HashMap<>();
-    private Map<String, List<Journey>> storage = DataConnect.getBD();
+    //private Map<String, List<Journey>> storage = DataConnect.getBD();
 
 
 
 
-    {
-        storage.put("Odessa->Kiev", createJourney("Odessa", "Kiev"));
-        storage.put("Kiev->Odessa", createJourney("Kiev", "Odessa"));
-        storage.put("Lviv->Kiev", createJourney("Lviv", "Kiev"));
 
-    }
 
     private List<Journey> createJourney(String from, String to) {
         return Arrays.asList(
@@ -32,16 +27,9 @@ public class TicketClientDB implements JourneyService {
 
     @Override
     public Collection<Journey> find(String stationFrom, String stationTo, LocalDate dateFrom, LocalDate dateTo) {
-        if(storage == null || storage.isEmpty()) return Collections.emptyList();
-        List<Journey> journeys = storage.get(stationFrom + "->" + stationTo);
-        if(journeys == null || journeys.isEmpty()) return Collections.emptyList();
-        List<Journey> out = new ArrayList<>();
-        for(Journey item: journeys){
-            if(item.getDeparture().equals(dateFrom) && item.getArrival().equals(dateTo)){
-                out.add(item);
-            }
-        }
-        return Collections.unmodifiableList(out);
+
+       // return Collections.unmodifiableList(out);
+        return null;
     }
 
 }
