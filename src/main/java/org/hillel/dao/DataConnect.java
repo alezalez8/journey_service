@@ -11,15 +11,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class DataConnect {
-    static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/schedule_transfer";
-    static final String USER = "postgres";
-    static final String PASS = "postgres";
-    static final String sql = "SELECT * FROM schedule_service";
-    static List<Journey> journeys = new ArrayList<>();
+    //static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/schedule_transfer";
+    private static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/schedule_service";
+    private static final String USER = "postgres";
+    private static final String PASS = "postgres";
+    private static final String sql = "SELECT * FROM schedule_service";
+    private List<Journey> journeys = new ArrayList<>();
 
+    public DataConnect() {
+        System.out.println("basa is ready");
+    }
 
-    public  List<Journey> getBD() {
-
+    public List<Journey> getBD() {
         try {
             Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement statement = connection.createStatement();
