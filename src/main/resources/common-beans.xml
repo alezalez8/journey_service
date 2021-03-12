@@ -7,9 +7,9 @@
 
     <context:component-scan base-package="org.hillel.config"/>
 
-    <!--<bean class="org.hillel.service.InMemoryJourneyServiceImpl">
-        <constructor-arg name="identify" value="Aleks"/>
-    </bean>-->
+    <bean class="org.hillel.service.InDBJourneyServiceImpl">
+
+    </bean>
 
 
 </beans>

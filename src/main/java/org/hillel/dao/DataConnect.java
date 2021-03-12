@@ -19,7 +19,7 @@ public class DataConnect {
     private List<Journey> journeys = new ArrayList<>();
 
     public DataConnect() {
-        System.out.println("basa is ready");
+
     }
 
     public List<Journey> getBD() {

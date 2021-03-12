@@ -22,7 +22,8 @@ public class TicketClientDB  {
     public static void main(String[] args) {
         final InDBJourneyServiceImpl journeyService = new InDBJourneyServiceImpl();
         final TicketClientDB client = new TicketClientDB(journeyService);
-        System.out.println(client.find("Odessa", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1)));
+        //System.out.println(client.find("Odessa", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1)));
+        System.out.println(client.find("Odessa", "Lviv", LocalDate.now().plusDays(1), LocalDate.now().plusDays(3)));
 
 
 

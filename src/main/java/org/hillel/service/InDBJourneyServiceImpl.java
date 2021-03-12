@@ -15,17 +15,6 @@ public class InDBJourneyServiceImpl implements JourneyService {
     private List<Journey> storage;
 
 
-    public static void main(String[] args) {
-        InDBJourneyServiceImpl service = new InDBJourneyServiceImpl();
-        System.out.println(service.find("Lviv", "Kiev", LocalDate.now(), LocalDate.now().plusDays(0)));
-        // System.out.println(service.find("tutui", "tyiutui", LocalDate.now(), LocalDate.now().plusDays(1)));
-
-    }
-
-    private void testFind(String stationFrom, String stationTo, LocalDate dateFrom, LocalDate dateTo) {
-        find(stationFrom, stationTo, dateFrom, dateTo);
-    }
-
 
     @Override
     public Collection<Journey> find(String stationFrom, String stationTo, LocalDate dateFrom, LocalDate dateTo) {
