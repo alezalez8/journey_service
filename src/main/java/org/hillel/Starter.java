@@ -16,15 +16,14 @@ import java.time.LocalDate;
 public class Starter {
     public static void main(String[] args) throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 
-        //final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
+        final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
 
-        final ApplicationContext applicationContext = new ClassPathXmlApplicationContext("common-beans.xml");
         final JourneyService journeyService = applicationContext.getBean(JourneyService.class);
+       // final JourneyService journeyService = applicationContext.getBean("inDBJourneyServiceImpl");
 
         //final JourneyService journeyService = AppContext.getBean("journeyService");
         System.out.println(journeyService.find("Lviv", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
-        System.out.println("=================");
-        //System.out.println(journeyService.find("Odessa", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
+
 
 
     }

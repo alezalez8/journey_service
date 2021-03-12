@@ -45,7 +45,7 @@ public class DataConnect {
         }
         return journeys;
     }
-
+    // for debuging
     private static void driverOK() {
         try {
             Class.forName("org.postgresql.Driver");

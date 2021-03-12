@@ -2,6 +2,7 @@ package org.hillel.service;
 
 import org.hillel.Journey;
 import org.hillel.dao.DataConnect;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-
+@Component
 public class InDBJourneyServiceImpl implements JourneyService {
     private DataConnect dataConnect = new DataConnect();
     private List<Journey> storage;
