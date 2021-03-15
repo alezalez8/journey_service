@@ -1,7 +1,6 @@
 package org.hillel.service;
 
 import org.hillel.Journey;
-import org.hillel.dao.DataConnect;
 
 import java.time.LocalDate;
 import java.util.*;
