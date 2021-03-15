@@ -10,6 +10,7 @@ public class Journey {
     private final LocalDate arrival;
     private final String route;
 
+
     public Journey(final String stationFrom, final String stationTo, final LocalDate departure,
                    final LocalDate arrival) {
         if (stationFrom == null || stationTo == null)
@@ -20,6 +21,7 @@ public class Journey {
         this.arrival = arrival;
         this.route = stationFrom + "->" + stationTo;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -44,6 +46,7 @@ public class Journey {
         result = 31 * result + (route != null ? route.hashCode() : 0);
         return result;
     }
+
 
     public String getStationFrom() {
         return stationFrom;

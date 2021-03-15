@@ -1,17 +1,13 @@
-package org.hillel.dao;
+package org.hillel.repository;
 
 import org.hillel.Journey;
 
 import java.sql.*;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class DataConnect {
-    //static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/schedule_transfer";
     private static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/schedule_service";
     private static final String USER = "postgres";
     private static final String PASS = "postgres";
@@ -45,7 +41,8 @@ public class DataConnect {
         }
         return journeys;
     }
-    // for debuging
+
+    // for debbuging
     private static void driverOK() {
         try {
             Class.forName("org.postgresql.Driver");

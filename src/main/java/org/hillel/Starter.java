@@ -18,11 +18,16 @@ public class Starter {
 
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
 
-        final JourneyService journeyService = applicationContext.getBean(JourneyService.class);
-       // final JourneyService journeyService = applicationContext.getBean("inDBJourneyServiceImpl");
+         JourneyService journeyService = applicationContext.getBean(JourneyService.class);
 
-        //final JourneyService journeyService = AppContext.getBean("journeyService");
         System.out.println(journeyService.find("Lviv", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
+        journeyService = applicationContext.getBean(JourneyService.class);
+
+        System.out.println(journeyService.find("Kiev", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1)));
+        journeyService = applicationContext.getBean(JourneyService.class);
+
+        System.out.println(journeyService.find("Kiev", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1)));
+        System.out.println(journeyService.find("Kiev", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1)));
 
 
 
