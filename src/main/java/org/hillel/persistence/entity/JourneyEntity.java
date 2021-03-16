@@ -26,4 +26,43 @@ public class JourneyEntity {
     @Column(name = "arrival", length = 10, nullable = false)
     private LocalDate arrival;
 
+    public String getStationFrom() {
+        return stationFrom;
+    }
+
+    public void setStationFrom(String stationFrom) {
+        this.stationFrom = stationFrom;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getStationTo() {
+        return stationTo;
+    }
+
+    public void setStationTo(String stationTo) {
+        this.stationTo = stationTo;
+    }
+
+    public LocalDate getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(LocalDate departure) {
+        this.departure = departure;
+    }
+
+    public LocalDate getArrival() {
+        return arrival;
+    }
+
+    public void setArrival(LocalDate arrival) {
+        this.arrival = arrival;
+    }
 }
