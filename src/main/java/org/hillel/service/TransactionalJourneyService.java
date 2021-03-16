@@ -1,14 +1,11 @@
 package org.hillel.service;
 
-import org.hillel.Journey;
 import org.hillel.persistence.entity.JourneyEntity;
 import org.hillel.persistence.repository.JourneyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.Collection;
 
 @Service
 public class TransactionalJourneyService {
@@ -22,6 +19,5 @@ public class TransactionalJourneyService {
     public Long createJourney(final JourneyEntity entity) {
         //todo check
         return journeyRepository.create(entity);
-
     }
 }

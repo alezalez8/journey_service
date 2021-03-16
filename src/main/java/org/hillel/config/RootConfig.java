@@ -5,13 +5,11 @@ import org.springframework.context.annotation.*;
 
 @Configuration
 @ComponentScan("org.hillel")
-//@PropertySource({"../../../../resources/application.properties", "database.properties"})
-@PropertySource({"database.properties"})
+@PropertySource({"classpath:database.properties"})
 public class RootConfig {
 
    /* @Bean
-    @Scope("prototype")
-    public JourneyService InDBJourneyServiceImpl() {
+      public JourneyService InDBJourneyServiceImpl() {
         return new InDBJourneyServiceImpl();
     }
 

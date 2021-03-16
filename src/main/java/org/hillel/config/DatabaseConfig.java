@@ -3,6 +3,7 @@ package org.hillel.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.hibernate.dialect.PostgreSQL10Dialect;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -46,6 +47,7 @@ public class DatabaseConfig {
         emf.setPackagesToScan("org.hillel.persistence.entity");
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         Properties properties = new Properties();
+        properties.put("hibernate.dialect", PostgreSQL10Dialect.class.getName());
         properties.put("hibernate.hbm2dll.auto", "create-drop");
         properties.put("hibernate.show_sql", "true");
         emf.setJpaProperties(properties);
