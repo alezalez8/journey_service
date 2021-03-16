@@ -2,6 +2,8 @@ package org.hillel;
 
 import org.hillel.config.RootConfig;
 import org.hillel.context.AppContext;
+import org.hillel.persistence.entity.JourneyEntity;
+import org.hillel.service.TicketClient;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -17,17 +19,13 @@ public class Starter {
     public static void main(String[] args) throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
+        // JourneyService journeyService = applicationContext.getBean(JourneyService.class);
+        TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
+        System.out.println(ticketClient.find("Lviv", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
 
-         JourneyService journeyService = applicationContext.getBean(JourneyService.class);
-
-        System.out.println(journeyService.find("Lviv", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
-        journeyService = applicationContext.getBean(JourneyService.class);
-
-        System.out.println(journeyService.find("Kiev", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1)));
-        journeyService = applicationContext.getBean(JourneyService.class);
-
-        System.out.println(journeyService.find("Kiev", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1)));
-        System.out.println(journeyService.find("Kiev", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1)));
+        JourneyEntity journeyEntity = new JourneyEntity();
+        journeyEntity.setStationFrom("Kiev");
+        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
 
 
 

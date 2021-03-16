@@ -11,15 +11,12 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 @Service
-public class TransactionalJourneyService implements JourneyService{
+public class TransactionalJourneyService {
 
     @Autowired
     private JourneyRepository journeyRepository;
 
-    @Override
-    public Collection<Journey> find(String stationFrom, String stationTo, LocalDate dateFrom, LocalDate dateTo) {
-        return null;
-    }
+
 
     @Transactional
     public Long createJourney(final JourneyEntity entity) {

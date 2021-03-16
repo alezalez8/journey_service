@@ -3,7 +3,6 @@ package org.hillel.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.hibernate.dialect.PostgreSQL10Dialect;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,8 +20,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-//@PropertySource("database.properties")
-@PropertySource("src/main/resources/application.properties")
+@PropertySource("classpath:database.properties")
 @EnableTransactionManagement
 public class DatabaseConfig {
 
