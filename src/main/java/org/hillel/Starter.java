@@ -25,7 +25,7 @@ public class Starter {
 
         JourneyEntity journeyEntity = new JourneyEntity();
         journeyEntity.setStationFrom("Kiev");
-        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
+       // System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
 
 
 
