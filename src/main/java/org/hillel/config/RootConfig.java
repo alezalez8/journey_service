@@ -1,24 +1,33 @@
 package org.hillel.config;
 
 
-import org.hillel.Journey;
 import org.hillel.service.InDBJourneyServiceImpl;
+import org.hillel.service.InMemoryJourneyServiceImpl;
 import org.hillel.service.JourneyService;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-
-import java.time.LocalDate;
-import java.util.Collection;
+import org.hillel.service.TicketClient;
+import org.springframework.context.annotation.*;
 
 @Configuration
+@ComponentScan("org.hillel")
+@PropertySource({"classpath:database.properties"})
 public class RootConfig {
 
+
+
     @Bean
-    @Scope("prototype")
-    public JourneyService InDBJourneyServiceImpl() {
+      public JourneyService InDBJourneyServiceImpl() {
         return new InDBJourneyServiceImpl();
     }
 
+    @Bean(name = "inMemoryJourneyService")
+    public JourneyService InMemoryJourneyServiceImpl() {
+        return new InMemoryJourneyServiceImpl("in memory");
+    }
+
+
+    @Bean
+    public TicketClient ticketClient() {
+        return new TicketClient();
+    }
 
 }
