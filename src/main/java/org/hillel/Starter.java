@@ -19,7 +19,7 @@ public class Starter {
     public static void main(String[] args) throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
 
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
-        // JourneyService journeyService = applicationContext.getBean(JourneyService.class);
+        System.out.println("after init");
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
         System.out.println(ticketClient.find("Lviv", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
 
