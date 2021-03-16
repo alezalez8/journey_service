@@ -21,7 +21,8 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("database.properties")
+//@PropertySource("database.properties")
+@PropertySource("src/main/resources/application.properties")
 @EnableTransactionManagement
 public class DatabaseConfig {
 
