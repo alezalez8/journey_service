@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class TicketClientDB  {
+
     private JourneyService journeyService;
 
     public TicketClientDB(JourneyService journeyService) {
