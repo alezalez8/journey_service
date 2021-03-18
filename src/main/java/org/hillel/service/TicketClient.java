@@ -15,7 +15,7 @@ import java.util.Map;
 @Component
 public class  TicketClient {
 
-    private JourneyService journeyService;
+    /*private JourneyService journeyService;
 
     public TicketClient() {
     }
@@ -35,13 +35,12 @@ public class  TicketClient {
         // TODO check input params
 
         return journeyService.find(stationFrom, stationTo, dateFrom, dateTo);
-    }
+    }*/
 
 
     //===================================== latest ticketClient
 
 
-    /*
 
      @Autowired
     private Map<String, JourneyService> journeyService;
@@ -66,7 +65,7 @@ public class  TicketClient {
         System.out.println(client.find("Odessa", "Lviv", LocalDate.now().plusDays(1), LocalDate.now().plusDays(3)));
 
 
-    }*/
+    }
 
 
 }
