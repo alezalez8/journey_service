@@ -1,8 +1,6 @@
 package org.hillel.config;
 
 
-import org.hillel.service.InDBJourneyServiceImpl;
-import org.hillel.service.InMemoryJourneyServiceImpl;
 import org.hillel.service.JourneyService;
 import org.hillel.service.TicketClient;
 import org.springframework.context.annotation.*;

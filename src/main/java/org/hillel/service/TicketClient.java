@@ -60,9 +60,9 @@ public class  TicketClient {
     }
 
     public static void main(String[] args) {
-        final InDBJourneyServiceImpl journeyService = new InDBJourneyServiceImpl();
-        final TicketClientDB client = new TicketClientDB(journeyService);
-        System.out.println(client.find("Odessa", "Lviv", LocalDate.now().plusDays(1), LocalDate.now().plusDays(3)));
+       // final InDBJourneyServiceImpl journeyService = new InDBJourneyServiceImpl(); delete db
+       // final TicketClientDB client = new TicketClientDB(journeyService);           delete db
+       // System.out.println(client.find("Odessa", "Lviv", LocalDate.now().plusDays(1), LocalDate.now().plusDays(3)));
 
 
     }
