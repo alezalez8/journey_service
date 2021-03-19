@@ -15,16 +15,16 @@ import java.util.Map;
 @Component
 public class  TicketClient {
 
-    /*private JourneyService journeyService;
+    private JourneyService journeyService;
 
     public TicketClient() {
     }
 
-    @Autowired
-    @Qualifier("inMemoryJourneyService")
+    /*@Autowired
+    //@Qualifier("inMemoryJourneyService")
     public void setJourneyService(JourneyService journeyService) {
         this.journeyService = journeyService;
-    }
+    }*/
 
 
     public TicketClient(@Qualifier("inMemoryJourneyService") JourneyService journeyService) {
@@ -35,15 +35,16 @@ public class  TicketClient {
         // TODO check input params
 
         return journeyService.find(stationFrom, stationTo, dateFrom, dateTo);
-    }*/
+    }
 
 
     //===================================== latest ticketClient
 
 
 
-     @Autowired
-    private Map<String, JourneyService> journeyService;
+//     @Autowired
+//    private Map<String, JourneyService> journeyServices;
+/*
 
     @Autowired
     private TransactionalJourneyService transactionalJourneyService;
@@ -66,6 +67,7 @@ public class  TicketClient {
 
 
     }
+*/
 
 
 }
