@@ -3,14 +3,13 @@ package org.hillel.persistence.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "schedule_service")
 public class JourneyEntity {
 
     @Id
-    @Column(name="id")
+   // @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
