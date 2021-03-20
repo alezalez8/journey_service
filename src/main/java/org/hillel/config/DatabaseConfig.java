@@ -36,7 +36,7 @@ public class DatabaseConfig {
         config.setJdbcUrl(environment.getProperty("database.url"));
         config.addDataSourceProperty("databaseName", environment.getProperty("database.name"));
         config.setDataSourceClassName(PGSimpleDataSource.class.getName());
-        HikariDataSource dataSource = new HikariDataSource();
+        HikariDataSource dataSource = new HikariDataSource(config);
         return dataSource;
     }
 
