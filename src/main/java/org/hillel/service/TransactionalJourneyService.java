@@ -15,7 +15,7 @@ public class TransactionalJourneyService {
 
 
 
-    @Transactional   // why this better then on сущностях
+    @Transactional
     public Long createJourney(final JourneyEntity entity) {
         //todo check
         return journeyRepository.create(entity);

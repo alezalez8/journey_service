@@ -41,7 +41,7 @@ public class DatabaseConfig {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean emf(DataSource dataSource){
+    public LocalContainerEntityManagerFactoryBean emf(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
         emf.setPackagesToScan("org.hillel.persistence.entity");
@@ -61,7 +61,6 @@ public class DatabaseConfig {
         jpaTransactionManager.setDataSource(dataSource());
         return jpaTransactionManager;
     }
-
 
 
 }

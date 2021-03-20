@@ -21,11 +21,15 @@ public class Starter {
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
         System.out.println("after init");
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
-        System.out.println(ticketClient.find("Lviv", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
+        //System.out.println(ticketClient.find("Lviv", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
 
         JourneyEntity journeyEntity = new JourneyEntity();
-        journeyEntity.setStationFrom("Kiev");
-       // System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
+        journeyEntity.setStationFrom("Odessa");
+        journeyEntity.setStationTo("Antalia");
+        journeyEntity.setDeparture(LocalDate.now());
+        journeyEntity.setArrival(LocalDate.now().plusDays(1));
+
+        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
 
 
 
