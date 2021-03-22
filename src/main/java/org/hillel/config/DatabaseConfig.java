@@ -36,7 +36,11 @@ public class DatabaseConfig {
         config.setJdbcUrl(environment.getProperty("database.url"));
         config.addDataSourceProperty("databaseName", environment.getProperty("database.name"));
         config.setDataSourceClassName(PGSimpleDataSource.class.getName());
+        config.setMinimumIdle(30);
+        config.setMaximumPoolSize(150);
+        config.setConnectionTimeout(2000);  // (5 minutes = 5*60*1000 = 30000 mS) /150 (connects) = 2000 mS
         HikariDataSource dataSource = new HikariDataSource(config);
+
         return dataSource;
     }
 

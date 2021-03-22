@@ -31,6 +31,17 @@ public class Starter {
 
         System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
 
+        JourneyEntity journeyEntity1 = new JourneyEntity();
+        journeyEntity1.setStationFrom("Odessa");
+        journeyEntity1.setStationTo("Kimer");
+        journeyEntity1.setDeparture(LocalDate.now());
+        journeyEntity1.setArrival(LocalDate.now().plusDays(1));
+
+        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity1));
+        JourneyEntity journeyEntity2 = new JourneyEntity("Kiev", "Lviv",LocalDate.now(), LocalDate.now().plusDays(1) );
+        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity2));
+
+
 
 
     }
