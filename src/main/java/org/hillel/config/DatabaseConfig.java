@@ -20,10 +20,15 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 @Configuration
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
 public class DatabaseConfig {
+    private final long connTimeOut = 2; // (5 minutes = 5*60 = 300 S) /150 (connects) = 2 S
+    private final int poolSize = 150;
+    private final int minIdle = 30;
 
     @Autowired
     private Environment environment;
@@ -36,6 +41,9 @@ public class DatabaseConfig {
         config.setJdbcUrl(environment.getProperty("database.url"));
         config.addDataSourceProperty("databaseName", environment.getProperty("database.name"));
         config.setDataSourceClassName(PGSimpleDataSource.class.getName());
+        config.setConnectionTimeout(SECONDS.toMillis(connTimeOut));
+        config.setMinimumIdle(minIdle);
+        config.setMaximumPoolSize(poolSize);
         HikariDataSource dataSource = new HikariDataSource(config);
         return dataSource;
     }
@@ -61,6 +69,5 @@ public class DatabaseConfig {
         jpaTransactionManager.setDataSource(dataSource());
         return jpaTransactionManager;
     }
-
 
 }

@@ -1,4 +1,4 @@
 package org.hillel.service;
 
-public class Journey {
+public class Journey  {
 }

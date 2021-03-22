@@ -16,12 +16,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class Starter {
-    public static void main(String[] args) throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public static void main(String[] args)  {
 
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
-        System.out.println("after init");
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
-        //System.out.println(ticketClient.find("Lviv", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
 
         JourneyEntity journeyEntity = new JourneyEntity();
         journeyEntity.setStationFrom("Odessa");
@@ -30,6 +28,17 @@ public class Starter {
         journeyEntity.setArrival(LocalDate.now().plusDays(1));
 
         System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
+
+        JourneyEntity journeyEntity1 = new JourneyEntity();
+        journeyEntity1.setStationFrom("Odessa");
+        journeyEntity1.setStationTo("Kimer");
+        journeyEntity1.setDeparture(LocalDate.now());
+        journeyEntity1.setArrival(LocalDate.now().plusDays(1));
+
+        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity1));
+        JourneyEntity journeyEntity2 = new JourneyEntity("Kiev", "Lviv",LocalDate.now(), LocalDate.now().plusDays(1) );
+        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity2));
+
 
 
 

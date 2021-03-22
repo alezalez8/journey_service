@@ -11,14 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class TransactionalJourneyService {
 
     @Autowired
-    private JourneyRepository journeyRepository; // inject my repository
-
+    private JourneyRepository journeyRepository;
 
 
     @Transactional
     public Long createJourney(final JourneyEntity entity) {
-        //todo check
+        if(entity != null) {
+            return journeyRepository.create(entity);
+        }
+
         return journeyRepository.create(entity);
     }
 }
-// create our journey using by our repo

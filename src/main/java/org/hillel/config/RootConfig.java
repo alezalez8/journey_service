@@ -13,17 +13,6 @@ public class RootConfig {
 
 
 
-  /*  @Bean
-      public JourneyService InDBJourneyServiceImpl() {
-        return new InDBJourneyServiceImpl();
-    }*/
-
-   /* @Bean(name = "inMemoryJourneyService")
-    public JourneyService InMemoryJourneyServiceImpl() {
-        return new InMemoryJourneyServiceImpl("in memory");
-    }*/
-
-
     @Bean
     public TicketClient ticketClient() {
         return new TicketClient();

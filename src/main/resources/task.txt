@@ -1,4 +1,4 @@
-В проект добавить hibernate, настроить все необходимое для работыс ним:
+В проект добавить hibernate, настроить все необходимое для работы с ним:
 1. entity
 2. manager,
 3. transaction,
@@ -7,8 +7,3 @@
 максимальное число соединений не должно превышать 150. Максимальное время
 выполнения запроса - не больше 5 минут.
 
-
-database.username=postgres
-database.password=postgres
-database.url=jdbc:postgresql://localhost:5432/schedule_service
-database.name=schedule_service
