@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class Starter {
-    public static void main(String[] args)  {
+    public static void main(String[] args)  throws IOException {
 
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
