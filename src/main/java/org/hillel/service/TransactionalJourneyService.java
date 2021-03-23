@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 @Service
@@ -17,8 +18,10 @@ public class TransactionalJourneyService {
 
 
     @Transactional
-    public Long createJourney(final JourneyEntity entity) throws FileNotFoundException {
-        if(entity == null) throw new FileNotFoundException("Unable to create new record");
+    public Long createJourney(final JourneyEntity entity) throws IOException {
+        if (entity == null) {
+            throw new IOException("Unable to create new record");
+        }
         return journeyRepository.create(entity);
     }
 }
