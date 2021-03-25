@@ -14,9 +14,10 @@ public class JourneyRepository {
     private EntityManager entityManager;
 
     public Long create(final JourneyEntity journeyEntity) {
-        // check  if journeyEntity != null
-        // permition this method with null
-        entityManager.persist(journeyEntity); //.persist - save object
+        if(journeyEntity == null) {
+            throw new IllegalArgumentException("Unable to create new record");
+        }
+        entityManager.persist(journeyEntity);
         return journeyEntity.getId();
 
     }

@@ -28,10 +28,10 @@ public class JourneyEntity {
         this.arrival = arrival;
     }
 
-    @Column(name = "station_from", length = 50, nullable = false)
+    @Column(name = "station_from", length = 80, nullable = false)
     private String stationFrom;
 
-    @Column(name = "station_to", length = 50, nullable = false)
+    @Column(name = "station_to", length = 80, nullable = false)
     private String stationTo;
 
 

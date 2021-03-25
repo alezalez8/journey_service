@@ -18,9 +18,9 @@ public class TransactionalJourneyService {
 
 
     @Transactional
-    public Long createJourney(final JourneyEntity entity) throws IOException {
+    public Long createJourney(final JourneyEntity entity)  {
         if (entity == null) {
-            throw new IOException("Unable to create new record");
+            throw new IllegalArgumentException("Unable to create new record");
         }
         return journeyRepository.create(entity);
     }

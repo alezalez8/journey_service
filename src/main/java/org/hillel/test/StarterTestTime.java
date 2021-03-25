@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class StarterTestTime {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
@@ -23,7 +23,7 @@ public class StarterTestTime {
             journeyEntity.setDeparture(LocalDate.now());
             journeyEntity.setArrival(LocalDate.now().plusDays(i));
             ticketClient.createJourney(journeyEntity);
-           // System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
+            // System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
 
         }
         System.out.println("BD is created");

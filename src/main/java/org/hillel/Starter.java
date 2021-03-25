@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class Starter {
-    public static void main(String[] args)  throws IOException {
+    public static void main(String[] args) {
 
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
@@ -36,13 +36,10 @@ public class Starter {
         journeyEntity1.setArrival(LocalDate.now().plusDays(1));
 
         System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity1));
-        JourneyEntity journeyEntity2 = new JourneyEntity("Kiev", "Lviv",LocalDate.now(), LocalDate.now().plusDays(1) );
+        JourneyEntity journeyEntity2 = new JourneyEntity("Kiev", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1));
         System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity2));
 
      
-
-
-
 
 
 
