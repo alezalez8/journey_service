@@ -26,7 +26,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
 public class DatabaseConfig {
-    private final long connTimeOut = 2; // (5 minutes = 5*60 = 300 S) /150 (connects) = 2 S
+//    private final long connTimeOut = 2; // (5 minutes = 5*60 = 300 S) /150 (connects) = 2 S
+    private final long connTimeOut = 300;
     private final int poolSize = 150;
     private final int minIdle = 30;
 
@@ -58,6 +59,7 @@ public class DatabaseConfig {
         properties.put("hibernate.dialect", PostgreSQL10Dialect.class.getName());
         properties.put("hibernate.hbm2ddl.auto", "create-drop");
         properties.put("hibernate.show_sql", "true");
+        properties.put("javax.persistence.query.timeout", 5*60*1000);
         emf.setJpaProperties(properties);
         return emf;
     }
