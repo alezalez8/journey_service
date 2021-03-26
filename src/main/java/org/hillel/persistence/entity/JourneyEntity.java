@@ -4,9 +4,12 @@ package org.hillel.persistence.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hillel.persistence.entity.enums.DirectionType;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "schedule_service")
@@ -21,12 +24,12 @@ public class JourneyEntity {
     private Long id;
 
 
-    public JourneyEntity(String stationFrom, String stationTo, LocalDate departure, LocalDate arrival) {
+    /*public JourneyEntity(String stationFrom, String stationTo, Date departure, Date arrival) {
         this.stationFrom = stationFrom;
         this.stationTo = stationTo;
         this.departure = departure;
         this.arrival = arrival;
-    }
+    }*/
 
     @Column(name = "station_from", length = 80, nullable = false)
     private String stationFrom;
@@ -35,11 +38,16 @@ public class JourneyEntity {
     private String stationTo;
 
 
-    @Column(name = "departure", length = 10, nullable = false)
-    private LocalDate departure;
+    @Column(name = "departure", nullable = false)
+    @Temporal(TemporalType.DATE)
+    //private Instant departure;
+    private Date departure;
 
-    @Column(name = "arrival", length = 10, nullable = false)
-    private LocalDate arrival;
+    @Column(name = "arrival", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date arrival;
 
-
+    @Column(name = "direction", length = 20)
+    @Enumerated(EnumType.STRING)
+    private DirectionType direction = DirectionType.TO;
 }
