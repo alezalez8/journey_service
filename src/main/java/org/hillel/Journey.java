@@ -3,7 +3,7 @@ package org.hillel;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Journey {
+public class Journey  {
     private final String stationFrom;
     private final String stationTo;
     private final LocalDate departure;

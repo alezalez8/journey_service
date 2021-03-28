@@ -11,7 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class DataConnect {
-    //static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/schedule_transfer";
     private static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/schedule_service";
     private static final String USER = "postgres";
     private static final String PASS = "postgres";
@@ -22,11 +21,11 @@ public class DataConnect {
 
     }
 
-    public List<Journey> getBD() {
-        try {
-            Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+    public List<Journey> getBD() throws SQLException {
+        try (
+                Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql)) {
 
             while (resultSet.next()) {
                 String stationFrom = resultSet.getString("station_from");
@@ -35,16 +34,10 @@ public class DataConnect {
                 LocalDate arrival = LocalDate.parse(resultSet.getString("arrival"));
                 journeys.add(new Journey(stationFrom, stationTo, departure, arrival));
             }
-            resultSet.close();
-            statement.close();
-            connection.close();
-
-        } catch (SQLException e) {
-            System.out.println("Connection Failed");
-            e.printStackTrace();
         }
         return journeys;
     }
+
     // for debuging
     private static void driverOK() {
         try {

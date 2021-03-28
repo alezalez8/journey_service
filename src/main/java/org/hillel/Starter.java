@@ -11,19 +11,17 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Starter {
-    public static void main(String[] args) throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException {
 
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
 
         final JourneyService journeyService = applicationContext.getBean(JourneyService.class);
-       // final JourneyService journeyService = applicationContext.getBean("inDBJourneyServiceImpl");
 
-        //final JourneyService journeyService = AppContext.getBean("journeyService");
         System.out.println(journeyService.find("Lviv", "Kiev", LocalDate.now(), LocalDate.now().plusDays(1)));
-
 
 
     }
