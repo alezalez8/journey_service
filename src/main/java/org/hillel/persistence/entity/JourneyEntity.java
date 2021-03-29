@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hillel.persistence.entity.enums.DirectionType;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
@@ -16,12 +17,12 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class JourneyEntity {
+public class JourneyEntity extends AbstractModifyEntity<Long> implements Serializable {
 
-    @Id
+   /* @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;*/
 
 
     /*public JourneyEntity(String stationFrom, String stationTo, Date departure, Date arrival) {

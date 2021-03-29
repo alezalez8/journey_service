@@ -4,6 +4,7 @@ package org.hillel.persistence.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,10 +14,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class StopEntity implements Serializable {
+public class StopEntity extends AbstractModifyEntity<Long> implements  Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stopSeq")
-    @SequenceGenerator(name = "stopSeq", sequenceName = "stop_seq", allocationSize = 1)
-    private Long id;
+
 }
