@@ -37,6 +37,7 @@ public class Starter {
         calendar.clear(Calendar.DAY_OF_YEAR);
         calendar.set(Calendar.DAY_OF_YEAR, 1);
         journeyEntity.setArrival(calendar.getTime());
+        journeyEntity.setActive(false);
         System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
 
         JourneyEntity journeyEntity1 = new JourneyEntity();
@@ -47,6 +48,7 @@ public class Starter {
         calendar.getTime();
         calendar.set(Calendar.DAY_OF_YEAR, 2);
         journeyEntity1.setArrival(calendar.getTime());
+        journeyEntity.setActive(false);
         System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity1));
 
         JourneyEntity journeyEntity2 = new JourneyEntity();
@@ -56,6 +58,7 @@ public class Starter {
         calendar.clear(Calendar.DAY_OF_YEAR);
         calendar.set(Calendar.DAY_OF_YEAR, 3);
         journeyEntity2.setArrival(calendar.getTime());
+        journeyEntity.setActive(true);
         System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity2));
 
 

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
+import org.hillel.persistence.entity.util.YesNoConverter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,7 +29,8 @@ public abstract class AbstractModifyEntity<ID> {
     private Date createDate;
 
     @Column(name = "active")
-    @Type(type = "yes_no")
+    @Convert(converter = YesNoConverter.class)
+    //@Type(type = "numeric_boolean")
     private boolean active = true;
 
 }
