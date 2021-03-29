@@ -44,7 +44,7 @@ public class DatabaseConfig {
         config.setJdbcUrl(environment.getProperty("database.url"));
         config.addDataSourceProperty("databaseName", environment.getProperty("database.name"));
         config.setDataSourceClassName(PGSimpleDataSource.class.getName());
-        config.setConnectionTimeout(SECONDS.toMillis(connTimeOut));
+        //config.setConnectionTimeout(SECONDS.toMillis(connTimeOut));
         config.setMinimumIdle(minIdle);
         config.setMaximumPoolSize(poolSize);
         HikariDataSource dataSource = new HikariDataSource(config);
@@ -61,7 +61,7 @@ public class DatabaseConfig {
         properties.put("hibernate.dialect", PostgreSQL10Dialect.class.getName());
         properties.put("hibernate.hbm2ddl.auto", "create-drop");
         properties.put("hibernate.show_sql", "true");
-        properties.put("javax.persistence.query.timeout", connеctTimeOut);
+       // properties.put("javax.persistence.query.timeout", connеctTimeOut);  add propertye to  pom.xml !!!!!
         emf.setJpaProperties(properties);
         return emf;
     }
