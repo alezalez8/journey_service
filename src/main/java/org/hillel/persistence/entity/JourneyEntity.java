@@ -51,4 +51,7 @@ public class JourneyEntity extends AbstractModifyEntity<Long> implements Seriali
     @Column(name = "direction", length = 20)
     @Enumerated(EnumType.STRING)
     private DirectionType direction = DirectionType.TO;
+
+
+
 }

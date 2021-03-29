@@ -3,10 +3,12 @@ package org.hillel.persistence.entity.util;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 import java.util.Objects;
 
 public class YesNoConverter implements AttributeConverter<Boolean, String> {
 
+//    @Converter(autoApply = true)  // global set for all hibernate
     private enum YesNoType {
         YES("yes", true), NO("no", false);
         private final String dbValue;

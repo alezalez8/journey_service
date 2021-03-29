@@ -3,6 +3,7 @@ package org.hillel;
 import org.hillel.config.RootConfig;
 import org.hillel.context.AppContext;
 import org.hillel.persistence.entity.JourneyEntity;
+import org.hillel.persistence.entity.StopAdditionalInfoEntity;
 import org.hillel.persistence.entity.enums.DirectionType;
 import org.hillel.service.TicketClient;
 import org.springframework.beans.factory.BeanFactory;
@@ -39,6 +40,10 @@ public class Starter {
         journeyEntity.setArrival(calendar.getTime());
         journeyEntity.setActive(false);
         System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
+
+        StopAdditionalInfoEntity stopAdditionalInfoEntity = new  StopAdditionalInfoEntity();
+        stopAdditionalInfoEntity.setLatitude(10D);
+        stopAdditionalInfoEntity.setLatitude(176D);
 
         JourneyEntity journeyEntity1 = new JourneyEntity();
         journeyEntity1.setStationFrom("Odessa");

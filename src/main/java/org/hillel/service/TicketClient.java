@@ -2,6 +2,7 @@ package org.hillel.service;
 
 import org.hibernate.cfg.Environment;
 import org.hillel.persistence.entity.JourneyEntity;
+import org.hillel.persistence.entity.StopEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -23,10 +24,16 @@ public class TicketClient {
     @Autowired
     private TransactionalJourneyService transactionalJourneyService;
 
+    @Autowired
+    private TransactionalStopService stopService;
+
     private Environment environment;
 
     public Long createJourney(final JourneyEntity journeyEntity) {
         return transactionalJourneyService.createJourney(journeyEntity);
+    }
+    public Long stopService(final StopEntity stopEntity) {
+        return stopService.createStop(stopEntity);
     }
 
     /*public Collection<Journey> find(String stationFrom, String stationTo, LocalDate dateFrom, LocalDate dateTo) throws Exception {
