@@ -2,8 +2,10 @@ package org.hillel;
 
 import org.hillel.config.RootConfig;
 import org.hillel.context.AppContext;
+import org.hillel.persistence.entity.CommonInfo;
 import org.hillel.persistence.entity.JourneyEntity;
 import org.hillel.persistence.entity.StopAdditionalInfoEntity;
+import org.hillel.persistence.entity.StopEntity;
 import org.hillel.persistence.entity.enums.DirectionType;
 import org.hillel.service.TicketClient;
 import org.springframework.beans.factory.BeanFactory;
@@ -43,7 +45,18 @@ public class Starter {
 
         StopAdditionalInfoEntity stopAdditionalInfoEntity = new  StopAdditionalInfoEntity();
         stopAdditionalInfoEntity.setLatitude(10D);
-        stopAdditionalInfoEntity.setLatitude(176D);
+        stopAdditionalInfoEntity.setLongitude(176D);
+        StopEntity stopEntity = new StopEntity();
+
+        stopEntity.addStopAdditionalInfo(stopAdditionalInfoEntity);
+        CommonInfo commonInfo = new CommonInfo();
+        commonInfo.setName("stop 1");
+        commonInfo.setDescription("stop 1 description");
+        stopEntity.setCommonInfo(commonInfo);
+
+        ticketClient.createStop(stopEntity);
+
+
 
         JourneyEntity journeyEntity1 = new JourneyEntity();
         journeyEntity1.setStationFrom("Odessa");
