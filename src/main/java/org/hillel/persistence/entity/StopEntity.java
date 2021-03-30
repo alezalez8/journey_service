@@ -16,16 +16,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class StopEntity extends AbstractModifyEntity<Long> implements Serializable {
 
-    /*@Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "description", length = 10000)
-    private String description;*/
+   /*@Transient                                 //exclude this field
+    private boolean applyToJourneyBuild;*/
 
     @Embedded
     private CommonInfo commonInfo;
 
-    @OneToOne(mappedBy = "stop")
+    @OneToOne(mappedBy = "stop", cascade = CascadeType.PERSIST)
     private StopAdditionalInfoEntity additionalInfo;
 
     public void addStopAdditionalInfo(StopAdditionalInfoEntity stopAdditionalInfo) {

@@ -32,7 +32,7 @@ public class TicketClient {
     public Long createJourney(final JourneyEntity journeyEntity) {
         return transactionalJourneyService.createJourney(journeyEntity);
     }
-    public Long stopService(final StopEntity stopEntity) {
+    public Long createStop(final StopEntity stopEntity) {
         return stopService.createStop(stopEntity);
     }
 

@@ -11,7 +11,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class StopAdditionalInfoEntity {
+public class StopAdditionalInfoEntity  {
+
+    @Id
+    @GeneratedValue()
+    private Long id;
+
 
     @Column(name = "longitude", nullable = false)
     private double longitude;
