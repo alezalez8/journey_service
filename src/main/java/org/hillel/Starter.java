@@ -2,10 +2,7 @@ package org.hillel;
 
 import org.hillel.config.RootConfig;
 import org.hillel.context.AppContext;
-import org.hillel.persistence.entity.CommonInfo;
-import org.hillel.persistence.entity.JourneyEntity;
-import org.hillel.persistence.entity.StopAdditionalInfoEntity;
-import org.hillel.persistence.entity.StopEntity;
+import org.hillel.persistence.entity.*;
 import org.hillel.persistence.entity.enums.DirectionType;
 import org.hillel.service.TicketClient;
 import org.springframework.beans.factory.BeanFactory;
@@ -31,35 +28,37 @@ public class Starter {
 
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
+        calendar.clear(Calendar.DAY_OF_YEAR);
+        calendar.set(Calendar.DAY_OF_YEAR, 1);
 
         JourneyEntity journeyEntity = new JourneyEntity();
         journeyEntity.setStationFrom("Odessa");
         journeyEntity.setStationTo("Antalia");
         journeyEntity.setDeparture(date);
         journeyEntity.setDirection(DirectionType.UNKNOW);
-        calendar.clear(Calendar.DAY_OF_YEAR);
-        calendar.set(Calendar.DAY_OF_YEAR, 1);
         journeyEntity.setArrival(calendar.getTime());
         journeyEntity.setActive(false);
-        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
 
-        StopAdditionalInfoEntity stopAdditionalInfoEntity = new  StopAdditionalInfoEntity();
+        final VehicleEntity vehicleEntity = new VehicleEntity();
+        vehicleEntity.setName("bus1");
+        journeyEntity.addVehicle(vehicleEntity);
+        ticketClient.createJourney(journeyEntity);
+
+        //System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
+        StopAdditionalInfoEntity stopAdditionalInfoEntity = new StopAdditionalInfoEntity();
         stopAdditionalInfoEntity.setLatitude(10D);
         stopAdditionalInfoEntity.setLongitude(176D);
-        StopEntity stopEntity = new StopEntity() ;
-
+        StopEntity stopEntity = new StopEntity();
         stopEntity.addStopAdditionalInfo(stopAdditionalInfoEntity);
         CommonInfo commonInfo = new CommonInfo();
         commonInfo.setName("stop 1");
         commonInfo.setDescription("stop 1 description");
         stopEntity.setCommonInfo(commonInfo);
-
-        //stopEntity.setApplyToJourneyBuild(stopEntity.isActive());
-
         ticketClient.createStop(stopEntity);
 
 
-
+/*
+        //--------------------------------------------------------------------------------------
         JourneyEntity journeyEntity1 = new JourneyEntity();
         journeyEntity1.setStationFrom("Odessa");
         journeyEntity1.setStationTo("Kimer");
@@ -71,6 +70,8 @@ public class Starter {
         journeyEntity.setActive(false);
         System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity1));
 
+        //--------------------------------------------------------------------------------------
+
         JourneyEntity journeyEntity2 = new JourneyEntity();
         journeyEntity2.setStationFrom("Kiev");
         journeyEntity2.setStationTo("Lviv");
@@ -80,7 +81,7 @@ public class Starter {
         journeyEntity2.setArrival(calendar.getTime());
         journeyEntity.setActive(true);
         System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity2));
-
+*/
 
     }
 }

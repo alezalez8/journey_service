@@ -4,12 +4,11 @@ package org.hillel.persistence.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.hillel.persistence.entity.enums.DirectionType;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -18,19 +17,6 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 public class JourneyEntity extends AbstractModifyEntity<Long> implements Serializable {
-
-   /* @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;*/
-
-
-    /*public JourneyEntity(String stationFrom, String stationTo, Date departure, Date arrival) {
-        this.stationFrom = stationFrom;
-        this.stationTo = stationTo;
-        this.departure = departure;
-        this.arrival = arrival;
-    }*/
 
     @Column(name = "station_from", length = 80, nullable = false)
     private String stationFrom;
@@ -52,6 +38,11 @@ public class JourneyEntity extends AbstractModifyEntity<Long> implements Seriali
     @Enumerated(EnumType.STRING)
     private DirectionType direction = DirectionType.TO;
 
+    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @JoinColumn(name = "vehicle_id")
+    private VehicleEntity vehicle;
 
-
+    public void addVehicle(final VehicleEntity vehicle) {
+        this.vehicle = vehicle;
+    }
 }
