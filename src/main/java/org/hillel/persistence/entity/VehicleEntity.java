@@ -8,7 +8,9 @@ import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "vehicle")
@@ -24,11 +26,11 @@ public class VehicleEntity extends AbstractModifyEntity<Long> {
     private String name;
 
     @OneToMany(mappedBy = "vehicle")
-    private List<JourneyEntity> journeys = new ArrayList<>();
+    private Set<JourneyEntity> journeys = new HashSet<>();
 
     public void addJourney(final JourneyEntity journeyEntity) {
         if (journeys == null) {
-            journeys = new ArrayList<>();
+            journeys = new HashSet<>();
         }
         journeys.add(journeyEntity);
         journeyEntity.addVehicle(this);

@@ -10,6 +10,7 @@ import org.hillel.persistence.entity.enums.DirectionType;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "schedule_service")
@@ -17,6 +18,19 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 public class JourneyEntity extends AbstractModifyEntity<Long> implements Serializable {
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof JourneyEntity)) return false;
+        JourneyEntity entity = (JourneyEntity) o;
+        return getId() != null && Objects.equals(getId(), entity.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 
     @Column(name = "station_from", length = 80, nullable = false)
     private String stationFrom;
@@ -38,7 +52,7 @@ public class JourneyEntity extends AbstractModifyEntity<Long> implements Seriali
     @Enumerated(EnumType.STRING)
     private DirectionType direction = DirectionType.TO;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.PERSIST} )
     @JoinColumn(name = "vehicle_id")
     private VehicleEntity vehicle;
 
