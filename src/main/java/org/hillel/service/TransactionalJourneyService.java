@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Optional;
 
 
 @Service(value = "transactionalJourneyService")
@@ -23,5 +24,10 @@ public class TransactionalJourneyService {
             throw new IllegalArgumentException("Unable to create new record");
         }
         return journeyRepository.create(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<JourneyEntity> getById(Long id) {
+        return journeyRepository.findById(id);
     }
 }

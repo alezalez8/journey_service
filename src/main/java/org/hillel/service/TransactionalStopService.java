@@ -17,10 +17,10 @@ public class TransactionalStopService {
 
 
     @Transactional
-    public Long createStop(final StopEntity entity)  {
-        if (entity == null) {
+    public Long createStop(final StopEntity stopEntity)  {
+        if (stopEntity == null) {
             throw new IllegalArgumentException("Unable to create new record");
         }
-        return stopRepository.create(entity);
+        return stopRepository.create(stopEntity);
     }
 }

@@ -52,11 +52,22 @@ public class JourneyEntity extends AbstractModifyEntity<Long> implements Seriali
     @Enumerated(EnumType.STRING)
     private DirectionType direction = DirectionType.TO;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST} )
+    @ManyToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY  )
     @JoinColumn(name = "vehicle_id")
     private VehicleEntity vehicle;
 
     public void addVehicle(final VehicleEntity vehicle) {
         this.vehicle = vehicle;
+    }
+
+    @Override
+    public String toString() {
+        return "JourneyEntity{" +
+                "stationFrom='" + stationFrom + '\'' +
+                ", stationTo='" + stationTo + '\'' +
+                ", departure=" + departure +
+                ", arrival=" + arrival +
+                ", direction=" + direction +
+                '}';
     }
 }

@@ -44,7 +44,7 @@ public class Starter {
         journeyEntity.addVehicle(vehicleEntity);
         ticketClient.createJourney(journeyEntity);
 
-        //System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
+
         StopAdditionalInfoEntity stopAdditionalInfoEntity = new StopAdditionalInfoEntity();
         stopAdditionalInfoEntity.setLatitude(10D);
         stopAdditionalInfoEntity.setLongitude(176D);
@@ -55,6 +55,8 @@ public class Starter {
         commonInfo.setDescription("stop 1 description");
         stopEntity.setCommonInfo(commonInfo);
         ticketClient.createStop(stopEntity);
+        System.out.println("create journey with id =  " + ticketClient.getJourneyById(journeyEntity.getId()));
+
 
 
 /*
