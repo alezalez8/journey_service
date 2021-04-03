@@ -38,6 +38,11 @@ public class TransactionalJourneyService {
     }
     @Transactional
     public void save(JourneyEntity journey) {
-        journeyRepository.save(journey);
+//        journeyRepository.save(journey);
+        //final JourneyRepository journeyRepository = this.journeyRepository;
+        //final JourneyRepository save = journeyRepository.findById(journey.getId()).get(); // the same as merge
+        final JourneyEntity save = journeyRepository.save(journey);
+        save.setStationFrom("test station from");
     }
+
 }
