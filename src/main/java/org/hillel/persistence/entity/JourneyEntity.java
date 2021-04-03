@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hillel.persistence.entity.enums.DirectionType;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@DynamicUpdate
 public class JourneyEntity extends AbstractModifyEntity<Long> implements Serializable {
 
     @Override
