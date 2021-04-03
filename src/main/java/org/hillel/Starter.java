@@ -55,7 +55,8 @@ public class Starter {
         commonInfo.setDescription("stop 1 description");
         stopEntity.setCommonInfo(commonInfo);
         ticketClient.createStop(stopEntity);
-        System.out.println("create journey with id =  " + ticketClient.getJourneyById(journeyEntity.getId()));
+
+        System.out.println("create journey with id =  " + ticketClient.getJourneyById(journeyEntity.getId(), true));
 
 
 

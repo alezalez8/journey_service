@@ -44,9 +44,9 @@ public class TicketClient {
         return journeyService.createJourney(journeyEntity);
     }
 
-    public Optional<JourneyEntity> getJourneyById(Long id) {
+    public Optional<JourneyEntity> getJourneyById(Long id, boolean withDependencies) {
         //Assert.notNull(id, "id must be set");
-        return id == null ? Optional.empty() : journeyService.getById(id);
+        return id == null ? Optional.empty() : journeyService.getById(id, withDependencies);
     }
 
 

@@ -35,4 +35,12 @@ public class VehicleEntity extends AbstractModifyEntity<Long> {
         journeys.add(journeyEntity);
         journeyEntity.addVehicle(this);
     }
+
+    @Override
+    public String toString() {
+        return "VehicleEntity{" +
+                "name='" + name + '\'' +
+//                ", journeys=" + journeys +
+                '}';
+    }
 }

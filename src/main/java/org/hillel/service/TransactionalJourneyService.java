@@ -19,7 +19,7 @@ public class TransactionalJourneyService {
 
 
     @Transactional
-    public Long createJourney(final JourneyEntity entity)  {
+    public Long createJourney(final JourneyEntity entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Unable to create new record");
         }
@@ -27,7 +27,12 @@ public class TransactionalJourneyService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<JourneyEntity> getById(Long id) {
-        return journeyRepository.findById(id);
+    public Optional<JourneyEntity> getById(Long id, boolean withDependencies) {
+        final Optional<JourneyEntity> byId = journeyRepository.findById(id);
+        if (withDependencies && byId.isPresent()) {
+            final JourneyEntity journeyEntity = byId.get();
+            journeyEntity.getVehicle().getName();
+        }
+        return byId;
     }
 }
