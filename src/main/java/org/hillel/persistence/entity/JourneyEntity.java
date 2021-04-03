@@ -9,11 +9,14 @@ import org.hillel.persistence.entity.enums.DirectionType;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "schedule_service")
+//@Table(name = "schedule_service")
+@Table(name = "journey")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -52,12 +55,28 @@ public class JourneyEntity extends AbstractModifyEntity<Long> implements Seriali
     @Enumerated(EnumType.STRING)
     private DirectionType direction = DirectionType.TO;
 
+
     @ManyToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_id")
     private VehicleEntity vehicle;
 
     public void addVehicle(final VehicleEntity vehicle) {
         this.vehicle = vehicle;
+    }
+
+
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @JoinTable(name = "journey_stop", indexes = @Index(name = "journey_stop_idx", columnList = "journey_id, stop_id"),
+            joinColumns = @JoinColumn(name = "journey_id"),
+            inverseJoinColumns = @JoinColumn(name = "stop_id")
+    )
+    private List<StopEntity> stops = new ArrayList<>();
+
+    public void addStop(final StopEntity stop) {
+        if(stop == null) return;
+        if(stops == null) stops = new ArrayList<>();
+        stops.add(stop);
+        stop.addJourney(this);
     }
 
     @Override

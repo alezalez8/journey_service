@@ -31,8 +31,13 @@ public class TransactionalJourneyService {
         final Optional<JourneyEntity> byId = journeyRepository.findById(id);
         if (withDependencies && byId.isPresent()) {
             final JourneyEntity journeyEntity = byId.get();
-            journeyEntity.getVehicle().getName();
+            journeyEntity.getVehicle().getName();  //
+            journeyEntity.getStops().size();        // get table in case lazy
         }
         return byId;
+    }
+    @Transactional
+    public void save(JourneyEntity journey) {
+        journeyRepository.save(journey);
     }
 }

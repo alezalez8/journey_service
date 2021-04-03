@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "stop")
@@ -22,6 +24,9 @@ public class StopEntity extends AbstractModifyEntity<Long> implements Serializab
     @Embedded
     private CommonInfo commonInfo;
 
+    @ManyToMany(mappedBy = "stops")
+    private List<JourneyEntity> journeys = new ArrayList<>();
+
     @OneToOne(mappedBy = "stop", cascade = CascadeType.PERSIST)
     private StopAdditionalInfoEntity additionalInfo;
 
@@ -34,5 +39,10 @@ public class StopEntity extends AbstractModifyEntity<Long> implements Serializab
         this.additionalInfo = stopAdditionalInfo;
     }
 
+    public void addJourney(JourneyEntity journeyEntity) {
+        if(journeyEntity == null) return;
+        if(journeys == null) journeys = new ArrayList<>();
+        journeys.add(journeyEntity);
+    }
 }
 

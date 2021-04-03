@@ -85,6 +85,11 @@ public class TicketClient {
         System.out.println("destroy");
     }
 
+    public void saveJourney(JourneyEntity journey) {
+        //todo check
+        journeyService.save(journey);
+    }
+
     /*@Autowired
     private List<JourneyService> journeyServices;
 

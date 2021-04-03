@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository
@@ -25,5 +26,8 @@ public class JourneyRepository  {
 
     public Optional<JourneyEntity> findById(Long id) {
       return Optional.ofNullable(entityManager.find(JourneyEntity.class, id));
+    }
+    public void save(JourneyEntity journey) {
+        entityManager.merge(journey);
     }
 }

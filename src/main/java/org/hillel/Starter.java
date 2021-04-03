@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Optional;
 
 public class Starter {
     public static void main(String[] args) {
@@ -42,22 +43,30 @@ public class Starter {
         final VehicleEntity vehicleEntity = new VehicleEntity();
         vehicleEntity.setName("bus1");
         journeyEntity.addVehicle(vehicleEntity);
-        ticketClient.createJourney(journeyEntity);
 
 
         StopAdditionalInfoEntity stopAdditionalInfoEntity = new StopAdditionalInfoEntity();
         stopAdditionalInfoEntity.setLatitude(10D);
         stopAdditionalInfoEntity.setLongitude(176D);
         StopEntity stopEntity = new StopEntity();
-        stopEntity.addStopAdditionalInfo(stopAdditionalInfoEntity);
+//        stopEntity.addStopAdditionalInfo(stopAdditionalInfoEntity);
         CommonInfo commonInfo = new CommonInfo();
         commonInfo.setName("stop 1");
         commonInfo.setDescription("stop 1 description");
         stopEntity.setCommonInfo(commonInfo);
-        ticketClient.createStop(stopEntity);
+        journeyEntity.addStop(stopEntity);
+//        ticketClient.createStop(stopEntity);
+        ticketClient.createJourney(journeyEntity);
+        final Optional<JourneyEntity> journeyById = ticketClient.getJourneyById(journeyEntity.getId(), true);
+//        System.out.println("get all stop by journey " + journeyById.get().getStops() );
+        final JourneyEntity journey = journeyById.get();
+        System.out.println("get all stop by journey " + journey.getStops() );
+        System.out.println("create journey with id =  " + journeyById);
 
-        System.out.println("create journey with id =  " + ticketClient.getJourneyById(journeyEntity.getId(), true));
+        journey.setDirection(DirectionType.TO);
+        System.out.println("save journey ");
 
+        ticketClient.saveJourney(journey);
 
 
 /*
