@@ -60,13 +60,37 @@ public class Starter {
         final Optional<JourneyEntity> journeyById = ticketClient.getJourneyById(journeyEntity.getId(), true);
 //        System.out.println("get all stop by journey " + journeyById.get().getStops() );
         final JourneyEntity journey = journeyById.get();
-        System.out.println("get all stop by journey " + journey.getStops() );
+        System.out.println("get all stop by journey " + journey.getStops());
         System.out.println("create journey with id =  " + journeyById);
 
         journey.setDirection(DirectionType.TO);
         System.out.println("save journey ");
 
         ticketClient.createOrUpdateJourney(journey);
+    }
+
+    private static JourneyEntity buildJourney(final String stationFrom, final String stationTo,
+                                              final Date departure, final Date arrival) {
+        final JourneyEntity journeyEntity = new JourneyEntity();
+        journeyEntity.setStationFrom(stationFrom);
+        journeyEntity.setStationTo(stationTo);
+        journeyEntity.setDeparture(departure);
+        journeyEntity.setArrival(arrival);
+        journeyEntity.setDirection(DirectionType.TO);
+        journeyEntity.setActive(true);
+        return journeyEntity;
+    }
+
+    private static StopEntity buildStop(final Double lat, final Double lon) {
+        StopAdditionalInfoEntity stopAddInfoEntity = new StopAdditionalInfoEntity();
+        stopAddInfoEntity.setLatitude(lat);
+        stopAddInfoEntity.setLongitude(lon);
+        StopEntity stopEntity = new StopEntity();
+        stopEntity.addStopAdditionalInfo(stopAddInfoEntity);
+        return stopEntity;
+    }
+
+
 
 
 /*
@@ -95,5 +119,5 @@ public class Starter {
         System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity2));
 */
 
-    }
+
 }
