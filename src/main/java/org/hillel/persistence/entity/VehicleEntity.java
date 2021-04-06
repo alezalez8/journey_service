@@ -29,6 +29,7 @@ public class VehicleEntity extends AbstractModifyEntity<Long> {
     private Set<JourneyEntity> journeys = new HashSet<>();
 
     public void addJourney(final JourneyEntity journeyEntity) {
+        // todo
         if (journeys == null) {
             journeys = new HashSet<>();
         }
@@ -39,8 +40,7 @@ public class VehicleEntity extends AbstractModifyEntity<Long> {
     @Override
     public String toString() {
         return "VehicleEntity{" +
-                "name='" + name + '\'' +
-//                ", journeys=" + journeys +
-                '}';
+                "name='" + name + '\'' + '}';
+
     }
 }

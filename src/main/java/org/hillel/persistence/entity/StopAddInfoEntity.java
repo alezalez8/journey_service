@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class StopAdditionalInfoEntity  {
+public class StopAddInfoEntity {
 
     @Id
     @GeneratedValue()
