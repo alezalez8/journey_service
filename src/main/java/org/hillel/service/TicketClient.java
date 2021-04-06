@@ -40,19 +40,20 @@ public class TicketClient {
     public TicketClient() {
     }
 
-    public Long createJourney(final JourneyEntity journeyEntity) {
-        return journeyService.createJourney(journeyEntity);
-    }
 
     public Optional<JourneyEntity> getJourneyById(Long id, boolean withDependencies) {
-        //Assert.notNull(id, "id must be set");
-        return id == null ? Optional.empty() : journeyService.getById(id, withDependencies);
+        return id == null ? Optional.empty() : journeyService.findById(id, withDependencies);
     }
 
-
-    public Long createStop(final StopEntity stopEntity) {
-        return stopService.createStop(stopEntity);
+    public StopEntity createOrUpdateStop(final StopEntity stopEntity) {
+        return stopService.createOrUpdate(stopEntity);
     }
+
+    public JourneyEntity createOrUpdateJourney(JourneyEntity journey) {
+        //todo check
+        return journeyService.createOrUpdateJourney(journey);
+    }
+
 
     public Collection<Journey> find(String stationFrom, String stationTo, LocalDate dateFrom, LocalDate dateTo) throws Exception {
         if (!StringUtils.hasText(stationFrom))
@@ -64,88 +65,24 @@ public class TicketClient {
         if (dateTo == null)
             throw new IllegalArgumentException("dateTo must be set");
 
-//        List<Journey> rez = new ArrayList<>();
-//        return journeyServices.get("dbJourneyService").find(stationFrom, stationTo, dateFrom, dateTo);
         for (JourneyService service : journeyServices) {
             System.out.println(service.getClass().getName());
-//            rez.addAll(service.find(stationFrom, stationTo, dateFrom, dateTo));
         }
-//        return rez;
+
         return Collections.emptyList();
     }
 
+
     @PostConstruct
     public void doPost() {
         System.out.println("post construct");
-//        System.out.println(url);
+
     }
 
     @PreDestroy
     public void destroy() {
         System.out.println("destroy");
     }
-
-    public void saveJourney(JourneyEntity journey) {
-        //todo check
-        journeyService.save(journey);
-    }
-
-    /*@Autowired
-    private List<JourneyService> journeyServices;
-
-    @Autowired
-    private TransactionalJourneyService journeyService;
-
-    @Autowired
-    private JourneyService journeyService;
-
-    @Autowired
-    private TransactionalStopService stopService;
-
-    @Autowired
-    private Environment environment;
-
-    @Autowired
-    private TransactionalJourneyService transactionalJourneyService;
-
-
-    @Value("${datasource.url}")
-    private String url;
-
-
-    public TicketClient() {
-    }
-
-
-*//*
-    public Long createJourney(final JourneyEntity journeyEntity) {
-        return transactionalJourneyService.createJourney(journeyEntity);
-    }
-*//*
-
-    public Long createJourney(final JourneyEntity journeyEntity) {
-        return journeyService.createJourney(journeyEntity);
-    }
-
-
-    public Optional<JourneyEntity> getJourneyById(Long id) {
-        //Assert.notNull(id, "id must be set");
-        return id == null ? Optional.empty() : journeyService.    }
-
-
-    public Long createStop(final StopEntity stopEntity) {
-        return stopService.createStop(stopEntity);
-    }
-
-    @PostConstruct
-    public void doPost() {
-        System.out.println("post construct");
-    }
-
-    @PreDestroy
-    public void destroy() {
-        System.out.println("destroy");
-    }*/
 
 
 }

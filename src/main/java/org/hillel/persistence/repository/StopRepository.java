@@ -9,9 +9,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-public class StopRepository {
+public class StopRepository extends CommonRepository<StopEntity, Long> {
 
-    @PersistenceContext
+
+    protected StopRepository() {
+        super(StopEntity.class);
+    }
+
+
+    //======================= end of lesson # 5  ===========================================
+
+    /*@PersistenceContext
     private EntityManager entityManager;
 
     public Long create(final StopEntity stopEntity) {
@@ -21,6 +29,6 @@ public class StopRepository {
         entityManager.persist(stopEntity);
         return stopEntity.getId();
 
-    }
+    }*/
 
 }

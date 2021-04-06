@@ -14,31 +14,39 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
 
     @PersistenceContext
     EntityManager entityManager;
+    private final Class<E> entityClass; // for different entity (stop, vehicle etc.)
+
+    protected CommonRepository(Class<E> entityClass) {
+        this.entityClass = entityClass;
+    }
 
     @Override
     public E createOrUpdate(E entity) {
         Assert.notNull(entity, "entity must be set");
-        if (Objects.isNull(entity.getId())){
+        if (Objects.isNull(entity.getId())) {
             entityManager.persist(entity);
         } else {
             return entityManager.merge(entity);
         }
-
-            return null;
+        return entity;
     }
 
     @Override
     public Optional<E> findById(ID id) {
-        return Optional.empty();
+        if (Objects.isNull(id)) return Optional.empty();
+        return Optional.ofNullable(entityManager.find(entityClass, id));
     }
 
     @Override
     public void removeId(ID id) {
+        throw new UnsupportedOperationException("not implement");
 
     }
 
     @Override
     public void remove(E entity) {
+        throw new UnsupportedOperationException("not implement");
+
 
     }
 }

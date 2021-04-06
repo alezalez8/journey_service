@@ -56,7 +56,7 @@ public class Starter {
         stopEntity.setCommonInfo(commonInfo);
         journeyEntity.addStop(stopEntity);
 //        ticketClient.createStop(stopEntity);
-        ticketClient.createJourney(journeyEntity);
+        ticketClient.createOrUpdateJourney(journeyEntity);
         final Optional<JourneyEntity> journeyById = ticketClient.getJourneyById(journeyEntity.getId(), true);
 //        System.out.println("get all stop by journey " + journeyById.get().getStops() );
         final JourneyEntity journey = journeyById.get();
@@ -66,7 +66,7 @@ public class Starter {
         journey.setDirection(DirectionType.TO);
         System.out.println("save journey ");
 
-        ticketClient.saveJourney(journey);
+        ticketClient.createOrUpdateJourney(journey);
 
 
 /*

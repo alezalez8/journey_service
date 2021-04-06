@@ -19,15 +19,15 @@ public class TransactionalJourneyService {
 
 
     @Transactional
-    public Long createJourney(final JourneyEntity entity) {
+    public JourneyEntity createOrUpdateJourney(final JourneyEntity entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Unable to create new record");
         }
-        return journeyRepository.create(entity);
+        return journeyRepository.createOrUpdate(entity);
     }
 
     @Transactional(readOnly = true)
-    public Optional<JourneyEntity> getById(Long id, boolean withDependencies) {
+    public Optional<JourneyEntity> findById(Long id, boolean withDependencies) {
         final Optional<JourneyEntity> byId = journeyRepository.findById(id);
         if (withDependencies && byId.isPresent()) {
             final JourneyEntity journeyEntity = byId.get();
@@ -36,13 +36,6 @@ public class TransactionalJourneyService {
         }
         return byId;
     }
-    @Transactional
-    public void save(JourneyEntity journey) {
-//        journeyRepository.save(journey);
-        //final JourneyRepository journeyRepository = this.journeyRepository;
-        //final JourneyRepository save = journeyRepository.findById(journey.getId()).get(); // the same as merge
-        final JourneyEntity save = journeyRepository.save(journey);
-        save.setStationFrom("test station from");
-    }
+
 
 }

@@ -11,12 +11,22 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository
-public class JourneyRepository {
+public class JourneyRepository extends CommonRepository<JourneyEntity, Long> {
+
+
+    protected JourneyRepository() {
+        super(JourneyEntity.class);
+    }
+
+
+//======================= end of lesson # 5  ===========================================
+
+   /*
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Long create(final JourneyEntity journeyEntity) {
+public Long create(final JourneyEntity journeyEntity) {
         if (journeyEntity == null) {
             throw new IllegalArgumentException("Unable to create new record");
         }
@@ -27,9 +37,9 @@ public class JourneyRepository {
 //    ========== uses var 1
 
 
-    /*public Optional<JourneyEntity> findById(Long id) {
+    *//*public Optional<JourneyEntity> findById(Long id) {
       return Optional.ofNullable(entityManager.find(JourneyEntity.class, id));
-    }*/
+    }*//*
 
 
     //    ========== uses var 2
@@ -47,5 +57,5 @@ public class JourneyRepository {
         final JourneyEntity merge = entityManager.merge(journey);
         entityManager.flush();
         return merge;
-    }
+    }*/
 }
