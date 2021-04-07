@@ -32,6 +32,9 @@ public class TicketClient {
     @Autowired
     private TransactionalStopService stopService;
 
+    @Autowired
+    private TransactionalVehicleService vehicleService;
+
     private Environment environment;
 
     @Value("${datasource.url}")
