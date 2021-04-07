@@ -58,7 +58,7 @@ public class JourneyEntity extends AbstractModifyEntity<Long> implements Seriali
     private DirectionType direction = DirectionType.TO;
 
 
-    @ManyToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinColumn(name = "vehicle_id")
     private VehicleEntity vehicle;
 

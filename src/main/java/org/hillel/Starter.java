@@ -25,8 +25,12 @@ public class Starter {
 
 
         JourneyEntity journey1 = buildJourney("from 1", "to 1", date, calendar.getTime());
-        journey1.addStop(buildStop(1d, 2d));
+        journey1.addStop(buildStop(1D, 2D));
         journey1 = ticketClient.createOrUpdateJourney(journey1);
+        journey1.addStop(buildStop(2D, 3D));
+        ticketClient.createOrUpdateJourney(journey1);
+
+
 
 
 
@@ -86,11 +90,11 @@ public class Starter {
         stopAddInfoEntity.setLongitude(lon);
         final StopEntity stopEntity = new StopEntity();
         //-------------------------------------------------
-        CommonInfo commonInfo = new CommonInfo();
+        /*CommonInfo commonInfo = new CommonInfo();
         commonInfo.setName("stop 1");
         commonInfo.setDescription("stop 1 description");
-        stopEntity.setCommonInfo(commonInfo);
-        //================================================================
+        stopEntity.setCommonInfo(commonInfo);*/
+        //=================================================
         stopEntity.addAddInfo(stopAddInfoEntity);
         return stopEntity;
     }
