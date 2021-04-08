@@ -21,13 +21,4 @@ public class TransactionalStopService {
         return stopRepository.createOrUpdate(stopEntity);
     }
 
-
-    // end of lesson 5
-
-    /*public Long createStop(final StopEntity stopEntity)  {
-        if (stopEntity == null) {
-            throw new IllegalArgumentException("Unable to create new record");
-        }
-        return stopRepository.create(stopEntity);
-    }*/
 }

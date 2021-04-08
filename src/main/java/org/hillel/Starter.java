@@ -12,17 +12,14 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Starter {
-    public static void main(String[] args)  throws Exception{
+    public static void main(String[] args) throws Exception {
         final Date date = new Date();
         Calendar calendar = new GregorianCalendar();
-
-
-        final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
-        TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
         calendar.clear(Calendar.DAY_OF_YEAR);
         calendar.set(Calendar.DAY_OF_YEAR, 1);
 
-
+        final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
+        TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
 
         JourneyEntity journey1 = buildJourney("from 1", "to 1", date, calendar.getTime());
         journey1.addStop(buildStop(1D, 2D));
@@ -30,46 +27,6 @@ public class Starter {
         journey1.addStop(buildStop(2D, 3D));
         ticketClient.createOrUpdateJourney(journey1);
 
-
-
-
-
-/*
-        JourneyEntity journeyEntity = new JourneyEntity();
-        journeyEntity.setStationFrom("Odessa");
-        journeyEntity.setStationTo("Antalia");
-        journeyEntity.setDeparture(date);
-        journeyEntity.setDirection(DirectionType.UNKNOW);
-        journeyEntity.setArrival(calendar.getTime());
-        journeyEntity.setActive(false);
-
-        final VehicleEntity vehicleEntity = new VehicleEntity();
-        vehicleEntity.setName("bus1");
-        journeyEntity.addVehicle(vehicleEntity);
-
-
-        StopAdditionalInfoEntity stopAdditionalInfoEntity = new StopAdditionalInfoEntity();
-        stopAdditionalInfoEntity.setLatitude(10D);
-        stopAdditionalInfoEntity.setLongitude(176D);
-        StopEntity stopEntity = new StopEntity();
-//        stopEntity.addStopAdditionalInfo(stopAdditionalInfoEntity);
-        CommonInfo commonInfo = new CommonInfo();
-        commonInfo.setName("stop 1");
-        commonInfo.setDescription("stop 1 description");
-        stopEntity.setCommonInfo(commonInfo);
-        journeyEntity.addStop(stopEntity);
-//        ticketClient.createStop(stopEntity);
-        ticketClient.createOrUpdateJourney(journeyEntity);
-        final Optional<JourneyEntity> journeyById = ticketClient.getJourneyById(journeyEntity.getId(), true);
-//        System.out.println("get all stop by journey " + journeyById.get().getStops() );
-        final JourneyEntity journey = journeyById.get();
-        System.out.println("get all stop by journey " + journey.getStops());
-        System.out.println("create journey with id =  " + journeyById);
-
-        journey.setDirection(DirectionType.TO);
-        System.out.println("save journey ");
-
-        ticketClient.createOrUpdateJourney(journey);*/
     }
 
     private static JourneyEntity buildJourney(final String stationFrom, final String stationTo,
@@ -89,12 +46,6 @@ public class Starter {
         stopAddInfoEntity.setLatitude(lat);
         stopAddInfoEntity.setLongitude(lon);
         final StopEntity stopEntity = new StopEntity();
-        //-------------------------------------------------
-        /*CommonInfo commonInfo = new CommonInfo();
-        commonInfo.setName("stop 1");
-        commonInfo.setDescription("stop 1 description");
-        stopEntity.setCommonInfo(commonInfo);*/
-        //=================================================
         stopEntity.addAddInfo(stopAddInfoEntity);
         return stopEntity;
     }
@@ -104,35 +55,6 @@ public class Starter {
         vehicleEntity.setName(name);
         return vehicleEntity;
     }
-
-
-
-
-/*
-        //--------------------------------------------------------------------------------------
-        JourneyEntity journeyEntity1 = new JourneyEntity();
-        journeyEntity1.setStationFrom("Odessa");
-        journeyEntity1.setStationTo("Kimer");
-        journeyEntity1.setDeparture(date);
-        calendar.clear(Calendar.DAY_OF_YEAR);
-        calendar.getTime();
-        calendar.set(Calendar.DAY_OF_YEAR, 2);
-        journeyEntity1.setArrival(calendar.getTime());
-        journeyEntity.setActive(false);
-        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity1));
-
-        //--------------------------------------------------------------------------------------
-
-        JourneyEntity journeyEntity2 = new JourneyEntity();
-        journeyEntity2.setStationFrom("Kiev");
-        journeyEntity2.setStationTo("Lviv");
-        journeyEntity2.setDeparture(date);
-        calendar.clear(Calendar.DAY_OF_YEAR);
-        calendar.set(Calendar.DAY_OF_YEAR, 3);
-        journeyEntity2.setArrival(calendar.getTime());
-        journeyEntity.setActive(true);
-        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity2));
-*/
 
 
 }

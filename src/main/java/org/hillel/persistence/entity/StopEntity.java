@@ -17,9 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 public class StopEntity extends AbstractModifyEntity<Long> implements Serializable {
 
-   /*@Transient                                 //exclude this field
-    private boolean applyToJourneyBuild;*/
-
     @Embedded
     private CommonInfo commonInfo;
 

@@ -15,10 +15,6 @@ import java.util.Date;
 @MappedSuperclass
 public abstract class AbstractModifyEntity<ID> {
 
-    /* @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stopSeq")
-    @SequenceGenerator(name = "stopSeq", sequenceName = "stop_seq", allocationSize = 1)
-    private Long id; */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +26,6 @@ public abstract class AbstractModifyEntity<ID> {
 
     @Column(name = "active")
     @Convert(converter = YesNoConverter.class)
-    //@Type(type = "numeric_boolean")
     private boolean active = true;
 
 }
