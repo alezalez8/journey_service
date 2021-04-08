@@ -21,11 +21,24 @@ public class Starter {
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
 
+        VehicleEntity vehicle1 = buildVehicle("bus1");
+        ticketClient.createOrUpdateVehicle(vehicle1);
+
+
+
         JourneyEntity journey1 = buildJourney("from 1", "to 1", date, calendar.getTime());
-        journey1.addStop(buildStop(1D, 2D));
-        journey1 = ticketClient.createOrUpdateJourney(journey1);
-        journey1.addStop(buildStop(2D, 3D));
+        journey1.addVehicle(vehicle1);
         ticketClient.createOrUpdateJourney(journey1);
+
+
+        /*journey1.addStop(buildStop(1D, 2D));
+
+        System.out.println("call create journey");
+        journey1 = ticketClient.createOrUpdateJourney(journey1);
+        journey1.getStops().get(0).setActive(false);
+        journey1.addStop(buildStop(2D, 3D));
+        System.out.println("call update journey");
+        ticketClient.createOrUpdateJourney(journey1);*/
 
     }
 

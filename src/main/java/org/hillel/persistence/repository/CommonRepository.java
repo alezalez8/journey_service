@@ -24,8 +24,10 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
     public E createOrUpdate(E entity) {
         Assert.notNull(entity, "entity must be set");
         if (Objects.isNull(entity.getId())) {
+            //System.out.println("Call persist");
             entityManager.persist(entity);
         } else {
+            //System.out.println("Call merge");
             return entityManager.merge(entity);
         }
         return entity;

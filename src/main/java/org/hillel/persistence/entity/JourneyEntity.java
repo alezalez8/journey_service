@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hillel.persistence.entity.enums.DirectionType;
 
@@ -22,6 +23,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @DynamicUpdate
+@DynamicInsert
 public class JourneyEntity extends AbstractModifyEntity<Long> implements Serializable {
 
     @Override
@@ -58,7 +60,7 @@ public class JourneyEntity extends AbstractModifyEntity<Long> implements Seriali
     private DirectionType direction = DirectionType.TO;
 
 
-    @ManyToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_id")
     private VehicleEntity vehicle;
 
@@ -67,7 +69,7 @@ public class JourneyEntity extends AbstractModifyEntity<Long> implements Seriali
     }
 
 
-    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "journey_stop", indexes = @Index(name = "journey_stop_idx", columnList = "journey_id, stop_id"),
             joinColumns = @JoinColumn(name = "journey_id"),
             inverseJoinColumns = @JoinColumn(name = "stop_id")

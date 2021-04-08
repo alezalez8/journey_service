@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,13 +18,10 @@ import java.util.Set;
 @NoArgsConstructor
 public class VehicleEntity extends AbstractModifyEntity<Long> {
 
-    /*@Embedded
-    private CommonInfo commonInfo;*/
-
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "vehicle")
+    @OneToMany(mappedBy = "vehicle", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<JourneyEntity> journeys = new HashSet<>();
 
     public void addJourney(final JourneyEntity journeyEntity) {

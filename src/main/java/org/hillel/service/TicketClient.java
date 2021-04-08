@@ -3,6 +3,7 @@ package org.hillel.service;
 import org.hibernate.cfg.Environment;
 import org.hillel.persistence.entity.JourneyEntity;
 import org.hillel.persistence.entity.StopEntity;
+import org.hillel.persistence.entity.VehicleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -32,9 +33,11 @@ public class TicketClient {
     @Autowired
     private TransactionalStopService stopService;
 
+
     @Autowired
     private TransactionalVehicleService vehicleService;
 
+    //@Autowired
     private Environment environment;
 
     @Value("${datasource.url}")
@@ -88,5 +91,9 @@ public class TicketClient {
     }
 
 
+    public VehicleEntity createOrUpdateVehicle(VehicleEntity vehicle) {
+        return vehicleService.createOrUpdate(vehicle);
+
+    }
 }
 
