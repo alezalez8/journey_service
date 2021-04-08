@@ -8,7 +8,7 @@ public interface GenericRepository<E, ID> {
 
     Optional<E> findById(ID id);
 
-    void removeId(ID id);
+    void removeById(ID id);
 
     void remove(E entity);
 }

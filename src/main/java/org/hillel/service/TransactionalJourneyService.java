@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -23,6 +24,15 @@ public class TransactionalJourneyService {
         if (entity == null) {
             throw new IllegalArgumentException("Unable to create new record");
         }
+        System.out.println("create journey ");
+        final JourneyEntity orUpdate = journeyRepository.createOrUpdate(entity);
+        System.out.println("get journey by id");
+        JourneyEntity journey = journeyRepository.findById(orUpdate.getId()).get();
+        System.out.println("remove journey by id");
+        //journeyRepository.remove(journey.getId());
+
+        //boolean isNew = Objects.isNull(entity.getId());
+       // if(!isNew)
         return journeyRepository.createOrUpdate(entity);
     }
 
@@ -37,5 +47,12 @@ public class TransactionalJourneyService {
         return byId;
     }
 
-
+    @Transactional
+    public void remove(JourneyEntity journey) {
+        journeyRepository.remove(journey);
+    }
+    @Transactional
+    public void removeById(Long journeyId) {
+        journeyRepository.removeById(journeyId);
+    }
 }

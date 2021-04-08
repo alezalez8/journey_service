@@ -1,6 +1,7 @@
 package org.hillel.persistence.repository;
 
 
+import lombok.SneakyThrows;
 import org.hillel.persistence.entity.AbstractModifyEntity;
 import org.springframework.util.Assert;
 
@@ -39,15 +40,16 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         return Optional.ofNullable(entityManager.find(entityClass, id));
     }
 
+    @SneakyThrows
     @Override
-    public void removeId(ID id) {
-        throw new UnsupportedOperationException("not implement");
+    public void removeById(ID id) {
+        entityManager.remove(findById(id));
 
     }
 
     @Override
     public void remove(E entity) {
-        throw new UnsupportedOperationException("not implement");
+        entityManager.remove(entity);
 
 
     }

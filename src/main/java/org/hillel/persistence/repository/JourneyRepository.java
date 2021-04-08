@@ -28,6 +28,9 @@ public class JourneyRepository extends CommonRepository<JourneyEntity, Long> {
             }
         }
        return super.createOrUpdate(entity);
-
     }
+
+
+
+
 }

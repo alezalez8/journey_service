@@ -95,5 +95,12 @@ public class TicketClient {
         return vehicleService.createOrUpdate(vehicle);
 
     }
+
+    public void remove(JourneyEntity journey) {
+        journeyService.remove(journey);
+    }
+    public void removeById(Long journeyId) {
+        journeyService.removeById(journeyId);
+    }
 }
 
