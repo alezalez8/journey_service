@@ -17,18 +17,5 @@ public class StopRepository extends CommonRepository<StopEntity, Long> {
     }
 
 
-    //======================= end of lesson # 5  ===========================================
-
-    /*@PersistenceContext
-    private EntityManager entityManager;
-
-    public Long create(final StopEntity stopEntity) {
-        if(stopEntity == null) {
-            throw new IllegalArgumentException("Unable to create new record");
-        }
-        entityManager.persist(stopEntity);
-        return stopEntity.getId();
-
-    }*/
 
 }

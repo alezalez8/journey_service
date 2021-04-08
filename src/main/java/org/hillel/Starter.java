@@ -25,8 +25,8 @@ public class Starter {
         ticketClient.createOrUpdateVehicle(vehicle1);
 
 
-
         JourneyEntity journey1 = buildJourney("from 1", "to 1", date, calendar.getTime());
+        vehicle1.setName("bus2");
         journey1.addVehicle(vehicle1);
         ticketClient.createOrUpdateJourney(journey1);
 

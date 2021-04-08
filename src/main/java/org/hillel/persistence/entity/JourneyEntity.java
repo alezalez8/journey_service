@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-//@Table(name = "schedule_service")
 @Table(name = "journey")
 @Getter
 @Setter
@@ -60,7 +59,7 @@ public class JourneyEntity extends AbstractModifyEntity<Long> implements Seriali
     private DirectionType direction = DirectionType.TO;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "vehicle_id")
     private VehicleEntity vehicle;
 

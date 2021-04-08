@@ -21,7 +21,7 @@ public class VehicleEntity extends AbstractModifyEntity<Long> {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "vehicle", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "vehicle")  // , cascade = {CascadeType.PERSIST, CascadeType.MERGE}
     private Set<JourneyEntity> journeys = new HashSet<>();
 
     public void addJourney(final JourneyEntity journeyEntity) {
