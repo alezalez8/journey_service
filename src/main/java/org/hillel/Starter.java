@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Starter {
-    public static void main(String[] args)  throws Exception{
+    public static void main(String[] args) throws Exception {
         final Date date = new Date();
         Calendar calendar = new GregorianCalendar();
 
@@ -21,7 +21,6 @@ public class Starter {
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
         calendar.clear(Calendar.DAY_OF_YEAR);
         calendar.set(Calendar.DAY_OF_YEAR, 1);
-
 
 
         JourneyEntity journey1 = buildJourney("from 1", "to 1", date, calendar.getTime());
@@ -89,12 +88,6 @@ public class Starter {
         stopAddInfoEntity.setLatitude(lat);
         stopAddInfoEntity.setLongitude(lon);
         final StopEntity stopEntity = new StopEntity();
-        //-------------------------------------------------
-        /*CommonInfo commonInfo = new CommonInfo();
-        commonInfo.setName("stop 1");
-        commonInfo.setDescription("stop 1 description");
-        stopEntity.setCommonInfo(commonInfo);*/
-        //=================================================
         stopEntity.addAddInfo(stopAddInfoEntity);
         return stopEntity;
     }
