@@ -16,7 +16,7 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
     @Override
     public void remove(VehicleEntity entity) {
       entity = findById(entity.getId()).get();
-      entity.removeAllJourney();
+      //entity.removeAllJourney();
       super.remove(entity);
 
     }

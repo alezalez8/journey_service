@@ -27,10 +27,13 @@ public class JourneyRepository extends CommonRepository<JourneyEntity, Long> {
                 entity.setVehicle(entityManager.merge(vehicleEntity));
             }
         }
-       return super.createOrUpdate(entity);
+        return super.createOrUpdate(entity);
     }
 
+    public EntityManager getEntityManager() {
+        return entityManager;
 
+    }
 
 
 }

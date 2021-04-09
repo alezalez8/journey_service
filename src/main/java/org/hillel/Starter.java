@@ -3,6 +3,7 @@ package org.hillel;
 import org.hillel.config.RootConfig;
 import org.hillel.persistence.entity.*;
 import org.hillel.persistence.entity.enums.DirectionType;
+import org.hillel.persistence.repository.JourneyRepository;
 import org.hillel.service.TicketClient;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.ApplicationContext;
@@ -29,6 +30,7 @@ public class Starter {
         vehicle1.setName("bus2");
         journey1.addVehicle(vehicle1);
         ticketClient.createOrUpdateJourney(journey1);
+        //JourneyRepository.
 
 
         System.out.println("delete vehicle");
