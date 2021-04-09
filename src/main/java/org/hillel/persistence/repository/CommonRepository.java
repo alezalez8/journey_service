@@ -43,8 +43,10 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
     @SneakyThrows
     @Override
     public void removeById(ID id) {
-        entityManager.remove(findById(id));
-
+//        entityManager.remove(findById(id).get());
+        final E reference =  entityManager.getReference(entityClass, id); // return only current object, without link wit other objects!
+        entityManager.remove(reference);
+//     entityManager.remove(entityManager.getReference(entityClass, id));
     }
 
     @Override

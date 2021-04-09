@@ -23,7 +23,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @DynamicUpdate
 @DynamicInsert
-public class JourneyEntity extends AbstractModifyEntity<Long> implements Serializable {
+public class JourneyEntity extends  AbstractModifyEntity<Long> implements Serializable {
 
     @Override
     public boolean equals(Object o) {
