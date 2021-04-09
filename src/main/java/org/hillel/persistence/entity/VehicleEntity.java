@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,7 +22,8 @@ public class VehicleEntity extends AbstractModifyEntity<Long> {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "vehicle")  // , cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+    //    @OneToMany(mappedBy = "vehicle", orphanRemoval = true )  // , cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+    @OneToMany(mappedBy = "vehicle")
     private Set<JourneyEntity> journeys = new HashSet<>();
 
     public void addJourney(final JourneyEntity journeyEntity) {
@@ -38,5 +40,10 @@ public class VehicleEntity extends AbstractModifyEntity<Long> {
         return "VehicleEntity{" +
                 "name='" + name + '\'' + '}';
 
+    }
+
+    public void removeAllJourney() {
+        if (CollectionUtils.isEmpty(journeys)) return;
+        journeys.forEach(item -> item.setVehicle(null));
     }
 }

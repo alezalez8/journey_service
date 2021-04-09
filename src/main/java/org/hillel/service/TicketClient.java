@@ -102,5 +102,9 @@ public class TicketClient {
     public void removeById(Long journeyId) {
         journeyService.removeById(journeyId);
     }
+
+    public void removeVehicle(final VehicleEntity vehicleEntity) {
+        vehicleService.remove(vehicleEntity);
+    }
 }
 

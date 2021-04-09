@@ -30,8 +30,12 @@ public class Starter {
         journey1.addVehicle(vehicle1);
         ticketClient.createOrUpdateJourney(journey1);
 
-        System.out.println("delete journey");
-        ticketClient.removeById(journey1.getId());
+
+        System.out.println("delete vehicle");
+        ticketClient.removeVehicle(vehicle1);
+
+//        System.out.println("delete journey");
+//        ticketClient.removeById(journey1.getId());
 
         /*journey1.addStop(buildStop(1D, 2D));
 
