@@ -29,7 +29,7 @@ public class TransactionalJourneyService {
         System.out.println("remove journey by id");
         journeyRepository.removeById(journey.getId());
 
-        journeyRepository.getEntityManager().flush();
+        //journeyRepository.getEntityManager().flush();
 
 
         JourneyEntity entity2 = new JourneyEntity();

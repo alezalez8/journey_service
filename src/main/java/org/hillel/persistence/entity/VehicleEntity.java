@@ -3,9 +3,13 @@ package org.hillel.persistence.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,7 +28,7 @@ public class VehicleEntity extends AbstractModifyEntity<Long> {
 
 //=============================
     @OneToOne(mappedBy = "vehicleEntity", cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    private VehicleFreeSeatsEntity freeSeats;
+    private VehicleFreeSeats freeSeats;
 //====================================
     public void addJourney(final JourneyEntity journeyEntity) {
         // todo

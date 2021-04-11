@@ -25,18 +25,6 @@ import java.util.Objects;
 @DynamicInsert
 public class JourneyEntity extends  AbstractModifyEntity<Long> implements Serializable {
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof JourneyEntity)) return false;
-        JourneyEntity entity = (JourneyEntity) o;
-        return getId() != null && Objects.equals(getId(), entity.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
 
     @Column(name = "station_from", length = 80, nullable = false)
     private String stationFrom;
@@ -44,10 +32,8 @@ public class JourneyEntity extends  AbstractModifyEntity<Long> implements Serial
     @Column(name = "station_to", length = 80, nullable = false)
     private String stationTo;
 
-
     @Column(name = "departure", nullable = false)
     @Temporal(TemporalType.DATE)
-    //private Instant departure;
     private Date departure;
 
     @Column(name = "arrival", nullable = false)
@@ -58,14 +44,13 @@ public class JourneyEntity extends  AbstractModifyEntity<Long> implements Serial
     @Enumerated(EnumType.STRING)
     private DirectionType direction = DirectionType.TO;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    List<VehicleFreeSeats> freeSeats = new ArrayList<>();
+
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "vehicle_id")
     private VehicleEntity vehicle;
-
-    public void addVehicle(final VehicleEntity vehicle) {
-        this.vehicle = vehicle;
-    }
 
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -74,6 +59,12 @@ public class JourneyEntity extends  AbstractModifyEntity<Long> implements Serial
             inverseJoinColumns = @JoinColumn(name = "stop_id")
     )
     private List<StopEntity> stops = new ArrayList<>();
+
+
+
+    public void addVehicle(final VehicleEntity vehicle) {
+        this.vehicle = vehicle;
+    }
 
     public void addStop(final StopEntity stop) {
         if(stop == null) return;
@@ -92,5 +83,18 @@ public class JourneyEntity extends  AbstractModifyEntity<Long> implements Serial
                 ", direction=" + direction +
                 ", vehicle=" + vehicle +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof JourneyEntity)) return false;
+        JourneyEntity entity = (JourneyEntity) o;
+        return getId() != null && Objects.equals(getId(), entity.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

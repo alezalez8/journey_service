@@ -12,11 +12,11 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class VehicleFreeSeatsEntity extends AbstractModifyEntity<Long> {
+public class VehicleFreeSeats {
 
-   /* @Id
+    @Id
     @GeneratedValue()
-    private Long id;*/
+    private Long id;
 
 
     @Column(name = "seats")
@@ -30,10 +30,6 @@ public class VehicleFreeSeatsEntity extends AbstractModifyEntity<Long> {
     @MapsId
     @JoinColumn(name = "id")
     private VehicleEntity vehicleEntity ;
-
-    @ManyToOne
-    @JoinColumn(name = "journey_id", nullable = false)
-    private JourneyEntity journey;
 
 
 }
