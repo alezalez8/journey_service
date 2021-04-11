@@ -1,47 +1,80 @@
 package org.hillel;
 
 import org.hillel.config.RootConfig;
-import org.hillel.context.AppContext;
-import org.hillel.persistence.entity.JourneyEntity;
+import org.hillel.persistence.entity.*;
+import org.hillel.persistence.entity.enums.DirectionType;
+import org.hillel.persistence.repository.JourneyRepository;
 import org.hillel.service.TicketClient;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.hillel.service.JourneyService;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.io.IOException;
-import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Starter {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        final Date date = new Date();
+        Calendar calendar = new GregorianCalendar();
+        calendar.clear(Calendar.DAY_OF_YEAR);
+        calendar.set(Calendar.DAY_OF_YEAR, 1);
 
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
 
-        JourneyEntity journeyEntity = new JourneyEntity();
-        journeyEntity.setStationFrom("Odessa");
-        journeyEntity.setStationTo("Antalia");
-        journeyEntity.setDeparture(LocalDate.now());
-        journeyEntity.setArrival(LocalDate.now().plusDays(1));
-
-        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity));
-
-        JourneyEntity journeyEntity1 = new JourneyEntity();
-        journeyEntity1.setStationFrom("Odessa");
-        journeyEntity1.setStationTo("Kimer");
-        journeyEntity1.setDeparture(LocalDate.now());
-        journeyEntity1.setArrival(LocalDate.now().plusDays(1));
-
-        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity1));
-        JourneyEntity journeyEntity2 = new JourneyEntity("Kiev", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1));
-        System.out.println("create journey with id =  " + ticketClient.createJourney(journeyEntity2));
-
-     
+        VehicleEntity vehicle1 = buildVehicle("bus1");
+        ticketClient.createOrUpdateVehicle(vehicle1);
 
 
+        JourneyEntity journey1 = buildJourney("from 1", "to 1", date, calendar.getTime());
+        vehicle1.setName("bus2");
+        journey1.addVehicle(vehicle1);
+        ticketClient.createOrUpdateJourney(journey1);
+        //JourneyRepository.
+
+
+        System.out.println("delete vehicle");
+        ticketClient.removeVehicle(vehicle1);
+
+//        System.out.println("delete journey");
+//        ticketClient.removeById(journey1.getId());
+
+        /*journey1.addStop(buildStop(1D, 2D));
+        System.out.println("call create journey");
+        journey1 = ticketClient.createOrUpdateJourney(journey1);
+        journey1.getStops().get(0).setActive(false);
+        journey1.addStop(buildStop(2D, 3D));
+        System.out.println("call update journey");
+        ticketClient.createOrUpdateJourney(journey1);*/
 
     }
+
+    private static JourneyEntity buildJourney(final String stationFrom, final String stationTo,
+                                              final Date departure, final Date arrival) {
+        final JourneyEntity journeyEntity = new JourneyEntity();
+        journeyEntity.setStationFrom(stationFrom);
+        journeyEntity.setStationTo(stationTo);
+        journeyEntity.setDeparture(departure);
+        journeyEntity.setArrival(arrival);
+        journeyEntity.setDirection(DirectionType.TO);
+        journeyEntity.setActive(true);
+        return journeyEntity;
+    }
+
+    private static StopEntity buildStop(final Double lat, final Double lon) {
+        final StopAddInfoEntity stopAddInfoEntity = new StopAddInfoEntity();
+        stopAddInfoEntity.setLatitude(lat);
+        stopAddInfoEntity.setLongitude(lon);
+        final StopEntity stopEntity = new StopEntity();
+        stopEntity.addAddInfo(stopAddInfoEntity);
+        return stopEntity;
+    }
+
+    private static VehicleEntity buildVehicle(final String name) {
+        final VehicleEntity vehicleEntity = new VehicleEntity();
+        vehicleEntity.setName(name);
+        return vehicleEntity;
+    }
+
+
 }

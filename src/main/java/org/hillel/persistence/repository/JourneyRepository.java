@@ -1,25 +1,38 @@
 package org.hillel.persistence.repository;
 
-
+import org.hibernate.Session;
 import org.hillel.persistence.entity.JourneyEntity;
+import org.hillel.persistence.entity.VehicleEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import java.util.Objects;
+import java.util.Optional;
 
 @Repository
-public class JourneyRepository {
+public class JourneyRepository extends CommonRepository<JourneyEntity, Long> {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    protected JourneyRepository() {
+        super(JourneyEntity.class);
+    }
 
-    public Long create(final JourneyEntity journeyEntity) {
-        if(journeyEntity == null) {
-            throw new IllegalArgumentException("Unable to create new record");
+    @Override
+    public JourneyEntity createOrUpdate(JourneyEntity entity) {
+        VehicleEntity vehicleEntity = entity.getVehicle();
+        if (Objects.nonNull(entity.getVehicle())) {
+            if (!entityManager.contains(vehicleEntity)) {
+                entity.setVehicle(entityManager.merge(vehicleEntity));
+            }
         }
-        entityManager.persist(journeyEntity);
-        return journeyEntity.getId();
+        return super.createOrUpdate(entity);
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
 
     }
+
 
 }
