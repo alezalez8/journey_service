@@ -22,6 +22,9 @@ public class StopEntity extends AbstractModifyEntity<Long> implements Serializab
     @Embedded
     private CommonInfo commonInfo;
 
+    @Column(name = "name_location", nullable = false, length = 100)
+    private String nameLocation;
+
 
     @OneToOne(mappedBy = "stop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private StopAddInfoEntity stopAddInfo;

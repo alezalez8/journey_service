@@ -22,6 +22,12 @@ public class StopAddInfoEntity {
     private double longitude;
     @Column(name = "latitude", nullable = false)
     private double latitude;
+    @Column(name = "is_market", length = 100)
+    private String market;
+    @Column(name = "hotel", length = 100)
+    private String hotel;
+
+
 
     @OneToOne
     @MapsId
