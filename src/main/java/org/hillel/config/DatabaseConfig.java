@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Objects;
 import java.util.Properties;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -26,12 +27,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
 public class DatabaseConfig {
-//    private final long connTimeOut = 2; // (5 minutes = 5*60 = 300 S) /150 (connects) = 2 S
-    private final long connTimeOut = 300;
-    private final long connеctTimeOut = 300000;
 
-    private final int poolSize = 150;
-    private final int minIdle = 30;
 
     @Autowired
     private Environment environment;
@@ -44,11 +40,9 @@ public class DatabaseConfig {
         config.setJdbcUrl(environment.getProperty("database.url"));
         config.addDataSourceProperty("databaseName", environment.getProperty("database.name"));
         config.setDataSourceClassName(PGSimpleDataSource.class.getName());
-        //config.setConnectionTimeout(SECONDS.toMillis(connTimeOut));
-        config.setMinimumIdle(minIdle);
-        config.setMaximumPoolSize(poolSize);
-        HikariDataSource dataSource = new HikariDataSource(config);
-        return dataSource;
+        config.setMinimumIdle(Integer.parseInt(Objects.requireNonNull(environment.getProperty("database.minIdle"))));
+        config.setMaximumPoolSize(Integer.parseInt(Objects.requireNonNull(environment.getProperty("database.poolSize"))));
+        return new HikariDataSource(config);
     }
 
     @Bean
@@ -59,9 +53,9 @@ public class DatabaseConfig {
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         Properties properties = new Properties();
         properties.put("hibernate.dialect", PostgreSQL10Dialect.class.getName());
-        properties.put("hibernate.hbm2ddl.auto", "create-drop");
+        properties.put("hibernate.hbm2ddl.auto", "create");
         properties.put("hibernate.show_sql", "true");
-       // properties.put("javax.persistence.query.timeout", connеctTimeOut);  add propertye to  pom.xml !!!!!
+        properties.put("javax.persistence.query.timeout", environment.getProperty("database.queryTimout"));
         emf.setJpaProperties(properties);
         return emf;
     }
