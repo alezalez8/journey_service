@@ -13,6 +13,7 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor
 public class CommonInfo {
 
+
     @Column(name = "name") // remove : nullable = false
     private String name;
 

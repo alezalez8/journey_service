@@ -70,7 +70,7 @@ public class JourneyEntity extends  AbstractModifyEntity<Long> implements Serial
         if(stop == null) return;
         if(stops == null) stops = new ArrayList<>();
         stops.add(stop);
-        stop.addJourney(this);
+        stop.addJourney(this);   //======
     }
 
     @Override

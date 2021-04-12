@@ -17,21 +17,21 @@ import javax.persistence.*;
 public class VehicleFreeSeatsEntity  extends AbstractModifyEntity<Long> {
 
 
-   /* @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;*/
-
-    /*@Column(name = "seats")
-    private int seats;*/
 
     @Column(name = "free_seats")
     private Integer freeSeats;
 
 
-    @OneToOne
+    /*@OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    private VehicleEntity vehicleEntity ;*/
+
+    @ManyToOne
     @MapsId
     @JoinColumn(name = "id")
     private VehicleEntity vehicleEntity ;
+
 
     @ManyToOne
     @JoinColumn(name = "journey_id", nullable = false)

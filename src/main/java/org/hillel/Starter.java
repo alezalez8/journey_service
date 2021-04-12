@@ -30,21 +30,22 @@ public class Starter {
 
         // create journey with stops:
         JourneyEntity journey = buildJourney("Odessa", "Lviv", date, calendar.getTime());
-        journey.addStop(buildStop(3D, 5D, "Odessa obl","Умань", "dendropark",
-                "Silpo", " "));
-        journey.addStop(buildStop(5D, 5D, "Hmelnits obl","Hmelitskyj", "sity Hmelnitsk",
-                "Kopeyka", "Hmeln"));
-        journey.addStop(buildStop(6D, 7D, "Ternop obl","Ternopolska", "sity Ternopil",
-                " ", "Terno"));
+        journey.addStop(buildStop(3D, 5D, "Одесская область","Умань", "г. Умань",
+                "Сельпо", " "));
+        journey.addStop(buildStop(5D, 5D, "Хмельницкая область","Хмельницкий", "г. Хмельницк",
+                "Копейка", "Звезда"));
+        journey.addStop(buildStop(6D, 7D, "Тернопольская область","Тернопольская", "г. Тернополь",
+                "АТБ", "Терноп"));
 
 
-        // create jo
+        // create journey with vehicle
         journey.setVehicle(busOne);
         journey.setVehicle(busTwo);
         journey = ticketClient.createOrUpdateJourney(journey);
 
         // create free seats
         busOne.addFreeSeats(buildFreeSeats(journey, busOne, 34));
+        busOne = ticketClient.createOrUpdateVehicle(busOne);
 
 
     }
