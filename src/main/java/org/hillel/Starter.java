@@ -22,20 +22,21 @@ public class Starter {
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
 
-        VehicleEntity vehicle1 = buildVehicle("bus1");
-        ticketClient.createOrUpdateVehicle(vehicle1);
+        // create vehicles:
+        VehicleEntity busOne = buildVehicle("City 34");
+        ticketClient.createOrUpdateVehicle(busOne);
+        VehicleEntity busTwo = buildVehicle("City 88");
+        ticketClient.createOrUpdateVehicle(busTwo);
+
+        // create journey with stops:
+        JourneyEntity journey = buildJourney("from 1", "to 1", date, calendar.getTime());
+        //journey.addStop(buildStop());
 
 
-        JourneyEntity journey1 = buildJourney("from 1", "to 1", date, calendar.getTime());
-        vehicle1.setName("bus2");
-        journey1.addVehicle(vehicle1);
-        ticketClient.createOrUpdateJourney(journey1);
-
-
-
-        System.out.println("delete vehicle");
-        ticketClient.removeVehicle(vehicle1);
-
+        //JourneyEntity journey1 = buildJourney("from 1", "to 1", date, calendar.getTime());
+        //vehicle1.setName("bus2");
+        //journey1.addVehicle(vehicle1);
+        //ticketClient.createOrUpdateJourney(journey1);
 
 
     }
@@ -52,10 +53,13 @@ public class Starter {
         return journeyEntity;
     }
 
-    private static StopEntity buildStop(final Double lat, final Double lon) {
+    private static StopEntity buildStop(final Double lat, final Double lon,
+                                        final String market, final String hotel) {
         final StopAddInfoEntity stopAddInfoEntity = new StopAddInfoEntity();
         stopAddInfoEntity.setLatitude(lat);
         stopAddInfoEntity.setLongitude(lon);
+        stopAddInfoEntity.setMarket(market);
+        stopAddInfoEntity.setHotel(hotel);
         final StopEntity stopEntity = new StopEntity();
         stopEntity.addAddInfo(stopAddInfoEntity);
         return stopEntity;
@@ -65,6 +69,24 @@ public class Starter {
         final VehicleEntity vehicleEntity = new VehicleEntity();
         vehicleEntity.setName(name);
         return vehicleEntity;
+    }
+
+    private static CommonInfo buildAddInfo(final String name, final String description) {
+        final CommonInfo commonInfo = new CommonInfo();
+        commonInfo.setName(name);
+        commonInfo.setDescription(description);
+        return commonInfo;
+    }
+
+    private static VehicleFreeSeatsEntity buildFreeSeats(final JourneyEntity journeyEntity,
+                                                         final VehicleEntity vehicleEntity,
+                                                         Integer freeSeats) {
+        final VehicleFreeSeatsEntity freeSeatsEntity = new VehicleFreeSeatsEntity();
+        freeSeatsEntity.setJourney(journeyEntity);
+        freeSeatsEntity.setVehicleEntity(vehicleEntity);
+        freeSeatsEntity.setFreeSeats(freeSeats);
+        return freeSeatsEntity;
+
     }
 
 

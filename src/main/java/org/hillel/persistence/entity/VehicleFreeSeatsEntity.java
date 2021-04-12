@@ -12,18 +12,18 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class VehicleFreeSeatsEntity extends AbstractModifyEntity<Long> {
-
-   /* @Id
-    @GeneratedValue()
-    private Long id;*/
+public class VehicleFreeSeatsEntity  extends AbstractModifyEntity<Long> {
 
 
-    @Column(name = "seats")
-    private int seats;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    /*@Column(name = "seats")
+    private int seats;*/
 
     @Column(name = "free_seats")
-    private int freeSeats;
+    private Integer freeSeats;
 
 
     @OneToOne

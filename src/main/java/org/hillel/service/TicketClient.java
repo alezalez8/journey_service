@@ -4,6 +4,7 @@ import org.hibernate.cfg.Environment;
 import org.hillel.persistence.entity.JourneyEntity;
 import org.hillel.persistence.entity.StopEntity;
 import org.hillel.persistence.entity.VehicleEntity;
+import org.hillel.persistence.entity.VehicleFreeSeatsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -33,9 +34,11 @@ public class TicketClient {
     @Autowired
     private TransactionalStopService stopService;
 
-
     @Autowired
     private TransactionalVehicleService vehicleService;
+
+    @Autowired
+    private TranscactionalVehicleSeatsService vehicleSeatsService;
 
     //    @Autowired
     private Environment environment;
@@ -79,31 +82,21 @@ public class TicketClient {
     }
 
 
-    @PostConstruct
-    public void doPost() {
-        System.out.println("post construct");
-
-    }
-
-    @PreDestroy
-    public void destroy() {
-        System.out.println("destroy");
-    }
-
-
     public VehicleEntity createOrUpdateVehicle(VehicleEntity vehicle) {
         return vehicleService.createOrUpdate(vehicle);
 
     }
-
+    public VehicleFreeSeatsEntity createOrUpdateSeats(final VehicleFreeSeatsEntity freeSeatsEntity) {
+        return vehicleSeatsService.createOrUpdate(freeSeatsEntity);
+    }
     public void remove(JourneyEntity journey) {
         journeyService.remove(journey);
     }
     public void removeById(Long journeyId) {
         journeyService.removeById(journeyId);
     }
-
     public void removeVehicle(final VehicleEntity vehicleEntity) {
         vehicleService.remove(vehicleEntity);
     }
+
 }
