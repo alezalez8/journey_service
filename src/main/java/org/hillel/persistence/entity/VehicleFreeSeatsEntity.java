@@ -4,6 +4,7 @@ package org.hillel.persistence.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -12,18 +13,19 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class VehicleFreeSeatsEntity extends AbstractModifyEntity<Long> {
+@DynamicUpdate
+public class VehicleFreeSeatsEntity  extends AbstractModifyEntity<Long> {
+
 
    /* @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;*/
 
-
-    @Column(name = "seats")
-    private int seats;
+    /*@Column(name = "seats")
+    private int seats;*/
 
     @Column(name = "free_seats")
-    private int freeSeats;
+    private Integer freeSeats;
 
 
     @OneToOne

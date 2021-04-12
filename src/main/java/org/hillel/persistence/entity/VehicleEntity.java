@@ -26,10 +26,10 @@ public class VehicleEntity extends AbstractModifyEntity<Long> {
     @OneToMany(mappedBy = "vehicle", cascade = {CascadeType.REMOVE})
     private Set<JourneyEntity> journeys = new HashSet<>();
 
-//=============================
-    @OneToOne(mappedBy = "vehicleEntity", cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    private VehicleFreeSeats freeSeats;
-//====================================
+
+    @OneToOne(mappedBy = "vehicleEntity", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private VehicleFreeSeatsEntity freeSeats;
+
     public void addJourney(final JourneyEntity journeyEntity) {
         // todo
         if (journeys == null) {
@@ -37,6 +37,13 @@ public class VehicleEntity extends AbstractModifyEntity<Long> {
         }
         journeys.add(journeyEntity);
         journeyEntity.addVehicle(this);
+    }
+
+    public void addFreeSeats(VehicleFreeSeatsEntity freeSeat) {
+        if (freeSeat == null) return;
+        if (freeSeats == null) freeSeats = new VehicleFreeSeatsEntity();
+        freeSeat.setVehicleEntity(this);
+
     }
 
     @Override

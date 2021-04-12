@@ -22,24 +22,8 @@ public class TransactionalJourneyService {
         if (entity == null) {
             throw new IllegalArgumentException("Unable to create new record");
         }
-        System.out.println("create journey ");
-        final JourneyEntity orUpdate = journeyRepository.createOrUpdate(entity);
-        System.out.println("get journey by id");
-        JourneyEntity journey = journeyRepository.findById(orUpdate.getId()).get();
-        System.out.println("remove journey by id");
-        journeyRepository.removeById(journey.getId());
 
-        //journeyRepository.getEntityManager().flush();
-
-
-        JourneyEntity entity2 = new JourneyEntity();
-        entity2.setArrival(orUpdate.getArrival());
-        entity2.setDeparture(orUpdate.getDeparture());
-        entity2.setStationFrom(orUpdate.getStationFrom());
-        entity2.setStationTo(orUpdate.getStationTo());
-        entity2.setActive(false);
-
-        return journeyRepository.createOrUpdate(entity2);
+        return journeyRepository.createOrUpdate(entity);
 
     }
 

@@ -1,6 +1,6 @@
 package org.hillel.service;
 
-import org.hillel.persistence.entity.VehicleFreeSeats;
+import org.hillel.persistence.entity.VehicleFreeSeatsEntity;
 import org.hillel.persistence.repository.VehicleSeatsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,8 @@ public class TranscactionalVehicleSeatsService {
     private VehicleSeatsRepository seatsRepository;
 
     @Transactional
-    public VehicleSeatsRepository createOrUpdate(final VehicleFreeSeats freeSeats) {
+    public VehicleFreeSeatsEntity createOrUpdate(final VehicleFreeSeatsEntity freeSeats) {
         return seatsRepository.createOrUpdate(freeSeats);
     }
+
 }

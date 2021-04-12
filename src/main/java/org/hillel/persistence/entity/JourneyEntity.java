@@ -44,8 +44,8 @@ public class JourneyEntity extends  AbstractModifyEntity<Long> implements Serial
     @Enumerated(EnumType.STRING)
     private DirectionType direction = DirectionType.TO;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    List<VehicleFreeSeats> freeSeats = new ArrayList<>();
+    @OneToMany(mappedBy = "journey", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    List<VehicleFreeSeatsEntity> freeSeats = new ArrayList<>();
 
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})

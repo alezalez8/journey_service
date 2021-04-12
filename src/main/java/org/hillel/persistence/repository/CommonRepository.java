@@ -11,7 +11,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
 
-public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID extends Serializable> implements GenericRepository<E, ID> {
+public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID extends Serializable>
+        implements GenericRepository<E, ID> {
 
     @PersistenceContext
     protected EntityManager entityManager;
@@ -25,10 +26,8 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
     public E createOrUpdate(E entity) {
         Assert.notNull(entity, "entity must be set");
         if (Objects.isNull(entity.getId())) {
-            //System.out.println("Call persist");
             entityManager.persist(entity);
         } else {
-            //System.out.println("Call merge");
             return entityManager.merge(entity);
         }
         return entity;
