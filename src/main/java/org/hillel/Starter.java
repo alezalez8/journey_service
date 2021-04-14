@@ -24,6 +24,10 @@ public class Starter {
 
         VehicleEntity vehicle1 = buildVehicle("bus1");
         ticketClient.createOrUpdateVehicle(vehicle1);
+        /*VehicleEntity vehicle2 = buildVehicle("bus1");
+        ticketClient.createOrUpdateVehicle(vehicle2);
+        VehicleEntity vehicle3 = buildVehicle("bus1");
+        ticketClient.createOrUpdateVehicle(vehicle3);*/
 
 
         JourneyEntity journey1 = buildJourney("from 1", "to 1", date, calendar.getTime());
@@ -35,6 +39,8 @@ public class Starter {
 
         System.out.println("delete vehicle");
         ticketClient.removeVehicle(vehicle1);
+
+        System.out.println(ticketClient.findVehicleById(1L));
 
 //        System.out.println("delete journey");
 //        ticketClient.removeById(journey1.getId());

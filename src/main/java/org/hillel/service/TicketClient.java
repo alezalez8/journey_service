@@ -7,13 +7,8 @@ import org.hillel.persistence.entity.VehicleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
@@ -37,7 +32,7 @@ public class TicketClient {
     @Autowired
     private TransactionalVehicleService vehicleService;
 
-//    @Autowired
+  // @Autowired
     private Environment environment;
 
     @Value("${datasource.url}")
@@ -79,18 +74,6 @@ public class TicketClient {
     }
 
 
-    @PostConstruct
-    public void doPost() {
-        System.out.println("post construct");
-
-    }
-
-    @PreDestroy
-    public void destroy() {
-        System.out.println("destroy");
-    }
-
-
     public VehicleEntity createOrUpdateVehicle(VehicleEntity vehicle) {
         return vehicleService.createOrUpdate(vehicle);
 
@@ -99,12 +82,21 @@ public class TicketClient {
     public void remove(JourneyEntity journey) {
         journeyService.remove(journey);
     }
+
     public void removeById(Long journeyId) {
         journeyService.removeById(journeyId);
     }
 
     public void removeVehicle(final VehicleEntity vehicleEntity) {
         vehicleService.remove(vehicleEntity);
+    }
+
+    public Collection<VehicleEntity> findVehicleByids(Long ... ids) {
+        return vehicleService.findByIds();
+    }
+
+    public Optional<VehicleEntity> findVehicleById(Long id) {
+        return vehicleService.findById(id);
     }
 }
 

@@ -2,12 +2,14 @@ package org.hillel.persistence.repository;
 
 
 import lombok.SneakyThrows;
+import org.hibernate.Session;
 import org.hillel.persistence.entity.AbstractModifyEntity;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -25,10 +27,8 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
     public E createOrUpdate(E entity) {
         Assert.notNull(entity, "entity must be set");
         if (Objects.isNull(entity.getId())) {
-            //System.out.println("Call persist");
             entityManager.persist(entity);
         } else {
-            //System.out.println("Call merge");
             return entityManager.merge(entity);
         }
         return entity;
@@ -43,10 +43,8 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
     @SneakyThrows
     @Override
     public void removeById(ID id) {
-//        entityManager.remove(findById(id).get());
         final E reference = entityManager.getReference(entityClass, id); // return only current object, without link wit other objects!
         entityManager.remove(reference);
-//     entityManager.remove(entityManager.getReference(entityClass, id));
     }
 
     @Override
@@ -58,4 +56,13 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         }
     }
 
+    @Override
+    public Collection<E> findByIds(ID... ids) {
+        return entityManager.unwrap(Session.class).byMultipleIds(entityClass).multiLoad(ids);
+    }
+
+    @Override
+    public Collection<E> findAll() {
+        return null;
+    }
 }
