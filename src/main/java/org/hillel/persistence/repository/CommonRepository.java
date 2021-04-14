@@ -63,6 +63,6 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
 
     @Override
     public Collection<E> findAll() {
-        return null;
+        return entityManager.;
     }
 }
