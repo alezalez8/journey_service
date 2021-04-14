@@ -26,13 +26,18 @@ public class TransactionalVehicleService {
         vehicleRepository.remove(vehicleEntity);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Collection<VehicleEntity> findByIds(Long... ids) {
         return vehicleRepository.findByIds(ids);
     }
-    @Transactional
-    public Optional<VehicleEntity> findById(Long id) {
-        return vehicleRepository.findById(id);
+
+    @Transactional(readOnly = true) // сущность не будет меняться
+    public Optional<VehicleEntity> findById(Long id, boolean withDep) {
+        final Optional<VehicleEntity> byId = vehicleRepository.findById(id);
+        if(!byId.isPresent())  return byId;
+        if(!withDep) return byId;
+        byId.get().getJourneys().size();
+        return byId;
     }
 
 

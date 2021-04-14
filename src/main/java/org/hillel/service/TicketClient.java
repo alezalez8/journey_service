@@ -95,8 +95,8 @@ public class TicketClient {
         return vehicleService.findByIds();
     }
 
-    public Optional<VehicleEntity> findVehicleById(Long id) {
-        return vehicleService.findById(id);
+    public Optional<VehicleEntity> findVehicleById(Long id, boolean withDependencies) {
+        return vehicleService.findById(id, withDependencies);
     }
 }
 
