@@ -46,6 +46,7 @@ public class Starter {
         // create free seats
         busOne.addFreeSeats(buildFreeSeats(journey, busOne, 34));
         busOne = ticketClient.createOrUpdateVehicle(busOne);
+        System.out.println("========================= delete vehicle ================");
 
 
     }

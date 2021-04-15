@@ -23,7 +23,7 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
     }
 
     @Override
-    public E createOrUpdate(E entity) {
+    public E  createOrUpdate(E entity) {
         Assert.notNull(entity, "entity must be set");
         if (Objects.isNull(entity.getId())) {
             entityManager.persist(entity);
