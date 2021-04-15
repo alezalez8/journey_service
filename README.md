@@ -1,5 +1,5 @@
 # TICKET
-## Home work 4
+## ДЗ 3. Hibernate relations
 
 
 #### Desision: 
