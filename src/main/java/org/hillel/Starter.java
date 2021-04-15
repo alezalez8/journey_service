@@ -34,12 +34,15 @@ public class Starter {
 
         // create journey with stops:
         JourneyEntity journey = buildJourney("Odessa", "Lviv", date, calendar.getTime());
-        journey.addStop(buildStop(3D, 5D, "Одесская область","Умань", "г. Умань",
-                "Сельпо", " "));
+        journey.addStop(buildStop(3D, 5D, "Винницкая область","Умань", "г. Умань",
+                "Сельпо", "Умань"));
+        journey.addStop(buildStop(3.5D, 5D, "Винницкая область","Винница", "г. Винница",
+                "Аврора", "Винiца"));
         journey.addStop(buildStop(5D, 5D, "Хмельницкая область","Хмельницкий", "г. Хмельницк",
                 "Копейка", "Звезда"));
         journey.addStop(buildStop(6D, 7D, "Тернопольская область","Тернопольская", "г. Тернополь",
                 "АТБ", "Терноп"));
+
 
 
         // create journey with vehicle
