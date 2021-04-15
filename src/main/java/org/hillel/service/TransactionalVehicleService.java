@@ -18,8 +18,4 @@ public class TransactionalVehicleService {
         return vehicleRepository.createOrUpdate(vehicleEntity);
     }
 
-    @Transactional
-    public void  remove(VehicleEntity vehicleEntity) {
-        vehicleRepository.remove(vehicleEntity);
-    }
 }
