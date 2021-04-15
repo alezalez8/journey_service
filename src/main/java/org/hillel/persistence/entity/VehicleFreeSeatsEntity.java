@@ -21,7 +21,6 @@ public class VehicleFreeSeatsEntity  extends AbstractModifyEntity<Long> {
     @Column(name = "free_seats")
     private Integer freeSeats;
 
-
     /*@OneToOne
     @MapsId
     @JoinColumn(name = "id")

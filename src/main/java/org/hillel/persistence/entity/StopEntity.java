@@ -27,18 +27,19 @@ public class StopEntity extends AbstractModifyEntity<Long> implements Serializab
     private String nameLocation;
 
 
-    @OneToOne(mappedBy = "stop", cascade = {CascadeType.PERSIST})
+    @OneToOne(mappedBy = "stop", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private StopAddInfoEntity stopAddInfo;
 
     @ManyToMany(mappedBy = "stops")
     private List<JourneyEntity> journeys = new ArrayList<>();
 
-    public void removeAllJorneys(){
-        if(Objects.isNull(journeys)) return;
-        for (JourneyEntity temp: journeys
-             ) {
-            journeys.remove(this);
+    public void removeAllJorneys() {
+        if (Objects.isNull(journeys)) return;
+        for (JourneyEntity temp : journeys
+        ) {
+            temp.getStops().remove(this);
         }
+        this.journeys.clear();
     }
 
 
