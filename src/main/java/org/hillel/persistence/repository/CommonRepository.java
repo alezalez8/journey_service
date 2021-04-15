@@ -61,8 +61,8 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         return entityManager.unwrap(Session.class).byMultipleIds(entityClass).multiLoad(ids);
     }
 
-    @Override
+   /* @Override
     public Collection<E> findAll() {
-        return entityManager.;
-    }
+        return entityManager;
+    }*/
 }

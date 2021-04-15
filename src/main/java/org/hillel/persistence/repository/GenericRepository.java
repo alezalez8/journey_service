@@ -15,5 +15,5 @@ public interface GenericRepository<E, ID> {
 
     Collection<E> findByIds(ID... ids);
 
-    Collection<E> findAll();
+//    Collection<E> findAll();
 }
