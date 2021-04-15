@@ -23,7 +23,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @DynamicUpdate
 @DynamicInsert
-public class JourneyEntity extends  AbstractModifyEntity<Long> implements Serializable {
+public class JourneyEntity extends AbstractModifyEntity<Long> implements Serializable {
 
 
     @Column(name = "station_from", length = 80, nullable = false)
@@ -61,17 +61,23 @@ public class JourneyEntity extends  AbstractModifyEntity<Long> implements Serial
     private List<StopEntity> stops = new ArrayList<>();
 
 
-
     public void addVehicle(final VehicleEntity vehicle) {
         this.vehicle = vehicle;
     }
 
     public void addStop(final StopEntity stop) {
-        if(stop == null) return;
-        if(stops == null) stops = new ArrayList<>();
+        if (stop == null) return;
+        if (stops == null) stops = new ArrayList<>();
         stops.add(stop);
         stop.addJourney(this);   //======
     }
+
+    /*public void deleteStop(final StopEntity stop) {
+        if (stop == null) return;
+        if (stops.contains(stop)) {
+            stops.remove(stop);
+        }
+    }*/
 
     @Override
     public String toString() {

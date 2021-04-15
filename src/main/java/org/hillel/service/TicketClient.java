@@ -40,7 +40,7 @@ public class TicketClient {
     @Autowired
     private TranscactionalVehicleSeatsService vehicleSeatsService;
 
-    //    @Autowired
+    //@Autowired
     private Environment environment;
 
     @Value("${datasource.url}")
@@ -86,17 +86,26 @@ public class TicketClient {
         return vehicleService.createOrUpdate(vehicle);
 
     }
+
     public VehicleFreeSeatsEntity createOrUpdateSeats(final VehicleFreeSeatsEntity freeSeatsEntity) {
         return vehicleSeatsService.createOrUpdate(freeSeatsEntity);
     }
+
+    public void removeStop(StopEntity stopEntity) {
+        stopService.remove(stopEntity);
+    }
+
     public void remove(JourneyEntity journey) {
         journeyService.remove(journey);
     }
+
     public void removeById(Long journeyId) {
         journeyService.removeById(journeyId);
     }
+
     public void removeVehicle(final VehicleEntity vehicleEntity) {
         vehicleService.remove(vehicleEntity);
     }
+
 
 }

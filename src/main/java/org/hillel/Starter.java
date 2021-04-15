@@ -27,6 +27,10 @@ public class Starter {
         busOne = ticketClient.createOrUpdateVehicle(busOne);
         VehicleEntity busTwo = buildVehicle("City 88");
         busTwo = ticketClient.createOrUpdateVehicle(busTwo);
+        VehicleEntity busThree = buildVehicle("City 105");
+        busTwo = ticketClient.createOrUpdateVehicle(busThree);
+        VehicleEntity busFour = buildVehicle("City 220");
+        busTwo = ticketClient.createOrUpdateVehicle(busFour);
 
         // create journey with stops:
         JourneyEntity journey = buildJourney("Odessa", "Lviv", date, calendar.getTime());
@@ -44,12 +48,24 @@ public class Starter {
         journey = ticketClient.createOrUpdateJourney(journey);
 
         // create free seats
-        busOne.addFreeSeats(buildFreeSeats(journey, busOne, 34));
-        busOne = ticketClient.createOrUpdateVehicle(busOne);
-        System.out.println("========================= delete vehicle ================");
+//        busOne.addFreeSeats(buildFreeSeats(journey, busOne, 34));
+//        busOne = ticketClient.createOrUpdateVehicle(busOne);
+        System.out.println("========================= begin of delete vehicle ================");
+
+        ticketClient.removeVehicle(busThree);
+        System.out.println("========================= end of delete vehicle ================");
+
+
+        System.out.println("========================= delete stop ================");
+
+        StopEntity stopEntity = journey.getStops().get(1);
+        ticketClient.removeStop(stopEntity);
+
 
 
     }
+
+
 
     private static JourneyEntity buildJourney(final String stationFrom, final String stationTo,
                                               final Date departure, final Date arrival) {
@@ -84,14 +100,6 @@ public class Starter {
 
         return stopEntity;
     }
-
-
-    /*private static CommonInfo buildAddInfo(final String name, final String description) {
-        final CommonInfo commonInfo = new CommonInfo();
-        commonInfo.setName(name);
-        commonInfo.setDescription(description);
-        return commonInfo;
-    }*/
 
     private static VehicleEntity buildVehicle(final String name) {
         final VehicleEntity vehicleEntity = new VehicleEntity();

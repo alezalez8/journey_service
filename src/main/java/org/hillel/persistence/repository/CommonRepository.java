@@ -18,6 +18,10 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
     protected EntityManager entityManager;
     private final Class<E> entityClass; // for different entity (stop, vehicle etc.)
 
+    public EntityManager getEntityManager(){
+        return entityManager;
+    }
+
     protected CommonRepository(Class<E> entityClass) {
         this.entityClass = entityClass;
     }

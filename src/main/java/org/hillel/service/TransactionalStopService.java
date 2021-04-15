@@ -21,4 +21,8 @@ public class TransactionalStopService {
         return stopRepository.createOrUpdate(stopEntity);
     }
 
+    @Transactional
+    public void remove(StopEntity stopEntity) {
+        stopRepository.remove(stopEntity);
+    }
 }

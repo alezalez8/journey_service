@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "stop")
@@ -26,11 +27,19 @@ public class StopEntity extends AbstractModifyEntity<Long> implements Serializab
     private String nameLocation;
 
 
-    @OneToOne(mappedBy = "stop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(mappedBy = "stop", cascade = {CascadeType.PERSIST})
     private StopAddInfoEntity stopAddInfo;
 
     @ManyToMany(mappedBy = "stops")
     private List<JourneyEntity> journeys = new ArrayList<>();
+
+    public void removeAllJorneys(){
+        if(Objects.isNull(journeys)) return;
+        for (JourneyEntity temp: journeys
+             ) {
+            journeys.remove(this);
+        }
+    }
 
 
     public void addAddInfo(StopAddInfoEntity stopAddInfo) {
@@ -42,9 +51,15 @@ public class StopEntity extends AbstractModifyEntity<Long> implements Serializab
         this.setStopAddInfo(stopAddInfo);
     }
 
+
     public void addJourney(JourneyEntity journeyEntity) {
         if (journeyEntity == null) return;
         if (journeys == null) journeys = new ArrayList<>();
         journeys.add(journeyEntity);
+    }
+
+    @Override
+    public String toString() {
+        return "NameLocation  " + getNameLocation();
     }
 }
