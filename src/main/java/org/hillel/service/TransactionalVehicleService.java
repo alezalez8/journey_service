@@ -22,7 +22,7 @@ public class TransactionalVehicleService {
     }
 
     @Transactional
-    public void  remove(VehicleEntity vehicleEntity) {
+    public void remove(VehicleEntity vehicleEntity) {
         vehicleRepository.remove(vehicleEntity);
     }
 
@@ -34,11 +34,15 @@ public class TransactionalVehicleService {
     @Transactional(readOnly = true) // сущность не будет меняться
     public Optional<VehicleEntity> findById(Long id, boolean withDep) {
         final Optional<VehicleEntity> byId = vehicleRepository.findById(id);
-        if(!byId.isPresent())  return byId;
-        if(!withDep) return byId;
+        if (!byId.isPresent()) return byId;
+        if (!withDep) return byId;
         byId.get().getJourneys().size();
         return byId;
     }
 
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findAll() {
+        return vehicleRepository.findAll();
+    }
 
 }

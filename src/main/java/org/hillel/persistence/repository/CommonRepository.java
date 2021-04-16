@@ -8,6 +8,10 @@ import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Table;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
@@ -61,8 +65,17 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         return entityManager.unwrap(Session.class).byMultipleIds(entityClass).multiLoad(ids);
     }
 
-    @Override
+    //@Override
     public Collection<E> findAll() {
-        return entityManager.;
+//        return entityManager.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList(); // first example hql-querry
+//        return entityManager.createNativeQuery("s
+//        elect  from " + entityClass.getAnnotation(Table.class).name(), entityClass).getResultList(); // second example
+        // критерий запроса
+
+        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass); // query - заготовка для дальнейшего sql запроса
+        final Root<E> from = query.from(entityClass); // с рута(from) строим все зависимости, т.е. в "select * from journey" journey - это и есть рут
+        return entityManager.createQuery(query.select(from)).getResultList();
+
     }
 }
