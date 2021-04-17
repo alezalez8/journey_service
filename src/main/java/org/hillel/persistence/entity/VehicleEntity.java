@@ -3,8 +3,6 @@ package org.hillel.persistence.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
-import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,6 +15,19 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+
+@org.hibernate.annotations.NamedQueries(value = {
+        @org.hibernate.annotations.NamedQuery(name = "findAll", query = "from VehicleEntity")
+})
+
+@NamedStoredProcedureQueries(
+        @NamedStoredProcedureQuery(
+                name = "findAllVehicle",
+                procedureName = "find_all_vehicles",
+                parameters = @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = Class.class),
+                resultClasses = VehicleEntity.class
+        )
+)
 public class VehicleEntity extends AbstractModifyEntity<Long> {
 
     @Column(name = "name")
