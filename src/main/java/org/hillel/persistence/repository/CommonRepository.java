@@ -7,6 +7,7 @@ import org.hillel.persistence.entity.AbstractModifyEntity;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -70,12 +71,20 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
 //        return entityManager.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList(); // first example hql-querry
 //        return entityManager.createNativeQuery("s
 //        elect  from " + entityClass.getAnnotation(Table.class).name(), entityClass).getResultList(); // second example
-        // критерий запроса
 
-        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+        // критерий запроса ===============================
+        /*final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass); // query - заготовка для дальнейшего sql запроса
         final Root<E> from = query.from(entityClass); // с рута(from) строим все зависимости, т.е. в "select * from journey" journey - это и есть рут
-        return entityManager.createQuery(query.select(from)).getResultList();
+        return entityManager.createQuery(query.select(from)).getResultList();*/
+        // критерий запроса конец ===============================
+
+        return entityManager.createStoredProcedureQuery("find_All", entityClass).
+                registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR).    // на 1-ой позиции мы говорим, что возвращается REF_CURSOR
+                registerStoredProcedureParameter(2, String.class, ParameterMode.IN).         // а входной параметр - это строка
+                setParameter(2, entityClass.getAnnotation(Table.class)).
+                getResultList();
 
     }
 }

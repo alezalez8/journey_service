@@ -24,6 +24,14 @@ public class Starter {
 
         VehicleEntity vehicle1 = buildVehicle("bus1");
         ticketClient.createOrUpdateVehicle(vehicle1);
+        VehicleEntity vehicle2 = buildVehicle("bus2");
+        ticketClient.createOrUpdateVehicle(vehicle2);
+        VehicleEntity vehicle3 = buildVehicle("bus3");
+        ticketClient.createOrUpdateVehicle(vehicle3);
+        VehicleEntity vehicle4 = buildVehicle("bus4");
+        ticketClient.createOrUpdateVehicle(vehicle4);
+        VehicleEntity vehicle5 = buildVehicle("bus5");
+        ticketClient.createOrUpdateVehicle(vehicle5);
        /* VehicleEntity vehicle2 = buildVehicle("bus2");
         ticketClient.createOrUpdateVehicle(vehicle2);
         VehicleEntity vehicle3 = buildVehicle("bus3");
@@ -33,7 +41,7 @@ public class Starter {
 
 
         JourneyEntity journey1 = buildJourney("from 1", "to 1", date, calendar.getTime());
-        vehicle1.setName("bus2");
+        vehicle1.setName("bus10");
         journey1.addVehicle(vehicle1);
         ticketClient.createOrUpdateJourney(journey1);
 
