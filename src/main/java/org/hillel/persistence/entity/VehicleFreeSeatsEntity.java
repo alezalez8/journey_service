@@ -19,7 +19,7 @@ public class VehicleFreeSeatsEntity  extends AbstractModifyEntity<Long> {
 
 
     @Column(name = "free_seats")
-    private Integer freeSeats;
+    private int freeSeats;
 
 
     /*@OneToOne
@@ -29,7 +29,7 @@ public class VehicleFreeSeatsEntity  extends AbstractModifyEntity<Long> {
 
     @ManyToOne
     @MapsId
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "vehicle_id")
     private VehicleEntity vehicleEntity ;
 
 
