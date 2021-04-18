@@ -66,6 +66,7 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
 
     @Override
     public Collection<E> findByName(String name) {
+        // это было в уроке 7
         // используем заготовку CriteriaBuilder:
         final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass);
@@ -77,8 +78,14 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         return entityManager.createQuery(query.
                 select(from).  // это select from нашей entity, где (следующая строчка):
                 where(byName, active, byJourneyName)).    // идем в сущность VehicleEntity и запросим поле name и его сравним с теми данными,
-                getResultList();                                                                   // которые есть в БД. from.get("name") - name принадлежит from'у
+                getResultList();                        // которые есть в БД. from.get("name") - name принадлежит from'у
+
+       // return entityManager.createQuery("from ", entityClass.getAnnotation(Table.class).name()) + "".).getResultList();
+        //return entityManager.createQuery("from " + entityClass + " e where e.name = " + "?", entityClass).setParameter(1, name).getResultList();
+
+
     }
+
 
 
     //@Override
