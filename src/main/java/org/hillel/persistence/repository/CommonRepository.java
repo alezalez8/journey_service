@@ -72,7 +72,6 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
 //        return entityManager.createNativeQuery("s
 //        elect  from " + entityClass.getAnnotation(Table.class).name(), entityClass).getResultList(); // second example
 
-
         // критерий запроса ===============================
         /*final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass); // query - заготовка для дальнейшего sql запроса
@@ -80,10 +79,11 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         return entityManager.createQuery(query.select(from)).getResultList();*/
         // критерий запроса конец ===============================
 
-        return entityManager.createStoredProcedureQuery("find_All", entityClass).
+        // заготова для формирования вызова хранимых функций
+        return entityManager.createStoredProcedureQuery("find_all", entityClass).
                 registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR).    // на 1-ой позиции мы говорим, что возвращается REF_CURSOR
                 registerStoredProcedureParameter(2, String.class, ParameterMode.IN).         // а входной параметр - это строка
-                setParameter(2, entityClass.getAnnotation(Table.class)).
+                setParameter(2, entityClass.getAnnotation(Table.class).name()).
                 getResultList();
 
     }

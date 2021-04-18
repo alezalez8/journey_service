@@ -21,10 +21,10 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
       super.remove(entity);
     }
 
-    @Override
+    /*@Override
     public Collection<VehicleEntity> findAll() {
         System.out.println("call from veh repo");
         //return entityManager.createNamedQuery("findAll", VehicleEntity.class).getResultList(); // вызов через @org.hibernate.annotations.NamedQueries(value = {...
         return entityManager.createNamedStoredProcedureQuery("findAllVehicle").getResultList();
-    }
+    }*/
 }
