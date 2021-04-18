@@ -1,8 +1,9 @@
 # TICKET
 ## ДЗ 3. Hibernate relations
 
-
+#### Исправлены замечания после проверки
 #### Desision: 
+
 Реализованы сущности journey, stop, stopAddInfo, vehicle, vehicleFreeSeats<br>
 В слоях репозитория и сервисного слоя реализовано создание и редактирование<br>
 созданных сущностей. <br>
