@@ -10,9 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
@@ -66,6 +64,23 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         return entityManager.unwrap(Session.class).byMultipleIds(entityClass).multiLoad(ids);
     }
 
+    @Override
+    public Collection<E> findByName(String name) {
+        // используем заготовку CriteriaBuilder:
+        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass);
+        final Root<E> from = query.from(entityClass);
+        final Join<Object, Object> journeys = from.join("journeys", JoinType.LEFT);
+        final Predicate byName = criteriaBuilder.equal(from.get("name"), criteriaBuilder.literal(name));
+        final Predicate active = criteriaBuilder.equal(from.get("active"), criteriaBuilder.literal(true));
+        final Predicate byJourneyName = criteriaBuilder.equal(journeys.get("stationFrom"), criteriaBuilder.literal("from 1"));
+        return entityManager.createQuery(query.
+                select(from).  // это select from нашей entity, где (следующая строчка):
+                where(byName, active, byJourneyName)).    // идем в сущность VehicleEntity и запросим поле name и его сравним с теми данными,
+                getResultList();                                                                   // которые есть в БД. from.get("name") - name принадлежит from'у
+    }
+
+
     //@Override
     public Collection<E> findAll() {
 //        return entityManager.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList(); // first example hql-querry
@@ -76,10 +91,12 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         /*final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass); // query - заготовка для дальнейшего sql запроса
         final Root<E> from = query.from(entityClass); // с рута(from) строим все зависимости, т.е. в "select * from journey" journey - это и есть рут
+
         return entityManager.createQuery(query.select(from)).getResultList();*/
         // критерий запроса конец ===============================
 
         // заготова для формирования вызова хранимых функций
+        // обобщенная хранимая процедура на стороне БД
         return entityManager.createStoredProcedureQuery("find_all", entityClass).
                 registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR).    // на 1-ой позиции мы говорим, что возвращается REF_CURSOR
                 registerStoredProcedureParameter(2, String.class, ParameterMode.IN).         // а входной параметр - это строка

@@ -45,4 +45,9 @@ public class TransactionalVehicleService {
         return vehicleRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findByName(String name) {
+        return vehicleRepository.findByName(name);
+    }
+
 }

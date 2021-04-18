@@ -102,5 +102,9 @@ public class TicketClient {
     public Collection<VehicleEntity> findAllVehicles() {
         return vehicleService.findAll();
     }
+
+    public Collection<VehicleEntity> findAllVehiclesByName(String name) {
+        return vehicleService.findByName(name);
+    }
 }
 
