@@ -68,7 +68,7 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
     public Collection<E> findByName(String name) {
         // это было в уроке 7
         // используем заготовку CriteriaBuilder:
-        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+/*        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass);
         final Root<E> from = query.from(entityClass);
         final Join<Object, Object> journeys = from.join("journeys", JoinType.LEFT);
@@ -78,14 +78,48 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         return entityManager.createQuery(query.
                 select(from).  // это select from нашей entity, где (следующая строчка):
                 where(byName, active, byJourneyName)).    // идем в сущность VehicleEntity и запросим поле name и его сравним с теми данными,
-                getResultList();                        // которые есть в БД. from.get("name") - name принадлежит from'у
+                getResultList(); */                       // которые есть в БД. from.get("name") - name принадлежит from'у
 
-       // return entityManager.createQuery("from ", entityClass.getAnnotation(Table.class).name()) + "".).getResultList();
-        //return entityManager.createQuery("from " + entityClass + " e where e.name = " + "?", entityClass).setParameter(1, name).getResultList();
+        // ==========================  параметризация по индексу ================================
+/*
+        return entityManager.createNativeQuery("select e.* from " + entityClass.getAnnotation(Table.class).name() + " e " + " where e.name = ?", entityClass)
+                .setParameter(1, name)
+                .getResultList();  // параметризация по нэйтиву sql*/
+/*
+        return entityManager.createQuery("from " + entityClass.getName() + " e where e.name = " + "?1", entityClass).  // без индекса 1 после ? работать не будет
+                setParameter(1, name).getResultList();   // параметризация по hql. если несколько пар-ров, то пишем "?1 ?2 ?3"
+
+*/
+        // ==========================  параметризация по названию ================================
+        /*return entityManager.createQuery("from " + entityClass.getName() + " e where e.name = :entityName and e.active = :activeParam", entityClass)  // без индекса 1 после ? работать не будет
+                .setParameter("entityName", name)
+                .setParameter("activeParam", true)
+                .getResultList();*/
+
+        // ==========================  параметризация по названию, нативный запрос====================
+        /*return entityManager.createNativeQuery("select e.* from " + entityClass.getAnnotation(Table.class).name() + " e " +
+                " where e.name = :entityName and e.active = :activeParam", entityClass)
+                .setParameter("entityName", name)
+                .setParameter("activeParam", "yes")  // в случае нэйтив запроса булево значение нужно использовать в виде строки, т.к. у нас
+                .getResultList();                           // конвертер в AbstractModifyEntity*/
 
 
+        // ==========================  вариант с предикатами   ====================
+        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass);
+        final Root<E> from = query.from(entityClass);
+        final Join<Object, Object> journeys = from.join("journeys", JoinType.LEFT);
+        final Predicate byName = criteriaBuilder.equal(from.get("name"), criteriaBuilder.parameter(String.class, "nameParam"));
+        final Predicate active = criteriaBuilder.equal(from.get("active"), criteriaBuilder.parameter(Boolean.class, "activeParam"));
+        final Predicate byJourneyName = criteriaBuilder.equal(journeys.get("stationFrom"), criteriaBuilder.parameter(String.class, "stationFromParam"));
+        return entityManager.createQuery(query
+                .select(from)  // это select from нашей entity, где (следующая строчка):
+                .where(byName, active, byJourneyName))
+                .setParameter("nameParam", name)
+                .setParameter("activeParam", true)
+                .setParameter("stationFromParam", "from 1")
+                .getResultList();
     }
-
 
 
     //@Override

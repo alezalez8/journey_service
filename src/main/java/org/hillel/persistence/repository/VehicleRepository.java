@@ -28,4 +28,9 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
         //return entityManager.createNamedQuery("findAll", VehicleEntity.class).getResultList(); // вызов через @NamedQueries(value = {...
         return entityManager.createNamedStoredProcedureQuery("findAllVehicle").getResultList();
     }*/
+
+    /*@Override
+    public Collection<VehicleEntity> findByName(String name) {
+        return entityManager.createQuery("from VehicleEntity e where e.name");
+    }*/
 }
