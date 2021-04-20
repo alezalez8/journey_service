@@ -108,13 +108,15 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass);
         final Root<E> from = query.from(entityClass);
-        final Join<Object, Object> journeys = from.join("journeys", JoinType.LEFT);
+        final Join<Object, Object> journeys = from.join("journeys", JoinType.LEFT);  // здесь "journeys" - имя поля в сущности
+        final Predicate byJourneyName = criteriaBuilder.equal(journeys.get("stationFrom"), criteriaBuilder.parameter(String.class, "stationFromParam"));
+        journeys.on(byJourneyName);
         final Predicate byName = criteriaBuilder.equal(from.get("name"), criteriaBuilder.parameter(String.class, "nameParam"));
         final Predicate active = criteriaBuilder.equal(from.get("active"), criteriaBuilder.parameter(Boolean.class, "activeParam"));
-        final Predicate byJourneyName = criteriaBuilder.equal(journeys.get("stationFrom"), criteriaBuilder.parameter(String.class, "stationFromParam"));
         return entityManager.createQuery(query
                 .select(from)  // это select from нашей entity, где (следующая строчка):
-                .where(byName, active, byJourneyName))
+                //.where(byName, active, byJourneyName))
+                .where(byName, active))
                 .setParameter("nameParam", name)
                 .setParameter("activeParam", true)
                 .setParameter("stationFromParam", "from 1")
