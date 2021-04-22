@@ -15,7 +15,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="emf" value="a9d2d274-55d4-4ed9-87f1-5326ce4f8106" />
+          <factory-entry name="emf" value="41882031-24d4-45b2-9592-25317de8f7ab" />
           <factory-entry name="ticket" value="a9d2d274-55d4-4ed9-87f1-5326ce4f8106" />
         </datasource-mapping>
         <naming-strategy-map />

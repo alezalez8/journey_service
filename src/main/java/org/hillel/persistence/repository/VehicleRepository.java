@@ -1,8 +1,11 @@
 package org.hillel.persistence.repository;
 
+import org.hillel.persistence.entity.JourneyEntity_;
 import org.hillel.persistence.entity.VehicleEntity;
+import org.hillel.persistence.entity.VehicleEntity_;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.*;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -33,4 +36,25 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
     public Collection<VehicleEntity> findByName(String name) {
         return entityManager.createQuery("from VehicleEntity e where e.name");
     }*/
+
+    public Collection<VehicleEntity> findByName(String name) {
+/*
+        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        final CriteriaQuery<VehicleEntity> query = criteriaBuilder.createQuery(VehicleEntity.class);
+        final Root<VehicleEntity> from = query.from(VehicleEntity.class);
+        final Join<Object, Object> journeys = from.join(VehicleEntity_.JOURNEYS, JoinType.LEFT);
+        final Predicate byJourneyName = criteriaBuilder.equal(journeys.get(JourneyEntity_.STATION_FROM), criteriaBuilder.parameter(String.class, "stationFromParam"));
+        journeys.on(byJourneyName);
+        final Predicate byName = criteriaBuilder.equal(from.get(VehicleEntity_.NAME), criteriaBuilder.parameter(String.class, "nameParam"));
+        final Predicate active = criteriaBuilder.equal(from.get(VehicleEntity_.ACTIVE), criteriaBuilder.parameter(Boolean.class, "activeParam"));
+        return entityManager.createQuery(query
+                .select(from)  // это select from нашей entity, где (следующая строчка):
+                //.where(byName, active, byJourneyName))
+                .where(byName, active))
+                .setParameter("nameParam", name)
+                .setParameter("activeParam", true)
+                .setParameter("stationFromParam", "from 1")
+                .getResultList();
+*/      return entityManager.createQuery("from VehicleEntity v left join v.journeys js on js.vehicle.id = v.id").getResultList();
+    }
 }

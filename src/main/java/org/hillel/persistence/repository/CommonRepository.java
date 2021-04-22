@@ -111,7 +111,7 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         final Join<Object, Object> journeys = from.join("journeys", JoinType.LEFT);  // здесь "journeys" - имя поля в сущности
         final Predicate byJourneyName = criteriaBuilder.equal(journeys.get("stationFrom"), criteriaBuilder.parameter(String.class, "stationFromParam"));
         journeys.on(byJourneyName);
-        final Predicate byName = criteriaBuilder.equal(from.get("name"), criteriaBuilder.parameter(String.class, "nameParam"));
+        final Predicate byName = criteriaBuilder.equal(from.get(" name"), criteriaBuilder.parameter(String.class, "nameParam"));
         final Predicate active = criteriaBuilder.equal(from.get("active"), criteriaBuilder.parameter(Boolean.class, "activeParam"));
         return entityManager.createQuery(query
                 .select(from)  // это select from нашей entity, где (следующая строчка):

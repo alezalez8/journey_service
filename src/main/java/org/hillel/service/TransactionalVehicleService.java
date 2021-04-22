@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.*;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -49,5 +50,8 @@ public class TransactionalVehicleService {
     public Collection<VehicleEntity> findByName(String name) {
         return vehicleRepository.findByName(name);
     }
+
+
+
 
 }
