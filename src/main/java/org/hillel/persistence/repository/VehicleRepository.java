@@ -1,5 +1,6 @@
 package org.hillel.persistence.repository;
 
+import org.hibernate.query.criteria.internal.OrderImpl;
 import org.hillel.persistence.entity.JourneyEntity_;
 import org.hillel.persistence.entity.VehicleEntity;
 import org.hillel.persistence.entity.VehicleEntity_;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.*;
 import java.util.Collection;
-import java.util.Objects;
+import java.util.Optional;
 
 @Repository
 public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
@@ -19,9 +20,9 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
 
     @Override
     public void remove(VehicleEntity entity) {
-      entity = findById(entity.getId()).get();
-      //entity.removeAllJourney();
-      super.remove(entity);
+        entity = findById(entity.getId()).get();
+        //entity.removeAllJourney();
+        super.remove(entity);
     }
 
     //  ===== это для критерия запроса  в CommonRepository  ===============================
@@ -38,7 +39,6 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
     }*/
 
     public Collection<VehicleEntity> findByName(String name) {
-/*
         final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<VehicleEntity> query = criteriaBuilder.createQuery(VehicleEntity.class);
         final Root<VehicleEntity> from = query.from(VehicleEntity.class);
@@ -50,11 +50,24 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
         return entityManager.createQuery(query
                 .select(from)  // это select from нашей entity, где (следующая строчка):
                 //.where(byName, active, byJourneyName))
-                .where(byName, active))
+                .where(byName, active).orderBy(new OrderImpl(from.get(VehicleEntity_.ID), false))
+        )
                 .setParameter("nameParam", name)
                 .setParameter("activeParam", true)
                 .setParameter("stationFromParam", "from 1")
+                .setFirstResult(3)
+                .setMaxResults(3)
                 .getResultList();
-*/      return entityManager.createQuery("from VehicleEntity v left join v.journeys js on js.vehicle.id = v.id").getResultList();
+
+        // сортировка на hql
+      /*  return entityManager
+                .createQuery("select v  from VehicleEntity v left join v.journeys js on js.vehicle.id = v.id order by v.id desc " , VehicleEntity.class) // sort by id
+                //.createQuery("select v  from VehicleEntity v left join v.journeys js on js.vehicle.id = v.id" , VehicleEntity.class)
+                .setMaxResults(3)
+                .setFirstResult(1)
+                .getResultList();*/
+
+
+
     }
 }
