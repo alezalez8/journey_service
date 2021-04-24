@@ -33,8 +33,11 @@ public class TransactionalVehicleService {
     @Autowired
     private EntityManagerFactory entityManagerFactory;  // for second method without annotation  @Transactional
 
+    @Autowired
+    private NewTransactionalVehicleService newTransactionalVehicleService;
 
-    //@Transactional
+
+    @Transactional
     public VehicleEntity createOrUpdate(VehicleEntity vehicleEntity) {
         //=====================================================================================
         // first method without annotation  @Transactional
@@ -96,7 +99,15 @@ public class TransactionalVehicleService {
         return vehicleRepository.findByName(name);
     }
 
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findAllByName(String name) {
+        final Collection<VehicleEntity> byName = vehicleRepository.findByName(name);
+        final VehicleEntity next = byName.iterator().next();
+        next.setName(String.valueOf(System.currentTimeMillis()));
+        System.out.println("save vehicle id = " + next.getId() + " and new value " + next.getName());
+        newTransactionalVehicleService.createOrUpdate(next);
+        return byName;
 
-
+    }
 
 }

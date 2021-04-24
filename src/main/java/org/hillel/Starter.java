@@ -47,6 +47,8 @@ public class Starter {
 
         System.out.println(ticketClient.findAllVehiclesByName("bus2"));
 
+        System.out.println(ticketClient.findAllByName("bus 4"));
+
        // System.out.println("delete vehicle");
        // ticketClient.removeVehicle(vehicle1);
 
