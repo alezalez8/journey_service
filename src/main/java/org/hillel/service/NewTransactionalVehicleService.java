@@ -23,9 +23,13 @@ public class NewTransactionalVehicleService {
     private TransactionTemplate transactionTemplate;
 
 
-    @Transactional(propagation = Propagation.NEVER)
+    @Transactional(propagation = Propagation.REQUIRED)
     public VehicleEntity createOrUpdate(VehicleEntity vehicleEntity) {
-        return vehicleRepository.createOrUpdate(vehicleEntity); // standart method with annotation  @Transactional
+        final VehicleEntity orUpdate = vehicleRepository.createOrUpdate(vehicleEntity);
+        if(true) {
+            throw new IllegalArgumentException("new exception");
+        }
+        return orUpdate; // standart method with annotation  @Transactional
     }
 
     @Transactional

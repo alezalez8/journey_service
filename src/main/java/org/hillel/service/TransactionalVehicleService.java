@@ -67,7 +67,7 @@ public class TransactionalVehicleService {
 
 
         // standart method with annotation  @Transactional
-         return vehicleRepository.createOrUpdate(vehicleEntity); // standart method with annotation  @Transactional
+        return vehicleRepository.createOrUpdate(vehicleEntity); // standart method with annotation  @Transactional
     }
 
     @Transactional
@@ -99,7 +99,7 @@ public class TransactionalVehicleService {
         return vehicleRepository.findByName(name);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(rollbackFor = IllegalArgumentException.class)
     public Collection<VehicleEntity> findAllByName(String name) {
         final Collection<VehicleEntity> byName = vehicleRepository.findByName(name);
         final VehicleEntity next = byName.iterator().next();
