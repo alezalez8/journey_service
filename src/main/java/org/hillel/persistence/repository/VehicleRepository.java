@@ -39,7 +39,7 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
     }*/
 
     public Collection<VehicleEntity> findByName(String name) {
-        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        /*final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<VehicleEntity> query = criteriaBuilder.createQuery(VehicleEntity.class);
         final Root<VehicleEntity> from = query.from(VehicleEntity.class);
         final Join<Object, Object> journeys = from.join(VehicleEntity_.JOURNEYS, JoinType.LEFT);
@@ -57,7 +57,7 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
                 .setParameter("stationFromParam", "from 1")
                 .setFirstResult(3)
                 .setMaxResults(3)
-                .getResultList();
+                .getResultList();*/
 
         // сортировка на hql
       /*  return entityManager
@@ -67,6 +67,13 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
                 .setFirstResult(1)
                 .getResultList();*/
 
+        return entityManager
+                //.createQuery("select v  from VehicleEntity v left join v.journeys js on js.vehicle.id = v.id order by v.id desc " , VehicleEntity.class) // sort by id
+                .createQuery("select v  from VehicleEntity v left join v." + VehicleEntity_.JOURNEYS + " js on js.vehicle.id = v.id order by v.id desc " , VehicleEntity.class) // sort by id
+                //.createQuery("select v  from VehicleEntity v left join v.journeys js on js.vehicle.id = v.id" , VehicleEntity.class)
+                .setMaxResults(3)
+                .setFirstResult(1)
+                .getResultList();
 
 
     }
