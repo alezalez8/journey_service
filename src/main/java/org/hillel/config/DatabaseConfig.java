@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -26,8 +27,10 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 @Configuration
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
+@EnableJpaRepositories(basePackages = {"org.hillel.persistence.jpa.repository"},
+        entityManagerFactoryRef = "emf")
 public class DatabaseConfig {
-//    private final long connTimeOut = 2; // (5 minutes = 5*60 = 300 S) /150 (connects) = 2 S
+    //    private final long connTimeOut = 2; // (5 minutes = 5*60 = 300 S) /150 (connects) = 2 S
     private final long connTimeOut = 300;
     private final int poolSize = 150;
     private final int minIdle = 30;
@@ -64,6 +67,7 @@ public class DatabaseConfig {
         emf.setJpaProperties(properties);
         return emf;
     }
+
 
     @Bean
     public TransactionTemplate transactionTemplate(final PlatformTransactionManager transactionManager) {

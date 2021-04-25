@@ -1,6 +1,7 @@
 package org.hillel.service;
 
 import org.hillel.persistence.entity.VehicleEntity;
+import org.hillel.persistence.jpa.repository.VehicleJpaRepository;
 import org.hillel.persistence.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.metadata.HsqlTableMetaDataProvider;
@@ -15,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.criteria.*;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -22,7 +24,7 @@ import java.util.Optional;
 public class TransactionalVehicleService {
 
     @Autowired
-    private VehicleRepository vehicleRepository;
+    private VehicleJpaRepository vehicleRepository;
 
     @Autowired
     private TransactionTemplate transactionTemplate;
@@ -67,17 +69,17 @@ public class TransactionalVehicleService {
 
 
         // standart method with annotation  @Transactional
-        return vehicleRepository.createOrUpdate(vehicleEntity); // standart method with annotation  @Transactional
+        return vehicleRepository.save(vehicleEntity); // standart method with annotation  @Transactional
     }
 
     @Transactional
     public void remove(VehicleEntity vehicleEntity) {
-        vehicleRepository.remove(vehicleEntity);
+        vehicleRepository.delete(vehicleEntity);
     }
 
     @Transactional(readOnly = true)
     public Collection<VehicleEntity> findByIds(Long... ids) {
-        return vehicleRepository.findByIds(ids);
+        return (Collection<VehicleEntity>) vehicleRepository.findAllById(Arrays.asList(ids));
     }
 
     @Transactional(readOnly = true) // сущность не будет меняться
@@ -91,21 +93,17 @@ public class TransactionalVehicleService {
 
     @Transactional(readOnly = true)
     public Collection<VehicleEntity> findAll() {
-        return vehicleRepository.findAll();
+        return (Collection<VehicleEntity>) vehicleRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     public Collection<VehicleEntity> findByName(String name) {
-        return vehicleRepository.findByName(name);
+        return vehicleRepository.findByNameAndActiveIsTrue(name);
     }
 
     @Transactional(rollbackFor = IllegalArgumentException.class)
     public Collection<VehicleEntity> findAllByName(String name) {
-        final Collection<VehicleEntity> byName = vehicleRepository.findByName(name);
-        final VehicleEntity next = byName.iterator().next();
-        next.setName(String.valueOf(System.currentTimeMillis()));
-        System.out.println("save vehicle id = " + next.getId() + " and new value " + next.getName());
-        newTransactionalVehicleService.createOrUpdate(next);
+        final Collection<VehicleEntity> byName = vehicleRepository.findByNameAndActiveIsTrue(name);
         return byName;
 
     }
