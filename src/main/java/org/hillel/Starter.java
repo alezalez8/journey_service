@@ -28,7 +28,7 @@ public class Starter {
         ticketClient.createOrUpdateVehicle(vehicle2);
         VehicleEntity vehicle3 = buildVehicle("bus3");
         ticketClient.createOrUpdateVehicle(vehicle3);
-        VehicleEntity vehicle4 = buildVehicle("bus2");
+        VehicleEntity vehicle4 = buildVehicle("bus4");
         ticketClient.createOrUpdateVehicle(vehicle4);
         VehicleEntity vehicle5 = buildVehicle("bus5");
         ticketClient.createOrUpdateVehicle(vehicle5);
@@ -45,9 +45,9 @@ public class Starter {
         journey1.addVehicle(vehicle1);
         ticketClient.createOrUpdateJourney(journey1);
 
-        System.out.println(ticketClient.findAllVehiclesByName("bus2"));
+        //System.out.println(ticketClient.findAllVehiclesByName("bus2"));
 
-        System.out.println(ticketClient.findAllByName("bus 4"));
+        System.out.println(ticketClient.findAllByName("bus4"));
 
        // System.out.println("delete vehicle");
        // ticketClient.removeVehicle(vehicle1);

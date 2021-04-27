@@ -101,11 +101,19 @@ public class TransactionalVehicleService {
         return vehicleRepository.findByNameAndActiveIsTrue(name);
     }
 
-    @Transactional(rollbackFor = IllegalArgumentException.class)
+    /*@Transactional(rollbackFor = IllegalArgumentException.class)
     public Collection<VehicleEntity> findAllByName(String name) {
         final Collection<VehicleEntity> byName = vehicleRepository.findByNameAndActiveIsTrue(name);
         return byName;
+    }*/
 
+    @Transactional(rollbackFor = IllegalArgumentException.class)
+    public Collection<VehicleEntity> findAllByName(String name) {
+        final Collection<VehicleEntity> byName = vehicleRepository.findByConditions(name, 1L, 100L );
+        return byName;
     }
+
+
+
 
 }
