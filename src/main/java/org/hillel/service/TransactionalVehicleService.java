@@ -1,9 +1,13 @@
 package org.hillel.service;
 
 import org.hillel.persistence.entity.VehicleEntity;
+import org.hillel.persistence.entity.VehicleEntity_;
 import org.hillel.persistence.jpa.repository.VehicleJpaRepository;
 import org.hillel.persistence.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.metadata.HsqlTableMetaDataProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -109,8 +113,14 @@ public class TransactionalVehicleService {
 
     @Transactional(rollbackFor = IllegalArgumentException.class)
     public Collection<VehicleEntity> findAllByName(String name) {
-        final Collection<VehicleEntity> byName = vehicleRepository.findByConditions(name, 1L, 100L );
-        return byName;
+        final Page<VehicleEntity> byName = vehicleRepository.findByConditions(
+                name,
+                1L,
+                100L,
+        PageRequest.of(0, 3, Sort.by(VehicleEntity_.ID)));
+//        System.out.println(byName.getTotalPages());
+
+        return byName.getContent();
     }
 
 
