@@ -1,25 +1,14 @@
 package org.hillel.service;
 
 import org.hillel.persistence.entity.VehicleEntity;
-import org.hillel.persistence.entity.VehicleEntity_;
 import org.hillel.persistence.jpa.repository.VehicleJpaRepository;
-import org.hillel.persistence.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.jdbc.core.metadata.HsqlTableMetaDataProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.criteria.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
@@ -111,7 +100,9 @@ public class TransactionalVehicleService {
         return byName;
     }*/
 
-    @Transactional(rollbackFor = IllegalArgumentException.class)
+   // ======================= before added CommonJpaRepository
+
+    /*@Transactional(rollbackFor = IllegalArgumentException.class)
     public Collection<VehicleEntity> findAllByName(String name) {
         final Page<VehicleEntity> byName = vehicleRepository.findByConditions(
                 name,
@@ -119,11 +110,15 @@ public class TransactionalVehicleService {
                 100L,
         PageRequest.of(0, 3, Sort.by(VehicleEntity_.ID)));
 //        System.out.println(byName.getTotalPages());
-
         return byName.getContent();
+    }*/
+
+
+    @Transactional(rollbackFor = IllegalArgumentException.class)
+    public Collection<VehicleEntity> findAllByName(String name) {
+
+        return vehicleRepository.findOnlyActive();
     }
-
-
 
 
 }

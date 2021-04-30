@@ -44,5 +44,7 @@ public class StopEntity extends AbstractModifyEntity<Long> implements Serializab
         if (journeys == null) journeys = new ArrayList<>();
         journeys.add(journeyEntity);
     }
+
+
 }
 

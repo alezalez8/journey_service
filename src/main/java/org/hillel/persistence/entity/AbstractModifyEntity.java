@@ -1,5 +1,6 @@
 package org.hillel.persistence.entity;
 
+import com.sun.xml.bind.v2.model.core.ID;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,12 +16,11 @@ import java.util.Date;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class AbstractModifyEntity<D extends Serializable implements Persistable<D> > {
-
+public abstract class AbstractModifyEntity<D extends Serializable> implements Persistable<D> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private ID id;
+    private D id;
 
     @Column(name = "create_date")
     @CreationTimestamp
@@ -29,5 +29,13 @@ public abstract class AbstractModifyEntity<D extends Serializable implements Per
     @Column(name = "active")
     @Convert(converter = YesNoConverter.class)
     private boolean active = true;
+
+    @Override
+    public boolean isNew() {
+//        return (boolean) (id = null);
+        return id == null;
+    }
+
+
 
 }
