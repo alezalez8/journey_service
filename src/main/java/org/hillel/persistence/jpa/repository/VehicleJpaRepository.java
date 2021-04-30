@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.Collection;
 import java.util.List;
 
-public interface VehicleJpaRepository extends CrudRepository<VehicleEntity, Long> {
+public interface  VehicleJpaRepository extends CrudRepository<VehicleEntity, Long> {
 
     //    Collection<VehicleEntity> findByName(String name);
     Collection<VehicleEntity> findByNameAndActiveIsTrue(String name);
