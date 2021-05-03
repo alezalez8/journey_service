@@ -27,7 +27,7 @@ public interface GenericRepository<E, ID> {
 в рамках которых вы реализуете все требуемые методы.
     * */
 
-   Collection<E> findAll();
+    Collection<E> findAll();
 
-    //Collection<E> findAllAsNative();
+    Collection<E> findAllAsNative();
 }

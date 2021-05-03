@@ -97,8 +97,13 @@ public class TicketClient {
     }
 
     public Collection<VehicleEntity> findAllVehicle(){
-        return vehicleService.findAllVehicles();
+        return vehicleService.findAll();
     }
+
+    public Collection<VehicleEntity> findAllVehicleAsNative() {
+        return vehicleService.findAllAsNative();
+    }
+
 
 
 }

@@ -7,6 +7,7 @@ import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
@@ -40,11 +41,19 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         return Optional.ofNullable(entityManager.find(entityClass, id));
     }
 
+
     @Override
     public Collection<E> findAll() {
         return entityManager.createQuery("from " + entityClass.getSimpleName(), entityClass)
                 .getResultList();
     }
+
+
+    @Override
+    public Collection<E> findAllAsNative() {
+        return entityManager.createNativeQuery("select * from " + entityClass.getAnnotation(Table.class).name()).getResultList();
+    }
+
 
     @SneakyThrows
     @Override

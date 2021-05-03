@@ -21,8 +21,14 @@ public class TransactionalVehicleService {
     }
 
     @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findAllVehicles() {
+    public Collection<VehicleEntity> findAll() {
         return vehicleRepository.findAll();
+    }
+
+
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findAllAsNative(){
+        return vehicleRepository.findAllAsNative();
     }
 
 }

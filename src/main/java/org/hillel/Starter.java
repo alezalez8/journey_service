@@ -23,10 +23,18 @@ public class Starter {
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
 
         // create vehicles:
-        VehicleEntity busOne = buildVehicle("City 34");
-        busOne = ticketClient.createOrUpdateVehicle(busOne);
-        VehicleEntity busTwo = buildVehicle("City 88");
-        busTwo = ticketClient.createOrUpdateVehicle(busTwo);
+        VehicleEntity bus1 = buildVehicle("City 33");
+        bus1 = ticketClient.createOrUpdateVehicle(bus1);
+        VehicleEntity bus2 = buildVehicle("City 34");
+        bus2 = ticketClient.createOrUpdateVehicle(bus2);
+        VehicleEntity bus3 = buildVehicle("City 35");
+        bus3 = ticketClient.createOrUpdateVehicle(bus3);
+        VehicleEntity bus4 = buildVehicle("City 88");
+        bus4 = ticketClient.createOrUpdateVehicle(bus4);
+        VehicleEntity bus5 = buildVehicle("City 89");
+        bus5 = ticketClient.createOrUpdateVehicle(bus5);
+        VehicleEntity bus6 = buildVehicle("City 95");
+        bus6 = ticketClient.createOrUpdateVehicle(bus6);
 
         // create journey with stops:
         JourneyEntity journey = buildJourney("Odessa", "Lviv", date, calendar.getTime());
@@ -39,17 +47,19 @@ public class Starter {
 
 
         // create journey with vehicle
-        journey.setVehicle(busOne);
-        journey.setVehicle(busTwo);
+        journey.setVehicle(bus1);
+        journey.setVehicle(bus2);
         journey = ticketClient.createOrUpdateJourney(journey);
 
         // create free seats
-        busOne.addFreeSeats(buildFreeSeats(journey, busOne, 34));
-        busOne = ticketClient.createOrUpdateVehicle(busOne);
+        bus1.addFreeSeats(buildFreeSeats(journey, bus1, 34));
+        bus1 = ticketClient.createOrUpdateVehicle(bus1);
 
         // All find by HQL querry
         System.out.println("=========== find All by HQL querry ====================");
         System.out.println(ticketClient.findAllVehicle());
+        System.out.println("=========== find All by native querry =================");
+        System.out.println(ticketClient.findAllVehicleAsNative());
 
 
     }

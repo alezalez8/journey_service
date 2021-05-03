@@ -57,4 +57,5 @@ public class VehicleEntity extends AbstractModifyEntity<Long> {
 
     }
 
+
 }
