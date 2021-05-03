@@ -1,5 +1,6 @@
 package org.hillel.persistence.repository;
 
+import java.util.Collection;
 import java.util.Optional;
 
 public interface GenericRepository<E, ID> {
@@ -11,6 +12,7 @@ public interface GenericRepository<E, ID> {
     void removeById(ID id);
 
     void remove(E entity);
+
 
     // add methods for hw5:
 
@@ -24,4 +26,8 @@ public interface GenericRepository<E, ID> {
 То есть для каждой сущности должен быть свой repository и service классы,
 в рамках которых вы реализуете все требуемые методы.
     * */
+
+    Collection<E> findAll();
+
+    Collection<E> findAllAsNative();
 }

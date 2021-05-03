@@ -47,6 +47,9 @@ public class Starter {
         busOne.addFreeSeats(buildFreeSeats(journey, busOne, 34));
         busOne = ticketClient.createOrUpdateVehicle(busOne);
 
+        // All find by HQL querry
+        //findAllVehicle.
+
 
     }
 
