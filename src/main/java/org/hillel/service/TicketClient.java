@@ -10,10 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Component
@@ -75,35 +72,46 @@ public class TicketClient {
 
 
     public VehicleEntity createOrUpdateVehicle(VehicleEntity vehicle) {
+        System.out.println(" =================== createOrUpdateVehicle ====================================");
+
         return vehicleService.createOrUpdate(vehicle);
 
     }
 
     public void remove(JourneyEntity journey) {
+        System.out.println(" =================== remove ==============================================");
         journeyService.remove(journey);
     }
 
     public void removeById(Long journeyId) {
+        System.out.println(" =================== removeById ===========================================");
         journeyService.removeById(journeyId);
     }
 
     public void removeVehicle(final VehicleEntity vehicleEntity) {
+        System.out.println(" =================== removeVehicle ===========================================");
         vehicleService.remove(vehicleEntity);
     }
 
     public Collection<VehicleEntity> findVehicleByids(Long ... ids) {
-        return vehicleService.findByIds();
+        System.out.println("id = " + Arrays.toString(ids));
+        return vehicleService.findByIds(ids);
     }
 
     public Optional<VehicleEntity> findVehicleById(Long id, boolean withDependencies) {
+        System.out.println(" =================== Method findVehicleById =============================================");
         return vehicleService.findById(id, withDependencies);
     }
 
     public Collection<VehicleEntity> findAllVehicles() {
+        System.out.println(" =================== Method findAllVehicles() ====================================");
+
         return vehicleService.findAll();
     }
 
     public Collection<VehicleEntity> findAllVehiclesByName(String name) {
+        System.out.println(" =================== Method findAllVehiclesByName(String name) =====================");
+
         return vehicleService.findByName(name);
     }
 }

@@ -17,5 +17,5 @@ public interface GenericRepository<E, ID> {
 
     Collection<E> findByName(String name);
 
-//    Collection<E> findAll();
+    Collection<E> findAll();
 }

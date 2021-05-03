@@ -12,9 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
 import javax.persistence.criteria.*;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID extends Serializable> implements GenericRepository<E, ID> {
 
@@ -61,7 +59,8 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
 
     @Override
     public Collection<E> findByIds(ID... ids) {
-        return entityManager.unwrap(Session.class).byMultipleIds(entityClass).multiLoad(ids);
+        return  entityManager.unwrap(Session.class).byMultipleIds(entityClass).multiLoad(ids);
+
     }
 
     @Override
