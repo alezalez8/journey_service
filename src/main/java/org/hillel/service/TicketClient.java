@@ -104,6 +104,10 @@ public class TicketClient {
         return vehicleService.findAllAsNative();
     }
 
+    public Collection<VehicleEntity> findAllVehicleAsCriteria() {
+        return vehicleService.findAllAsCriteria();
+    }
+
 
 
 }

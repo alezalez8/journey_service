@@ -8,6 +8,9 @@ import org.springframework.util.Assert;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
@@ -54,6 +57,13 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         return entityManager.createNativeQuery("select * from " + entityClass.getAnnotation(Table.class).name()).getResultList();
     }
 
+    @Override
+    public Collection<E> findAllAsCriteria() {
+        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass);
+        final Root<E> from = query.from(entityClass);
+        return entityManager.createQuery(query.select(from)).getResultList();
+    }
 
     @SneakyThrows
     @Override

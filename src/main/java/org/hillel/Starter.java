@@ -60,6 +60,8 @@ public class Starter {
         System.out.println(ticketClient.findAllVehicle());
         System.out.println("=========== find All by native querry =================");
         System.out.println(ticketClient.findAllVehicleAsNative());
+        System.out.println("=========== find All by criteria builder =================");
+        System.out.println(ticketClient.findAllVehicleAsCriteria());
 
 
     }

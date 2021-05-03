@@ -30,4 +30,8 @@ public interface GenericRepository<E, ID> {
     Collection<E> findAll();
 
     Collection<E> findAllAsNative();
+
+    Collection<E> findAllAsCriteria();
+
+
 }
