@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+
 @Service
 public class TransactionalVehicleService {
 
@@ -16,6 +18,11 @@ public class TransactionalVehicleService {
     @Transactional
     public VehicleEntity createOrUpdate(VehicleEntity vehicleEntity) {
         return vehicleRepository.createOrUpdate(vehicleEntity);
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findAllVehicles() {
+        return vehicleRepository.findAll();
     }
 
 }

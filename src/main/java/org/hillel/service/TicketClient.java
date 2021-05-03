@@ -96,5 +96,9 @@ public class TicketClient {
         journeyService.removeById(journeyId);
     }
 
+    public Collection<VehicleEntity> findAllVehicle(){
+        return vehicleService.findAllVehicles();
+    }
+
 
 }

@@ -13,4 +13,7 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
         super(VehicleEntity.class);
     }
 
+
+
+
 }
