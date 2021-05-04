@@ -6,6 +6,7 @@ import org.hillel.persistence.entity.AbstractModifyEntity;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -63,6 +64,16 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass);
         final Root<E> from = query.from(entityClass);
         return entityManager.createQuery(query.select(from)).getResultList();
+    }
+
+
+    @Override
+    public Collection<E> findAllAsStoredProcedure() {
+        return entityManager.createStoredProcedureQuery("find_all", entityClass).   // "find_all" - это со стороны базы данных
+                registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR).    // на 1-ой позиции мы говорим, что возвращается REF_CURSOR
+                registerStoredProcedureParameter(2, String.class, ParameterMode.IN).         // а входной параметр - это строка
+                setParameter(2, entityClass.getAnnotation(Table.class).name()).              // передаем имя таблицы
+                getResultList();
     }
 
     @SneakyThrows

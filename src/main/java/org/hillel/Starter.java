@@ -81,7 +81,10 @@ public class Starter {
         System.out.println("========= All seats =====================");
         System.out.println(ticketClient.findAllSeatAsNamed());
 
-
+        // All find by AsNamed
+        System.out.println("===========  findAllAsStoredProcedure ============================");
+        System.out.println("========= All vehicles =====================");
+        System.out.println(ticketClient.findAllVehicleAsStoredProcedure());
 
 
     }

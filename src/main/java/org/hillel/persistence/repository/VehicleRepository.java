@@ -18,4 +18,10 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
         return  entityManager.createNamedQuery("findVehicleAll", VehicleEntity.class).getResultList();
     }
 
+
+
+
+
+
+
 }

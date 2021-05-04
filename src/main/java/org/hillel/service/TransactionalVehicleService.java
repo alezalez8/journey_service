@@ -42,4 +42,10 @@ public class TransactionalVehicleService {
         return vehicleRepository.findAllAsNamed();
     }
 
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findAllAsStoredProcedure() {
+        return vehicleRepository.findAllAsStoredProcedure();
+    }
+
+
 }

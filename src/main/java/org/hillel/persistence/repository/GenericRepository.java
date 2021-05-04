@@ -37,5 +37,7 @@ public interface GenericRepository<E, ID> {
 
     Collection<E> findAllAsNamed();
 
+    Collection<E> findAllAsStoredProcedure();
+
 
 }

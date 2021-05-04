@@ -103,6 +103,7 @@ public class TicketClient {
     public Collection<VehicleEntity> findAllVehicle() {
         return vehicleService.findAll();
     }
+
     public Collection<JourneyEntity> findAllJourney() {
         return journeyService.findAll();
     }
@@ -130,14 +131,22 @@ public class TicketClient {
         return vehicleService.findAllAsNamed();
     }
 
-        public Collection<JourneyEntity> findAllJorneyAsNamed() {
+    public Collection<JourneyEntity> findAllJorneyAsNamed() {
         return journeyService.findAllAsNamed();
     }
+
     public Collection<StopEntity> findAllStopAsNamed() {
         return stopService.findAllAsNamed();
     }
+
     public Collection<VehicleFreeSeatsEntity> findAllSeatAsNamed() {
         return vehicleSeatsService.findAllAsNamed();
+    }
+
+    //============================= As Stored Procedure  =======================
+
+    public Collection<VehicleEntity> findAllVehicleAsStoredProcedure() {
+        return vehicleService.findAllAsStoredProcedure();
     }
 
 
