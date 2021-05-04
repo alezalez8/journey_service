@@ -1,15 +1,12 @@
 package org.hillel.persistence.repository;
 
-import org.hibernate.Session;
 import org.hillel.persistence.entity.JourneyEntity;
 import org.hillel.persistence.entity.VehicleEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.Objects;
-import java.util.Optional;
 
 @Repository
 public class JourneyRepository extends CommonRepository<JourneyEntity, Long> {
@@ -31,8 +28,11 @@ public class JourneyRepository extends CommonRepository<JourneyEntity, Long> {
 
     public EntityManager getEntityManager() {
         return entityManager;
-
     }
 
 
+    @Override
+    public Collection<JourneyEntity> findAllAsNamed() {
+        return entityManager.createNamedQuery("findJourneyAll", JourneyEntity.class).getResultList();
+    }
 }

@@ -17,18 +17,17 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@NamedQueries(value = {
+        @NamedQuery(name = "findVehicleAll", query = "from VehicleEntity")
+})
 public class VehicleEntity extends AbstractModifyEntity<Long> {
 
     @Column(name = "name")
     private String name;
 
-    //    @OneToMany(mappedBy = "vehicle", orphanRemoval = true )  // , cascade = {CascadeType.PERSIST, CascadeType.MERGE}
     @OneToMany(mappedBy = "vehicle", cascade = {CascadeType.REMOVE})
     private Set<JourneyEntity> journeys = new HashSet<>();
 
-
-   /* @OneToOne(mappedBy = "vehicleEntity", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private VehicleFreeSeatsEntity freeSeats;*/
 
     @OneToMany(mappedBy = "vehicleEntity", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<VehicleFreeSeatsEntity> freeSeats = new ArrayList<>();

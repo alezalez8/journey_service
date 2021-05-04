@@ -37,4 +37,9 @@ public class TransactionalVehicleService {
         return vehicleRepository.findAllAsCriteria();
     }
 
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findAllAsNamed() {
+        return vehicleRepository.findAllAsNamed();
+    }
+
 }

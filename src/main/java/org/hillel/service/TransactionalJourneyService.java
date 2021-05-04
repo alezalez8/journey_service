@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.Collection;
 import java.util.Optional;
 
 
@@ -47,4 +48,27 @@ public class TransactionalJourneyService {
     public void removeById(Long journeyId) {
         journeyRepository.removeById(journeyId);
     }
+
+    @Transactional(readOnly = true)
+    public Collection<JourneyEntity> findAll() {
+        return journeyRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<JourneyEntity> findAllAsNative(){
+        return journeyRepository.findAllAsNative();
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<JourneyEntity> findAllAsCriteria() {
+        return journeyRepository.findAllAsCriteria();
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<JourneyEntity> findAllAsNamed(){
+        return journeyRepository.findAllAsNamed();
+    }
+
+
+
 }

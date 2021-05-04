@@ -17,6 +17,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @DynamicUpdate
+@NamedQueries(value = {
+        @NamedQuery(name = "findStopAll", query = "from StopEntity")
+})
 public class StopEntity extends AbstractModifyEntity<Long> implements Serializable {
 
     @Embedded
@@ -46,5 +49,11 @@ public class StopEntity extends AbstractModifyEntity<Long> implements Serializab
         if (journeyEntity == null) return;
         if (journeys == null) journeys = new ArrayList<>();
         journeys.add(journeyEntity);
+    }
+
+    @Override
+    public String toString() {
+        return "Name location of stop = " + nameLocation;
+
     }
 }

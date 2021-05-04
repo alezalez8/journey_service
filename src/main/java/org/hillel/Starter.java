@@ -58,10 +58,30 @@ public class Starter {
         // All find by HQL querry
         System.out.println("=========== find All by HQL querry ====================");
         System.out.println(ticketClient.findAllVehicle());
+        System.out.println(ticketClient.findAllJourney());
+
+        // All find by native querry
         System.out.println("=========== find All by native querry =================");
         System.out.println(ticketClient.findAllVehicleAsNative());
-        System.out.println("=========== find All by criteria builder =================");
+        System.out.println(ticketClient.findAllJourneysAsNative());
+
+        // All find by criteria builder
+        System.out.println("=========== find All by criteria builder ===============");
         System.out.println(ticketClient.findAllVehicleAsCriteria());
+        System.out.println(ticketClient.findAllJourneyAsCriteria());
+
+        // All find by AsNamed
+        System.out.println("===========  findAllAsNamed ============================");
+        System.out.println("========= All vehicles =====================");
+        System.out.println(ticketClient.findAllVehicleAsNamed());
+        System.out.println("========= All journeys =====================");
+        System.out.println(ticketClient.findAllJorneyAsNamed());
+        System.out.println("========= All stops =====================");
+        System.out.println(ticketClient.findAllStopAsNamed());
+        System.out.println("========= All seats =====================");
+        System.out.println(ticketClient.findAllSeatAsNamed());
+
+
 
 
     }

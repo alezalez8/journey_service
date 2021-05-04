@@ -28,7 +28,6 @@ public class StopAddInfoEntity {
     private String hotel;
 
 
-
     @OneToOne
     @MapsId
     @JoinColumn(name = "stop_id")

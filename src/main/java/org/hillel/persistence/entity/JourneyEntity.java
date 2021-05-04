@@ -23,6 +23,9 @@ import java.util.Objects;
 @NoArgsConstructor
 @DynamicUpdate
 @DynamicInsert
+@NamedQueries(value = {
+        @NamedQuery(name = "findJourneyAll", query = "from JourneyEntity")
+})
 public class JourneyEntity extends  AbstractModifyEntity<Long> implements Serializable {
 
 
@@ -81,7 +84,7 @@ public class JourneyEntity extends  AbstractModifyEntity<Long> implements Serial
                 ", departure=" + departure +
                 ", arrival=" + arrival +
                 ", direction=" + direction +
-                ", vehicle=" + vehicle +
+                ", vehicle=" + vehicle.getId() +
                 '}';
     }
 

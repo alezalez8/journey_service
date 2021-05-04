@@ -14,6 +14,9 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @DynamicUpdate
+@NamedQueries(value = {
+        @NamedQuery(name = "findFreeSeatsAll", query = "from VehicleFreeSeatsEntity")
+})
 public class VehicleFreeSeatsEntity  extends AbstractModifyEntity<Long> {
 
 
@@ -37,5 +40,8 @@ public class VehicleFreeSeatsEntity  extends AbstractModifyEntity<Long> {
     @JoinColumn(name = "journey_id", nullable = false)
     private JourneyEntity journey;
 
-
+    @Override
+    public String toString() {
+        return "Free seats are " + freeSeats;
+    }
 }

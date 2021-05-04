@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+
 
 @Service
 public class TransactionalStopService {
@@ -19,6 +21,11 @@ public class TransactionalStopService {
     @Transactional
     public StopEntity createOrUpdate(StopEntity stopEntity) {
         return stopRepository.createOrUpdate(stopEntity);
+    }
+
+    @Transactional
+    public Collection<StopEntity> findAllAsNamed (){
+        return stopRepository.findAllAsNamed();
     }
 
 }

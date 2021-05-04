@@ -86,28 +86,59 @@ public class TicketClient {
         return vehicleService.createOrUpdate(vehicle);
 
     }
+
     public VehicleFreeSeatsEntity createOrUpdateSeats(final VehicleFreeSeatsEntity freeSeatsEntity) {
         return vehicleSeatsService.createOrUpdate(freeSeatsEntity);
     }
+
     public void remove(JourneyEntity journey) {
         journeyService.remove(journey);
     }
+
     public void removeById(Long journeyId) {
         journeyService.removeById(journeyId);
     }
 
-    public Collection<VehicleEntity> findAllVehicle(){
+    //============================= As HQL =======================
+    public Collection<VehicleEntity> findAllVehicle() {
         return vehicleService.findAll();
     }
+    public Collection<JourneyEntity> findAllJourney() {
+        return journeyService.findAll();
+    }
 
+    //============================= As Native QL =======================
     public Collection<VehicleEntity> findAllVehicleAsNative() {
         return vehicleService.findAllAsNative();
     }
 
+    public Collection<JourneyEntity> findAllJourneysAsNative() {
+        return journeyService.findAllAsNative();
+    }
+
+    //============================= As Criteria Builder =======================
     public Collection<VehicleEntity> findAllVehicleAsCriteria() {
         return vehicleService.findAllAsCriteria();
     }
 
+    public Collection<JourneyEntity> findAllJourneyAsCriteria() {
+        return journeyService.findAllAsCriteria();
+    }
+
+    //============================= As Named =======================
+    public Collection<VehicleEntity> findAllVehicleAsNamed() {
+        return vehicleService.findAllAsNamed();
+    }
+
+        public Collection<JourneyEntity> findAllJorneyAsNamed() {
+        return journeyService.findAllAsNamed();
+    }
+    public Collection<StopEntity> findAllStopAsNamed() {
+        return stopService.findAllAsNamed();
+    }
+    public Collection<VehicleFreeSeatsEntity> findAllSeatAsNamed() {
+        return vehicleSeatsService.findAllAsNamed();
+    }
 
 
 }
