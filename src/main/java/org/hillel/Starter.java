@@ -54,37 +54,47 @@ public class Starter {
         // create free seats
         bus1.addFreeSeats(buildFreeSeats(journey, bus1, 34));
         bus1 = ticketClient.createOrUpdateVehicle(bus1);
+        System.out.println('\n');
 
         // All find by HQL querry
-        System.out.println("=========== find All by HQL querry ====================");
+        System.out.println("=========== find All by HQL querry =====================");
+        System.out.println("==========  findAllVehicles ============================");
         System.out.println(ticketClient.findAllVehicle());
+        System.out.println("==========  findAllJourneys ============================");
         System.out.println(ticketClient.findAllJourney());
-
+        System.out.println("--------------------------------------------------------" + '\n');
         // All find by native querry
-        System.out.println("=========== find All by native querry =================");
+        System.out.println("=========== find All by native querry ==================");
+        System.out.println("==========  findAllNativeVehicles ======================");
         System.out.println(ticketClient.findAllVehicleAsNative());
+        System.out.println("==========  findAllNativeJourneys ======================");
         System.out.println(ticketClient.findAllJourneysAsNative());
+        System.out.println("--------------------------------------------------------" + '\n');
 
         // All find by criteria builder
         System.out.println("=========== find All by criteria builder ===============");
         System.out.println(ticketClient.findAllVehicleAsCriteria());
         System.out.println(ticketClient.findAllJourneyAsCriteria());
+        System.out.println("--------------------------------------------------------" + '\n');
 
         // All find by AsNamed
-        System.out.println("===========  findAllAsNamed ============================");
-        System.out.println("========= All vehicles =====================");
+        System.out.println("===========  findAllAsNamed ===========================");
+        System.out.println("========= All vehicles As Named =======================");
         System.out.println(ticketClient.findAllVehicleAsNamed());
-        System.out.println("========= All journeys =====================");
+        System.out.println("========= All journeys  As Named =======================");
         System.out.println(ticketClient.findAllJorneyAsNamed());
-        System.out.println("========= All stops =====================");
+        System.out.println("========= All stops  As Named ==========================");
         System.out.println(ticketClient.findAllStopAsNamed());
-        System.out.println("========= All seats =====================");
+        System.out.println("========= All seats  As Named ==========================");
         System.out.println(ticketClient.findAllSeatAsNamed());
+        System.out.println("--------------------------------------------------------" + '\n');
 
         // All find by AsNamed
-        System.out.println("===========  findAllAsStoredProcedure ============================");
-        System.out.println("========= All vehicles =====================");
+        System.out.println("===========  findAllAsStoredProcedure ==================");
+        System.out.println("========= All vehicles Stored Proc =====================");
         System.out.println(ticketClient.findAllVehicleAsStoredProcedure());
+        System.out.println("========= All journeys  Stored Proc  ===================");
+        System.out.println(ticketClient.findAllJourneyAsStoredProcedure());
 
 
     }

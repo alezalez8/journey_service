@@ -149,5 +149,11 @@ public class TicketClient {
         return vehicleService.findAllAsStoredProcedure();
     }
 
+    public Collection<JourneyEntity> findAllJourneyAsStoredProcedure() {
+        return journeyService.findAllAsStoredProcedure();
+    }
+
+
+
 
 }

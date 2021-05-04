@@ -69,6 +69,8 @@ public class TransactionalJourneyService {
         return journeyRepository.findAllAsNamed();
     }
 
-
-
+    @Transactional(readOnly = true)
+    public Collection<JourneyEntity> findAllAsStoredProcedure() {
+        return journeyRepository.findAllAsStoredProcedure();
+    }
 }
