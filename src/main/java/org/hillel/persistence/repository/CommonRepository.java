@@ -109,6 +109,7 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass);
         final Root<E> from = query.from(entityClass);
         final Join<Object, Object> journeys = from.join("journeys", JoinType.LEFT);  // здесь "journeys" - имя поля в сущности
+//        final Predicate byName = criteriaBuilder.equal(from.get("name"), criteriaBuilder.literal(name)); // это предыдущий пример, с literal
         final Predicate byJourneyName = criteriaBuilder.equal(journeys.get("stationFrom"), criteriaBuilder.parameter(String.class, "stationFromParam"));
         journeys.on(byJourneyName);
         final Predicate byName = criteriaBuilder.equal(from.get(" name"), criteriaBuilder.parameter(String.class, "nameParam"));
