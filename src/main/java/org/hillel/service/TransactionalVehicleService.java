@@ -37,11 +37,11 @@ public class TransactionalVehicleService {
     private NewTransactionalVehicleService newTransactionalVehicleService;
 
 
-    @Transactional
+    //@Transactional
     public VehicleEntity createOrUpdate(VehicleEntity vehicleEntity) {
         //=====================================================================================
         // first method without annotation  @Transactional
-        //return transactionTemplate.execute((status) -> vehicleRepository.createOrUpdate(vehicleEntity));
+//        return transactionTemplate.execute((status) -> vehicleRepository.createOrUpdate(vehicleEntity));
         //=====================================================================================
 
         // the second method without annotation  @Transactional
@@ -50,7 +50,8 @@ public class TransactionalVehicleService {
         final TransactionStatus transaction = platformTransactionManager.getTransaction(transactionDefinition);
         vehicleRepository.createOrUpdate(vehicleEntity);
         platformTransactionManager.commit(transaction);
-        platformTransactionManager.rollback(transaction); // в случае экспешна двух верхних строк выполняется откат*/
+        platformTransactionManager.rollback(transaction); // в случае экспешна двух верхних строк выполняется откат
+        return null;*/
         //=====================================================================================
 
 
@@ -62,12 +63,13 @@ public class TransactionalVehicleService {
         em.persist(vehicleEntity);
         transaction1.commit();
         // если неуспешно, то откат:
-        transaction1.rollback();*/
+        transaction1.rollback();
+        return null;*/
         //=====================================================================================
 
 
         // standart method with annotation  @Transactional
-        return vehicleRepository.createOrUpdate(vehicleEntity); // standart method with annotation  @Transactional
+       return vehicleRepository.createOrUpdate(vehicleEntity); // standart method with annotation  @Transactional
     }
 
     @Transactional
