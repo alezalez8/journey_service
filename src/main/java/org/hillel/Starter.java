@@ -40,14 +40,14 @@ public class Starter {
         StopEntity stopEntity = buildStop(2D, 3D);
 
 //=========================
-        /*JourneyEntity journey1 = buildJourney("from 1", "to 1", date, calendar.getTime());
-        vehicle1.setName("bus10");
-        journey1.addVehicle(vehicle1);
-        ticketClient.createOrUpdateJourney(journey1);
+        //JourneyEntity journey1 = buildJourney("from 1", "to 1", date, calendar.getTime());
+        //vehicle1.setName("bus10");
+        //journey1.addVehicle(vehicle1);
+        //ticketClient.createOrUpdateJourney(journey1);
 
-        System.out.println(ticketClient.findAllVehiclesByName("bus2"));
+        //System.out.println(ticketClient.findAllVehiclesByName("bus2"));
 
-        System.out.println(ticketClient.findAllByName("bus 4"));*/
+        System.out.println(ticketClient.findAllByName("bus 4"));
 //======================
        // System.out.println("delete vehicle");
        // ticketClient.removeVehicle(vehicle1);

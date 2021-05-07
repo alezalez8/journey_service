@@ -37,7 +37,7 @@ public class TransactionalVehicleService {
     private NewTransactionalVehicleService newTransactionalVehicleService;
 
 
-    //@Transactional
+    @Transactional
     public VehicleEntity createOrUpdate(VehicleEntity vehicleEntity) {
         //=====================================================================================
         // first method without annotation  @Transactional
@@ -102,14 +102,25 @@ public class TransactionalVehicleService {
     }
 
     @Transactional(rollbackFor = IllegalArgumentException.class)
+//    @Transactional()
     public Collection<VehicleEntity> findAllByName(String name) {
         final Collection<VehicleEntity> byName = vehicleRepository.findByName(name);
         final VehicleEntity next = byName.iterator().next();
         next.setName(String.valueOf(System.currentTimeMillis()));
         System.out.println("save vehicle id = " + next.getId() + " and new value " + next.getName());
         newTransactionalVehicleService.createOrUpdate(next);
+        /*if (true) {
+            throw new IllegalArgumentException("new exception");
+        }*/
         return byName;
 
     }
+
+
+    /*@Transactional(readOnly = true)
+    public Collection<VehicleEntity> findAllByName(String name) {
+         return vehicleRepository.findByName(name);
+
+    }*/
 
 }
