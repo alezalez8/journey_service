@@ -37,39 +37,48 @@ public class Starter {
         bus6 = ticketClient.createOrUpdateVehicle(bus6);
 
         // create journey with stops:
-        JourneyEntity journey = buildJourney("Odessa", "Lviv", date, calendar.getTime());
-        journey.addStop(buildStop(3D, 5D, "Одесская область","Умань", "г. Умань",
+        JourneyEntity journey1 = buildJourney("Odessa", "Lviv", date, calendar.getTime());
+        journey1.addStop(buildStop(3D, 5D, "Одесская область","Умань", "г. Умань",
                 "Сельпо", " "));
-        journey.addStop(buildStop(5D, 5D, "Хмельницкая область","Хмельницкий", "г. Хмельницк",
+        journey1.addStop(buildStop(5D, 5D, "Хмельницкая область","Хмельницкий", "г. Хмельницк",
                 "Копейка", "Звезда"));
-        journey.addStop(buildStop(6D, 7D, "Тернопольская область","Тернопольская", "г. Тернополь",
+        journey1.addStop(buildStop(6D, 7D, "Тернопольская область","Тернопольская", "г. Тернополь",
                 "АТБ", "Терноп"));
+
+        JourneyEntity journey2 = buildJourney("Odessa", "Dnipro", date, calendar.getTime());
+        journey2.addStop(buildStop(3D, 5D, "Николаевская область","Николаев", "г. Николаев",
+                "Фуршет", " "));
+        journey2.addStop(buildStop(7D, 8D, "Криворожская область","Кривой Рог", "г. Кривой Рог",
+                "АТБ", "Криворож"));
+        journey2.addStop(buildStop(7D, 9D, "Днипровская область","Днипровская", "г. Днипро",
+                "Селянка", "Днипро"));
 
 
         // create journey with vehicle
-        journey.setVehicle(bus1);
-        journey.setVehicle(bus2);
-        journey = ticketClient.createOrUpdateJourney(journey);
+        journey1.setVehicle(bus1);
+        journey1.setVehicle(bus2);
+        journey2.setVehicle(bus3);
+        journey2.setVehicle(bus4);
+        journey1 = ticketClient.createOrUpdateJourney(journey1);
+        journey2 = ticketClient.createOrUpdateJourney(journey2);
+
 
         // create free seats
-        bus1.addFreeSeats(buildFreeSeats(journey, bus1, 34));
+        bus1.addFreeSeats(buildFreeSeats(journey1, bus1, 34));
         bus1 = ticketClient.createOrUpdateVehicle(bus1);
+        bus2.addFreeSeats(buildFreeSeats(journey1, bus2, 27));
+        bus2 = ticketClient.createOrUpdateVehicle(bus2);
+        bus3.addFreeSeats(buildFreeSeats(journey1, bus3, 12));
+        bus3 = ticketClient.createOrUpdateVehicle(bus3);
+        bus4.addFreeSeats(buildFreeSeats(journey2, bus4, 15));
+        bus4 = ticketClient.createOrUpdateVehicle(bus4);
+        bus5.addFreeSeats(buildFreeSeats(journey2, bus5, 20));
+        bus5 = ticketClient.createOrUpdateVehicle(bus5);
+        bus6.addFreeSeats(buildFreeSeats(journey2, bus6, 22));
+        bus6 = ticketClient.createOrUpdateVehicle(bus6);
         System.out.println('\n');
 
-        // All find by HQL querry
-       /* System.out.println("=========== find All by HQL querry =====================");
-        System.out.println("==========  findAllVehicles ============================");
-        System.out.println(ticketClient.findAllVehicle());
-        System.out.println("==========  findAllJourneys ============================");
-        System.out.println(ticketClient.findAllJourney());
-        System.out.println("--------------------------------------------------------" + '\n');
-        // All find by native querry
-        System.out.println("=========== find All by native querry ==================");
-        System.out.println("==========  findAllNativeVehicles ======================");
-        System.out.println(ticketClient.findAllVehicleAsNative());
-        System.out.println("==========  findAllNativeJourneys ======================");
-        System.out.println(ticketClient.findAllJourneysAsNative());
-        System.out.println("--------------------------------------------------------" + '\n');
+
 
         // All find by criteria builder
         System.out.println("=========== find All by criteria builder ===============");
@@ -77,24 +86,9 @@ public class Starter {
         System.out.println(ticketClient.findAllJourneyAsCriteria());
         System.out.println("--------------------------------------------------------" + '\n');
 
-        // All find by AsNamed
-        System.out.println("===========  findAllAsNamed ===========================");
-        System.out.println("========= All vehicles As Named =======================");
-        System.out.println(ticketClient.findAllVehicleAsNamed());
-        System.out.println("========= All journeys  As Named =======================");
-        System.out.println(ticketClient.findAllJorneyAsNamed());
-        System.out.println("========= All stops  As Named ==========================");
-        System.out.println(ticketClient.findAllStopAsNamed());
-        System.out.println("========= All seats  As Named ==========================");
-        System.out.println(ticketClient.findAllSeatAsNamed());
-        System.out.println("--------------------------------------------------------" + '\n');
 
-        // All find by AsNamed
-        System.out.println("===========  findAllAsStoredProcedure ==================");
-        System.out.println("========= All vehicles Stored Proc =====================");
-        System.out.println(ticketClient.findAllVehicleAsStoredProcedure());
-        System.out.println("========= All journeys  Stored Proc  ===================");
-        System.out.println(ticketClient.findAllJourneyAsStoredProcedure());*/
+
+
 
 
     }
