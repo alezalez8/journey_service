@@ -3,6 +3,7 @@ package org.hillel.persistence.repository;
 
 import lombok.SneakyThrows;
 import org.hillel.persistence.entity.AbstractModifyEntity;
+import org.hillel.persistence.entity.VehicleEntity;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -55,7 +56,8 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
 
     @Override
     public Collection<E> findAllAsNative() {
-        return entityManager.createNativeQuery("select * from " + entityClass.getAnnotation(Table.class).name()).getResultList();
+        return entityManager.createNativeQuery("select * from " + entityClass.getAnnotation(Table.class).name(), entityClass)
+                .getResultList();
     }
 
     @Override
