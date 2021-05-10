@@ -99,6 +99,18 @@ public class TicketClient {
         journeyService.removeById(journeyId);
     }
 
+    // =========================== search by params ================================
+    public Collection<VehicleEntity> findAllVehicles(int fromPage, int maxResult,
+                                                     String sortBy, boolean isAscSort) {
+
+        SearchQueryParam searchQueryParam = new SearchQueryParam(fromPage, maxResult, sortBy, isAscSort);
+        return vehicleService.findAllAsCriteriaBuildWithParams(searchQueryParam);
+    }
+
+
+
+
+
     //============================= As HQL =======================
     public Collection<VehicleEntity> findAllVehicle() {
         return vehicleService.findAll();
@@ -151,6 +163,10 @@ public class TicketClient {
 
     public Collection<JourneyEntity> findAllJourneyAsStoredProcedure() {
         return journeyService.findAllAsStoredProcedure();
+    }
+// ----------------------------------------------
+    public Collection<VehicleEntity> findAllVehiclePageble() {
+        return vehicleService.findAllPageble();
     }
 
 

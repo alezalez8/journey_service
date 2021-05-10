@@ -23,7 +23,7 @@ public class Starter {
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
 
         // create vehicles:
-        VehicleEntity bus1 = buildVehicle("City 33");
+        VehicleEntity bus1 = buildVehicle("City 75");
         bus1 = ticketClient.createOrUpdateVehicle(bus1);
         VehicleEntity bus2 = buildVehicle("City 34");
         bus2 = ticketClient.createOrUpdateVehicle(bus2);
@@ -31,7 +31,7 @@ public class Starter {
         bus3 = ticketClient.createOrUpdateVehicle(bus3);
         VehicleEntity bus4 = buildVehicle("City 88");
         bus4 = ticketClient.createOrUpdateVehicle(bus4);
-        VehicleEntity bus5 = buildVehicle("City 89");
+        VehicleEntity bus5 = buildVehicle("City 82");
         bus5 = ticketClient.createOrUpdateVehicle(bus5);
         VehicleEntity bus6 = buildVehicle("City 95");
         bus6 = ticketClient.createOrUpdateVehicle(bus6);
@@ -86,9 +86,7 @@ public class Starter {
         System.out.println(ticketClient.findAllJourneyAsCriteria());
         System.out.println("--------------------------------------------------------" + '\n');
 
-
-
-
+        System.out.println(ticketClient.findAllVehiclePageble());
 
 
     }

@@ -2,8 +2,10 @@ package org.hillel.persistence.repository;
 
 
 import lombok.SneakyThrows;
+import org.hibernate.query.criteria.internal.OrderImpl;
 import org.hillel.persistence.entity.AbstractModifyEntity;
 import org.hillel.persistence.entity.VehicleEntity;
+import org.hillel.service.SearchQueryParam;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -12,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.Collection;
@@ -83,6 +86,20 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
     public void removeById(ID id) {
         final E reference = entityManager.getReference(entityClass, id); // return only current object, without link wit other objects!
         entityManager.remove(reference);
+    }
+
+
+    // критериабилдер, вызов с параметрами и  сортировкой
+    public Collection<E> findAllAsCriteriaBuildWithParams(SearchQueryParam searchQueryParam) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass);
+        Root<E> from = query.from(entityClass);
+        Order order = new OrderImpl(from.get(searchQueryParam.getQueryParam()), searchQueryParam.isAscSort());
+        return entityManager.createQuery(query.select(from).orderBy(order))
+                .setFirstResult(searchQueryParam.getPageIndex())
+                .setMaxResults(searchQueryParam.getMaxResult())
+                .getResultList();
+
     }
 
     @Override
