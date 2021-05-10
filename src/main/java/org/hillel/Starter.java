@@ -57,7 +57,7 @@ public class Starter {
         System.out.println('\n');
 
         // All find by HQL querry
-        System.out.println("=========== find All by HQL querry =====================");
+       /* System.out.println("=========== find All by HQL querry =====================");
         System.out.println("==========  findAllVehicles ============================");
         System.out.println(ticketClient.findAllVehicle());
         System.out.println("==========  findAllJourneys ============================");
@@ -94,7 +94,7 @@ public class Starter {
         System.out.println("========= All vehicles Stored Proc =====================");
         System.out.println(ticketClient.findAllVehicleAsStoredProcedure());
         System.out.println("========= All journeys  Stored Proc  ===================");
-        System.out.println(ticketClient.findAllJourneyAsStoredProcedure());
+        System.out.println(ticketClient.findAllJourneyAsStoredProcedure());*/
 
 
     }
