@@ -100,15 +100,24 @@ public class TicketClient {
     }
 
     // =========================== search by params ================================
+
     public Collection<VehicleEntity> findAllVehicles(int fromPage, int maxResult,
                                                      String sortBy, boolean isAscSort) {
-
         SearchQueryParam searchQueryParam = new SearchQueryParam(fromPage, maxResult, sortBy, isAscSort);
         return vehicleService.findAllVehicles(searchQueryParam);
     }
 
+    public Collection<JourneyEntity> findAllJourneys(int fromPage, int maxResult,
+                                                     String sortBy, boolean isAscSort) {
+        SearchQueryParam searchQueryParam = new SearchQueryParam(fromPage, maxResult, sortBy, isAscSort);
+        return journeyService.findAllVehicles(searchQueryParam);
+    }
 
-
+    public Collection<StopEntity> findAllStops(int fromPage, int maxResult,
+                                               String sortBy, boolean isAscSort) {
+        SearchQueryParam searchQueryParam = new SearchQueryParam(fromPage, maxResult, sortBy, isAscSort);
+        return stopService.findAllVehicles(searchQueryParam);
+    }
 
 
     //============================= As HQL =======================
@@ -164,9 +173,6 @@ public class TicketClient {
     public Collection<JourneyEntity> findAllJourneyAsStoredProcedure() {
         return journeyService.findAllAsStoredProcedure();
     }
-
-
-
 
 
 }

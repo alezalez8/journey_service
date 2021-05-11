@@ -1,6 +1,7 @@
 package org.hillel.service;
 
 import org.hillel.persistence.entity.JourneyEntity;
+import org.hillel.persistence.entity.VehicleEntity;
 import org.hillel.persistence.repository.JourneyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,12 @@ public class TransactionalJourneyService {
             journeyEntity.getStops().size();        // get table in case lazy
         }
         return byId;
+    }
+
+
+    @Transactional(readOnly = true)
+    public Collection<JourneyEntity> findAllVehicles(SearchQueryParam searchQueryParam) {
+        return journeyRepository.findAllAsCriteriaBuildWithParams(searchQueryParam);
     }
 
     @Transactional

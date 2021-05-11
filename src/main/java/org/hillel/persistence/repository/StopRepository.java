@@ -20,4 +20,5 @@ public class StopRepository extends CommonRepository<StopEntity, Long> {
         return entityManager.createNamedQuery("findStopAll", StopEntity.class).getResultList();
     }
 
+
 }

@@ -12,7 +12,7 @@ public class SearchQueryParam {
 
 //https://betacode.net/11797/pagination-in-java-hibernate
 
-   // new SearchQueryParam(pageIndex, maxResult, sortBy, isAscSort)
+
 
 
     public SearchQueryParam(int fromPage, int recordOnPage, String sortBy, boolean isAscSort) {
@@ -41,9 +41,13 @@ public class SearchQueryParam {
         return isAscSort;
     }
 
+    public int getFromRecordIndex() {
+        return fromRecordIndex;
+    }
+
     public String getQueryParam() {
         if (sortBy != null) {
-            return " order by " + sortBy + (isAscSort ? " asc" : " desc");
+            return sortBy;
         }
         return "";
     }

@@ -38,19 +38,19 @@ public class Starter {
 
         // create journey with stops:
         JourneyEntity journey1 = buildJourney("Odessa", "Lviv", date, calendar.getTime());
-        journey1.addStop(buildStop(3D, 5D, "Одесская область","Умань", "г. Умань",
+        journey1.addStop(buildStop(3D, 5D, "Одесская область", "Умань", "г. Умань",
                 "Сельпо", " "));
-        journey1.addStop(buildStop(5D, 5D, "Хмельницкая область","Хмельницкий", "г. Хмельницк",
+        journey1.addStop(buildStop(5D, 5D, "Хмельницкая область", "Хмельницкий", "г. Хмельницк",
                 "Копейка", "Звезда"));
-        journey1.addStop(buildStop(6D, 7D, "Тернопольская область","Тернопольская", "г. Тернополь",
+        journey1.addStop(buildStop(6D, 7D, "Тернопольская область", "Тернопольская", "г. Тернополь",
                 "АТБ", "Терноп"));
 
         JourneyEntity journey2 = buildJourney("Odessa", "Dnipro", date, calendar.getTime());
-        journey2.addStop(buildStop(3D, 5D, "Николаевская область","Николаев", "г. Николаев",
+        journey2.addStop(buildStop(3D, 5D, "Николаевская область", "Николаев", "г. Николаев",
                 "Фуршет", " "));
-        journey2.addStop(buildStop(7D, 8D, "Криворожская область","Кривой Рог", "г. Кривой Рог",
+        journey2.addStop(buildStop(7D, 8D, "Криворожская область", "Кривой Рог", "г. Кривой Рог",
                 "АТБ", "Криворож"));
-        journey2.addStop(buildStop(7D, 9D, "Днипровская область","Днипровская", "г. Днипро",
+        journey2.addStop(buildStop(7D, 9D, "Днипровская область", "Днипровская", "г. Днипро",
                 "Селянка", "Днипро"));
 
 
@@ -79,13 +79,16 @@ public class Starter {
         System.out.println('\n');
 
 
-
         // All find by criteria builder
         /*System.out.println("=========== find All by criteria builder ===============");
         System.out.println(ticketClient.findAllVehicleAsCriteria());
         System.out.println(ticketClient.findAllJourneyAsCriteria());*/
-        System.out.println("--------------------------------------------------------" + '\n');
-        System.out.println(ticketClient.findAllVehicles(1, 3, "id", false));
+        System.out.println("------------------findAllVehicles-------------------------------------" + '\n');
+        System.out.println(ticketClient.findAllVehicles(2, 3, "id", true));
+        System.out.println("------------------findAllStops-------------------------------------" + '\n');
+        System.out.println(ticketClient.findAllStops(1, 3, "id", true));
+        System.out.println("------------------findAllJourneys-------------------------------------" + '\n');
+        System.out.println(ticketClient.findAllJourneys(0, 3, "id", true));
 
 
     }

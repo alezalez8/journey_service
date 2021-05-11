@@ -12,10 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Order;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
@@ -95,10 +92,11 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass);
         Root<E> from = query.from(entityClass);
-        System.out.println("params is " + searchQueryParam.getQueryParam() + ", asc = " + searchQueryParam.isAscSort());
-        Order order = new OrderImpl(from.get(searchQueryParam.getQueryParam()));
+//        System.out.println("params is " + searchQueryParam.getQueryParam() + ", asc = " + searchQueryParam.isAscSort());
+//        System.out.println("Page index = " + searchQueryParam.getPageIndex() + " and max result is " + searchQueryParam.getMaxResult());
+        OrderImpl order = new OrderImpl(from.get(searchQueryParam.getQueryParam()), searchQueryParam.isAscSort());
         return entityManager.createQuery(query.select(from).orderBy(order))
-                .setFirstResult(searchQueryParam.getPageIndex())
+                .setFirstResult(searchQueryParam.getFromRecordIndex())
                 .setMaxResults(searchQueryParam.getMaxResult())
                 .getResultList();
 
