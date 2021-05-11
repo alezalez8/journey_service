@@ -91,10 +91,12 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
 
     // критериабилдер, вызов с параметрами и  сортировкой
     public Collection<E> findAllAsCriteriaBuildWithParams(SearchQueryParam searchQueryParam) {
+
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass);
         Root<E> from = query.from(entityClass);
-        Order order = new OrderImpl(from.get(searchQueryParam.getQueryParam()), searchQueryParam.isAscSort());
+        System.out.println("params is " + searchQueryParam.getQueryParam() + ", asc = " + searchQueryParam.isAscSort());
+        Order order = new OrderImpl(from.get(searchQueryParam.getQueryParam()));
         return entityManager.createQuery(query.select(from).orderBy(order))
                 .setFirstResult(searchQueryParam.getPageIndex())
                 .setMaxResults(searchQueryParam.getMaxResult())

@@ -49,12 +49,7 @@ public class TransactionalVehicleService {
 
 
     @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findAllPageble() {
-        return vehicleRepository.findAllPagebleVehicles();
-    }
-
-    @Transactional(readOnly = true)
-    private Collection<VehicleRepository> findAllVehicles(SearchQueryParam searchQueryParam) {
+    public Collection<VehicleEntity> findAllVehicles(SearchQueryParam searchQueryParam) {
         return vehicleRepository.findAllAsCriteriaBuildWithParams(searchQueryParam);
     }
 }

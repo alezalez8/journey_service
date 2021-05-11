@@ -104,7 +104,7 @@ public class TicketClient {
                                                      String sortBy, boolean isAscSort) {
 
         SearchQueryParam searchQueryParam = new SearchQueryParam(fromPage, maxResult, sortBy, isAscSort);
-        return vehicleService.findAllAsCriteriaBuildWithParams(searchQueryParam);
+        return vehicleService.findAllVehicles(searchQueryParam);
     }
 
 
@@ -164,10 +164,7 @@ public class TicketClient {
     public Collection<JourneyEntity> findAllJourneyAsStoredProcedure() {
         return journeyService.findAllAsStoredProcedure();
     }
-// ----------------------------------------------
-    public Collection<VehicleEntity> findAllVehiclePageble() {
-        return vehicleService.findAllPageble();
-    }
+
 
 
 

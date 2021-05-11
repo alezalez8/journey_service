@@ -4,6 +4,7 @@ import org.hibernate.query.criteria.internal.OrderImpl;
 import org.hillel.persistence.entity.JourneyEntity_;
 import org.hillel.persistence.entity.VehicleEntity;
 import org.hillel.persistence.entity.VehicleEntity_;
+import org.hillel.service.SearchQueryParam;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.*;
@@ -22,6 +23,10 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
         return entityManager.createNamedQuery("findVehicleAll", VehicleEntity.class).getResultList();
     }
 
+    /*@Override
+    public Collection<VehicleEntity> findAllVehicles(SearchQueryParam searchQueryParam) {
+        return super.findAllAsCriteriaBuildWithParams(searchQueryParam);
+    }*/
 
     /*public Collection<VehicleEntity> findAllPagebleVehicles() {
         final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();

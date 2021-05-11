@@ -81,12 +81,11 @@ public class Starter {
 
 
         // All find by criteria builder
-        System.out.println("=========== find All by criteria builder ===============");
+        /*System.out.println("=========== find All by criteria builder ===============");
         System.out.println(ticketClient.findAllVehicleAsCriteria());
-        System.out.println(ticketClient.findAllJourneyAsCriteria());
+        System.out.println(ticketClient.findAllJourneyAsCriteria());*/
         System.out.println("--------------------------------------------------------" + '\n');
-
-        System.out.println(ticketClient.findAllVehiclePageble());
+        System.out.println(ticketClient.findAllVehicles(1, 3, "id", false));
 
 
     }
