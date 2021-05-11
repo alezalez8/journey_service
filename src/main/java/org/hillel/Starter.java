@@ -84,14 +84,19 @@ public class Starter {
         System.out.println(ticketClient.findAllVehicleAsCriteria());
         System.out.println(ticketClient.findAllJourneyAsCriteria());*/
         System.out.println("------------------findAllVehicles-------------------------------------" + '\n');
-        System.out.println(ticketClient.findAllVehicles(2, 3, "id", true));
-        System.out.println("------------------findAllStops-------------------------------------" + '\n');
+        System.out.println(ticketClient.findAllVehicles(2, 3, "active", false));
+        System.out.println("------------------findAllStops----------------------------------------" + '\n');
         System.out.println(ticketClient.findAllStops(1, 3, "id", true));
         System.out.println("------------------findAllJourneys-------------------------------------" + '\n');
         System.out.println(ticketClient.findAllJourneys(0, 3, "id", true));
 
 
+        System.out.println("-------------------find MIN -------------------------------------------" + '\n');
+        System.out.println(ticketClient.findMinSeats());
+        System.out.println("-------------------find MAX -------------------------------------------" + '\n');
+        System.out.println(ticketClient.findMaxSeats());
     }
+
 
     private static JourneyEntity buildJourney(final String stationFrom, final String stationTo,
                                               final Date departure, final Date arrival) {

@@ -119,6 +119,14 @@ public class TicketClient {
         return stopService.findAllVehicles(searchQueryParam);
     }
 
+    // ============================ searh MIN, MAX vehicle's seats ==============================
+    public Collection<VehicleEntity> findMinSeats() {
+        return vehicleService.findVehicleWithMinSeats();
+    }
+
+    public Collection<VehicleEntity> findMaxSeats() {
+        return vehicleService.findVehicleWithMaxSeats();
+    }
 
     //============================= As HQL =======================
     public Collection<VehicleEntity> findAllVehicle() {
