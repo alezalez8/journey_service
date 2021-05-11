@@ -27,6 +27,16 @@ public class TransactionalVehicleService {
 
 
     @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findVehicleWithMinSeats() {
+        return vehicleRepository.findVehicleWithMinSeats();
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findVehicleWithMaxSeats() {
+        return vehicleRepository.findVehicleWithMaxSeats();
+    }
+
+    @Transactional(readOnly = true)
     public Collection<VehicleEntity> findAllAsNative() {
         return vehicleRepository.findAllAsNative();
 
