@@ -23,7 +23,7 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
         return entityManager.createNamedQuery("findVehicleAll", VehicleEntity.class).getResultList();
     }
 
-//  =================== native SQL sting query =================================
+//  =================== native SQL sting query ==================================
     private String sqlMin = "select vehicle.*\n" +
             "from vehicle\n" +
             "         inner join vehicle_seat on vehicle.id = vehicle_seat.vehicle_id\n" +
@@ -44,13 +44,30 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
             "        order by vs.free_seats desc\n" +
             "        limit 1);";
 
+    //  =================== native SQL sting query with number of free seats ====
+    private String sqlMax2 = "select vehicle.*, vehicle_seat.free_seats\n" +
+            "from vehicle\n" +
+            "         inner join vehicle_seat on vehicle.id = vehicle_seat.vehicle_id\n" +
+            "order by vehicle_seat.free_seats desc limit 1";
+
+
+    private String sqlMin2 = "select vehicle.*, vehicle_seat.free_seats\n" +
+            "from vehicle\n" +
+            "         inner join vehicle_seat on vehicle.id = vehicle_seat.vehicle_id\n" +
+            "group by vehicle.id, vehicle_seat.free_seats\n" +
+            "having sum(free_seats) =\n" +
+            "       (select vs.free_seats\n" +
+            "        from vehicle_seat vs\n" +
+            "        order by vs.free_seats asc\n" +
+            "        limit 1)";
+
 
     public Collection<VehicleEntity> findVehicleWithMinSeats() {
-        return entityManager.createNativeQuery(sqlMin, VehicleEntity.class).getResultList();
+        return entityManager.createNativeQuery(sqlMin2, VehicleEntity.class).getResultList();
     }
 
     public Collection<VehicleEntity> findVehicleWithMaxSeats() {
-        return entityManager.createNativeQuery(sqlMax, VehicleEntity.class).getResultList();
+        return entityManager.createNativeQuery(sqlMax2, VehicleEntity.class).getResultList();
     }
 
 
