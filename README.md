@@ -1,5 +1,5 @@
 # TICKET
-## ДЗ 5. Hibernate relations
+## ДЗ 6. Hibernate relations
 
 #### Decision: 
 
