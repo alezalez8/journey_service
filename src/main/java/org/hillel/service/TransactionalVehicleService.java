@@ -67,12 +67,13 @@ public class TransactionalVehicleService {
 
     @Transactional
     public void remove(VehicleEntity vehicleEntity) {
-        vehicleRepository.delete(vehicleEntity);
+        vehicleRepository.delete(vehicleEntity);  // jpa spring-data
     }
+
 
     @Transactional(readOnly = true)
     public Collection<VehicleEntity> findByIds(Long... ids) {
-        return (Collection<VehicleEntity>) vehicleRepository.findAllById(Arrays.asList(ids));
+        return (Collection<VehicleEntity>) vehicleRepository.findAllById(Arrays.asList(ids)); // jpa spring-data
     }
 
     @Transactional(readOnly = true) // сущность не будет меняться
@@ -94,13 +95,19 @@ public class TransactionalVehicleService {
         return vehicleRepository.findByNameAndActiveIsTrue(name);
     }
 
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> littleTest(String name) {
+        final Collection<VehicleEntity> byName = vehicleRepository.searchByName(name);
+        return byName;
+    }
+
     /*@Transactional(rollbackFor = IllegalArgumentException.class)
     public Collection<VehicleEntity> findAllByName(String name) {
         final Collection<VehicleEntity> byName = vehicleRepository.findByNameAndActiveIsTrue(name);
         return byName;
     }*/
 
-   // ======================= before added CommonJpaRepository
+    // ======================= before added CommonJpaRepository
 
     /*@Transactional(rollbackFor = IllegalArgumentException.class)
     public Collection<VehicleEntity> findAllByName(String name) {

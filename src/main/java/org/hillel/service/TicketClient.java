@@ -73,6 +73,13 @@ public class TicketClient {
         return Collections.emptyList();
     }
 
+    //=========================
+    public Collection<VehicleEntity> veryLittleTest(String name) {
+        return vehicleService.littleTest(name);
+    }
+
+    //===========================
+
 
     public VehicleEntity createOrUpdateVehicle(VehicleEntity vehicle) {
         return vehicleService.createOrUpdate(vehicle);

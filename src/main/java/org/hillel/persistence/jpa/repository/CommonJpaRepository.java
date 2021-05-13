@@ -10,6 +10,7 @@ import java.util.List;
 public interface CommonJpaRepository<E extends Persistable<ID>, ID extends Serializable> {
 
     @Query("select e from #{#entityName} e where e.active = true")
+
     List<E> findOnlyActive();
 
 //    List<E> findByName(String name);
