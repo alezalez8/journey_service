@@ -32,7 +32,7 @@ public class TicketClient {
     @Autowired
     private TransactionalVehicleService vehicleService;
 
-  // @Autowired
+    // @Autowired
     private Environment environment;
 
     @Value("${datasource.url}")
@@ -98,7 +98,7 @@ public class TicketClient {
         vehicleService.remove(vehicleEntity);
     }
 
-    public Collection<VehicleEntity> findVehicleByids(Long ... ids) {
+    public Collection<VehicleEntity> findVehicleByids(Long... ids) {
         return vehicleService.findByIds();
     }
 
@@ -110,6 +110,7 @@ public class TicketClient {
         return vehicleService.findAll();
     }
 
+
     public Collection<VehicleEntity> findAllVehiclesByName(String name) {
         return vehicleService.findByName(name);
     }
@@ -117,5 +118,10 @@ public class TicketClient {
     public Collection<VehicleEntity> findAllByName(String name) {
         return vehicleService.findAllByName(name);
     }
-}
+
+    public void disableById(Long id) {
+        vehicleService.disableById(id);
+    }
+
+    }
 

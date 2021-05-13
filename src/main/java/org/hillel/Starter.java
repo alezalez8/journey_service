@@ -49,10 +49,15 @@ public class Starter {
 
         System.out.println(ticketClient.findAllByName("bus2"));
 
-        System.out.println(ticketClient.veryLittleTest("bus3"));
+        //System.out.println(ticketClient.veryLittleTest("bus3"));
+        System.out.println(ticketClient.findAllVehiclesByName("bus3"));
+        System.out.println("===================================================================");
+        ticketClient.disableById(2L);
+        System.out.println("===================================================================");
 
-       // System.out.println("delete vehicle");
-       // ticketClient.removeVehicle(vehicle1);
+        System.out.println(ticketClient.findAllByName("bus2"));
+        // System.out.println("delete vehicle");
+        // ticketClient.removeVehicle(vehicle1);
 
         //System.out.println(ticketClient.findVehicleById(1L, true));
 //        System.out.println(ticketClient.findVehicleByids(1L, 2L,3L,4L,5L));

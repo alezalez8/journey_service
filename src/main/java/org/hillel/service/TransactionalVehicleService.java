@@ -1,8 +1,11 @@
 package org.hillel.service;
 
 import org.hillel.persistence.entity.VehicleEntity;
+import org.hillel.persistence.entity.VehicleEntity_;
 import org.hillel.persistence.jpa.repository.VehicleJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
@@ -92,7 +95,7 @@ public class TransactionalVehicleService {
 
     @Transactional(readOnly = true)
     public Collection<VehicleEntity> findByName(String name) {
-        return vehicleRepository.findByNameAndActiveIsTrue(name);
+        return vehicleRepository.findDistinctByNameAndActiveIsTrue(name);
     }
 
     @Transactional(readOnly = true)
@@ -123,8 +126,18 @@ public class TransactionalVehicleService {
 
     @Transactional(rollbackFor = IllegalArgumentException.class)
     public Collection<VehicleEntity> findAllByName(String name) {
+//        return vehicleRepository.findOnlyActive();
 
-        return vehicleRepository.findOnlyActive();
+        VehicleEntity vehicleEntity = new VehicleEntity();
+        vehicleEntity.setName(name);
+        vehicleEntity.setActive(true);
+        vehicleEntity.setId(3L);
+        return vehicleRepository.findAll(Example.of(vehicleEntity));
+    }
+
+    @Transactional
+    public void disableById(Long id) {
+        vehicleRepository.disableById(id);
     }
 
 
