@@ -39,6 +39,7 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
     }*/
 
     public Collection<VehicleEntity> findByName(String name) {
+
         /*final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<VehicleEntity> query = criteriaBuilder.createQuery(VehicleEntity.class);
         final Root<VehicleEntity> from = query.from(VehicleEntity.class);

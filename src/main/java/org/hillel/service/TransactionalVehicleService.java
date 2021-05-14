@@ -3,6 +3,7 @@ package org.hillel.service;
 import org.hillel.persistence.entity.VehicleEntity;
 import org.hillel.persistence.entity.VehicleEntity_;
 import org.hillel.persistence.jpa.repository.VehicleJpaRepository;
+import org.hillel.persistence.jpa.repository.specification.VehicleSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -132,13 +133,16 @@ public class TransactionalVehicleService {
         vehicleEntity.setName(name);
         vehicleEntity.setActive(true);
         vehicleEntity.setId(3L);
-        return vehicleRepository.findAll(Example.of(vehicleEntity));
+//        return vehicleRepository.findAll(Example.of(vehicleEntity));  // до абс времени 18.38 урока 9 (до введения Specification)
+        return vehicleRepository.findAll(VehicleSpecification.byName(name).and(VehicleSpecification.onlyActive()));
     }
 
     @Transactional
     public void disableById(Long id) {
         vehicleRepository.disableById(id);
     }
+
+
 
 
 }
