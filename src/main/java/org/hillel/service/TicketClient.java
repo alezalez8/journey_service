@@ -4,6 +4,7 @@ import org.hibernate.cfg.Environment;
 import org.hillel.persistence.entity.JourneyEntity;
 import org.hillel.persistence.entity.StopEntity;
 import org.hillel.persistence.entity.VehicleEntity;
+import org.hillel.persistence.jpa.repository.SimpleVehicleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -126,6 +127,9 @@ public class TicketClient {
 
 
 
+    public List<SimpleVehicleDto>  listAllSimpleVehicles() {
+        return vehicleService.listAllSimpleVehicles();
+    }
 
     }
 

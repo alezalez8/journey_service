@@ -3,6 +3,7 @@ package org.hillel;
 import org.hillel.config.RootConfig;
 import org.hillel.persistence.entity.*;
 import org.hillel.persistence.entity.enums.DirectionType;
+import org.hillel.persistence.jpa.repository.SimpleVehicleDto;
 import org.hillel.persistence.repository.JourneyRepository;
 import org.hillel.service.TicketClient;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -56,6 +57,8 @@ public class Starter {
         System.out.println("===================================================================");
 
         System.out.println(ticketClient.findAllByName("bus2"));
+        System.out.println("===================================================================");
+        ticketClient.listAllSimpleVehicles().forEach(SimpleVehicleDto::toStrings);
         // System.out.println("delete vehicle");
         // ticketClient.removeVehicle(vehicle1);
 

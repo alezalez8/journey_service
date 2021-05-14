@@ -2,6 +2,7 @@ package org.hillel.service;
 
 import org.hillel.persistence.entity.VehicleEntity;
 import org.hillel.persistence.entity.VehicleEntity_;
+import org.hillel.persistence.jpa.repository.SimpleVehicleDto;
 import org.hillel.persistence.jpa.repository.VehicleJpaRepository;
 import org.hillel.persistence.jpa.repository.specification.VehicleSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import javax.persistence.EntityManagerFactory;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -134,7 +136,8 @@ public class TransactionalVehicleService {
         vehicleEntity.setActive(true);
         vehicleEntity.setId(3L);
 //        return vehicleRepository.findAll(Example.of(vehicleEntity));  // до абс времени 18.38 урока 9 (до введения Specification)
-        return vehicleRepository.findAll(VehicleSpecification.byName(name).and(VehicleSpecification.onlyActive()));
+//        return vehicleRepository.findAll(VehicleSpecification.byName(name).and(VehicleSpecification.onlyActive())); // это без совмещения спецификешт и экземпл
+        return vehicleRepository.findAll(VehicleSpecification.byNameAndExample(name, vehicleEntity)); // это совмещение спецификешн и экземпл
     }
 
     @Transactional
@@ -142,6 +145,10 @@ public class TransactionalVehicleService {
         vehicleRepository.disableById(id);
     }
 
+
+    public List<SimpleVehicleDto>  listAllSimpleVehicles() {
+        return vehicleRepository.findAllByActiveIsTrue();
+    }
 
 
 

@@ -18,6 +18,8 @@ import java.util.List;
 public interface VehicleJpaRepository extends CommonJpaRepository<VehicleEntity, Long>,
         JpaSpecificationExecutor<VehicleEntity> {
 
+
+
     Collection<VehicleEntity> searchByName(String name);
 
     Collection<VehicleEntity> findDistinctByNameAndActiveIsTrue(String name);
@@ -37,5 +39,8 @@ public interface VehicleJpaRepository extends CommonJpaRepository<VehicleEntity,
     Page<VehicleEntity> findByConditions(@Param("name") String name,
                                          @Param("id_from") Long idFrom,
                                          @Param("id_to") Long idTo, Pageable page);
+
+
+    List<SimpleVehicleDto> findAllByActiveIsTrue();
 
 }

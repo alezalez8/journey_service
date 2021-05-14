@@ -75,7 +75,7 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
                 .setMaxResults(3)
                 .setFirstResult(1)
                 .getResultList();
-
-
     }
+
+
 }
