@@ -1,0 +1,101 @@
+create or replace function find_all(p_db_name IN varchar(20)) returns refcursor as
+$$
+declare
+    db_cursor refcursor;
+begin
+    open db_cursor for execute format('select * from %I', p_db_name);
+    return db_cursor;
+end;
+$$ language plpgsql;
+
+
+
+COMMIT;
+BEGIN;
+SELECT find_all('vehicle');
+FETCH ALL IN "<unnamed portal 9>";
+COMMIT;
+
+
+select vehicleent0_.id          as id1_4_,
+       vehicleent0_.active      as active2_4_,
+       vehicleent0_.create_date as create_d3_4_,
+       vehicleent0_.name        as name4_4_
+from vehicle vehicleent0_
+         left outer join journey journeys1_ on vehicleent0_.id = journeys1_.vehicle_id
+where vehicleent0_.name=?
+  and vehicleent0_.active=?
+  and journeys1_.station_from=?;
+
+
+
+select vs.free_seats
+from vehicle_seat vs
+order by vs.free_seats desc
+limit 1;
+
+select vs.free_seats
+from vehicle_seat vs
+where vs.free_seats = (select MIN(free_seats) from vehicle_seat);
+
+
+
+select free_seats
+from vehicle_seat
+where free_seats = (select min(free_seats) from vehicle_seat);
+
+
+select MAX(vs.free_seats)
+from vehicle_seat vs
+group by vs.free_seats;
+
+
+-----------------------------------------------------------------------
+
+select vehicle.*
+from vehicle
+         inner join vehicle_seat on vehicle.id = vehicle_seat.vehicle_id
+group by vehicle.id
+having sum(free_seats) =
+       (select min(sumFreeSeats)
+        from (select sum(free_seats) sumFreeSeats from vehicle_seat group by vehicle_id) seat);
+
+-------------------------------------------------------------------------------
+select vehicle.*
+from vehicle
+         inner join vehicle_seat on vehicle.id = vehicle_seat.vehicle_id
+group by vehicle.id
+having sum(free_seats);
+
+
+-------------------------------------------------------------------------
+select vehicle.*
+from vehicle
+         inner join vehicle_seat on vehicle.id = vehicle_seat.vehicle_id
+group by vehicle.id
+having sum(free_seats) =
+       (select vs.free_seats
+        from vehicle_seat vs
+        order by vs.free_seats asc
+        limit 1);
+--------------------------------------------------------------------------
+select vehicle.*
+from vehicle
+         inner join vehicle_seat on vehicle.id = vehicle_seat.vehicle_id
+group by vehicle.id
+having sum(free_seats) =
+       (select vs.free_seats
+        from vehicle_seat vs
+        order by vs.free_seats desc
+        limit 1);
+---------------------------------------------------------------------------------
+select name vehicle_name, vehicle.active, vehicle_seat.free_seats
+from vehicle
+         inner join vehicle_seat on vehicle.id = vehicle_seat.vehicle_id
+order by vehicle_seat.free_seats desc
+limit 1;
+
+select name vehicle_name, vehicle.active, vehicle_seat.free_seats
+from vehicle inner join vehicle_seat on vehicle.id = vehicle_seat.vehicle_id
+order by vehicle_seat.free_seats asc
+limit 1;
