@@ -79,11 +79,19 @@ public class Starter {
         System.out.println('\n');
 
 
+
+
+
+
+
         // All find by criteria builder
         /*System.out.println("=========== find All by criteria builder ===============");
         System.out.println(ticketClient.findAllVehicleAsCriteria());
         System.out.println(ticketClient.findAllJourneyAsCriteria());*/
-        System.out.println("------------------findAllVehicles-------------------------------------" + '\n');
+
+
+
+       /* System.out.println("------------------findAllVehicles-------------------------------------" + '\n');
         System.out.println(ticketClient.findAllVehicles(2, 3, "active", false));
         System.out.println("------------------findAllStops----------------------------------------" + '\n');
         System.out.println(ticketClient.findAllStops(1, 3, "id", true));
@@ -94,7 +102,7 @@ public class Starter {
         System.out.println("-------------------find MIN -------------------------------------------" + '\n');
         System.out.println(ticketClient.findMinSeats());
         System.out.println("-------------------find MAX -------------------------------------------" + '\n');
-        System.out.println(ticketClient.findMaxSeats());
+        System.out.println(ticketClient.findMaxSeats());*/
     }
 
 

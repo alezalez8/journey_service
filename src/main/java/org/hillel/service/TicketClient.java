@@ -182,5 +182,10 @@ public class TicketClient {
         return journeyService.findAllAsStoredProcedure();
     }
 
+    //=============================================== findAllVehiclesJpa
+    public Collection<JourneyEntity> findAllVehiclesJpa(String name) {
+        return vehicleService.findAllVehiclesJpa(name);
+    }
+
 
 }

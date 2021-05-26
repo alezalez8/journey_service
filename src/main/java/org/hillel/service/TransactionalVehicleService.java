@@ -1,8 +1,10 @@
 package org.hillel.service;
 
 import org.hillel.persistence.entity.VehicleEntity;
+import org.hillel.persistence.jpa.repository.VehicleJpaRepository;
 import org.hillel.persistence.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,9 @@ public class TransactionalVehicleService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
+
+    @Autowired
+    private VehicleJpaRepository vehicleJpaRepository;
 
 
     @Transactional
@@ -61,5 +66,14 @@ public class TransactionalVehicleService {
     @Transactional(readOnly = true)
     public Collection<VehicleEntity> findAllVehicles(SearchQueryParam searchQueryParam) {
         return vehicleRepository.findAllAsCriteriaBuildWithParams(searchQueryParam);
+    }
+
+    // ======================================================================================
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findAllVehiclesJpa(String name) {
+
+        VehicleEntity vehicleEntity = new VehicleEntity();
+        vehicleEntity.setName(name);
+        return vehicleJpaRepository.findAll(Example.of(vehicleEntity));
     }
 }
