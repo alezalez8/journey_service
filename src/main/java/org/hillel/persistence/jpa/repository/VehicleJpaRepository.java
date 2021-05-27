@@ -11,11 +11,11 @@ import org.springframework.data.repository.query.Param;
 import java.util.Collection;
 
 
-public interface VehicleJpaRepository extends CrudRepository<VehicleEntity, Long>
+//public interface VehicleJpaRepository extends CrudRepository<VehicleEntity, Long>
         , JpaSpecificationExecutor<VehicleEntity> {
 
-/*public interface VehicleJpaRepository extends CommonJpaRepository<VehicleEntity, Long>,
-        JpaSpecificationExecutor<VehicleEntity> {*/
+public interface VehicleJpaRepository extends CommonJpaRepository<VehicleEntity, Long>,
+        JpaSpecificationExecutor<VehicleEntity> {
 
     Collection<VehicleEntity> searchByName(String name);
 
