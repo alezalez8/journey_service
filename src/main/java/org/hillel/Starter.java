@@ -81,6 +81,8 @@ public class Starter {
 
         System.out.println(ticketClient.findAllVehiclesJpa());
         System.out.println(ticketClient.findByName("City 88"));
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(ticketClient.findAllStops());
 
         // All find by criteria builder
         /*System.out.println("=========== find All by criteria builder ===============");

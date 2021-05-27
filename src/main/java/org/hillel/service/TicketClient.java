@@ -114,11 +114,11 @@ public class TicketClient {
         return journeyService.findAllVehicles(searchQueryParam);
     }
 
-    public Collection<StopEntity> findAllStops(int fromPage, int maxResult,
+    /*public Collection<StopEntity> findAllStops(int fromPage, int maxResult,
                                                String sortBy, boolean isAscSort) {
         SearchQueryParam searchQueryParam = new SearchQueryParam(fromPage, maxResult, sortBy, isAscSort);
-        return stopService.findAllVehicles(searchQueryParam);
-    }
+        return stopService.findAllStops(searchQueryParam);
+    }*/
 
     // ============================ searh MIN, MAX vehicle's seats ==============================
     public Collection<VehicleEntity> findMinSeats() {
@@ -165,8 +165,12 @@ public class TicketClient {
         return journeyService.findAllAsNamed();
     }
 
-    public Collection<StopEntity> findAllStopAsNamed() {
-        return stopService.findAllAsNamed();
+    /*public Collection<StopEntity> findAllStopAsNamed() {
+        return stopService.findAll();
+    }*/
+
+    public Collection<StopEntity> findAllStops() {
+        return stopService.findAll();
     }
 
     public Collection<VehicleFreeSeatsEntity> findAllSeatAsNamed() {
