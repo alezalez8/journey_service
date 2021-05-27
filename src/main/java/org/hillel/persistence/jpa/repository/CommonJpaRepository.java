@@ -21,7 +21,7 @@ public interface CommonJpaRepository<E extends Persistable<ID>, ID extends Seria
 
 //    List<E> findByName(String name);
 
-    // @Transactional
+
     @Modifying
     @Query("update  #{#entityName} e set e.active = false  where e.id = :id")
     void disableById(@Param("id") ID id);
