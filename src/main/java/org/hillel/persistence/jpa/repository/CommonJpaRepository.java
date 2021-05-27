@@ -14,6 +14,8 @@ import java.util.List;
 @NoRepositoryBean
 public interface CommonJpaRepository<E extends Persistable<ID>, ID extends Serializable> extends JpaRepository<E, Long> {
 
+
+
     @Query("select e from #{#entityName} e where e.active = true")
     List<E> findOnlyActive();
 
