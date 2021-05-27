@@ -69,11 +69,11 @@ public class TransactionalVehicleService {
     }
 
     // ======================================================================================
-    @Transactional(readOnly = true)
+    /*@Transactional(readOnly = true)
     public Collection<VehicleEntity> findAllVehiclesJpa(String name) {
 
         VehicleEntity vehicleEntity = new VehicleEntity();
         vehicleEntity.setName(name);
         return vehicleJpaRepository.findAll(Example.of(vehicleEntity));
-    }
+    }*/
 }
