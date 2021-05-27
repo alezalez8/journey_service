@@ -37,6 +37,7 @@ public class TicketClient {
     @Autowired
     private TransactionalVehicleService vehicleService;
 
+
     @Autowired
     private TranscactionalVehicleSeatsService vehicleSeatsService;
 
@@ -183,8 +184,12 @@ public class TicketClient {
     }
 
     //=============================================== findAllVehiclesJpa
-    public Collection<JourneyEntity> findAllVehiclesJpa(String name) {
-        return vehicleService.findAllVehiclesJpa(name);
+    public Collection<VehicleEntity> findAllVehiclesJpa() {
+        return vehicleService.findAllVehiclesJpa();
+    }
+
+    public Collection<VehicleEntity> findByName(String name) {
+        return vehicleService.findByName(name);
     }
 
 

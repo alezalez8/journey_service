@@ -69,11 +69,15 @@ public class TransactionalVehicleService {
     }
 
     // ======================================================================================
-    /*@Transactional(readOnly = true)
-    public Collection<VehicleEntity> findAllVehiclesJpa(String name) {
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findAllVehiclesJpa() {
 
-        VehicleEntity vehicleEntity = new VehicleEntity();
-        vehicleEntity.setName(name);
-        return vehicleJpaRepository.findAll(Example.of(vehicleEntity));
-    }*/
+        //VehicleEntity vehicleEntity = new VehicleEntity();
+        //vehicleEntity.setName(name);
+        return vehicleJpaRepository.findAll();
+    }
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findByName(String name) {
+        return vehicleJpaRepository.findByName(name);
+    }
 }
