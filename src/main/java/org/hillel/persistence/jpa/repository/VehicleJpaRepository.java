@@ -17,7 +17,6 @@ public interface VehicleJpaRepository extends CommonJpaRepository<VehicleEntity,
     Collection<VehicleEntity> findByName(String name);
 
     Collection<VehicleEntity> findDistinctByNameAndActiveIsTrue(String name);
-    //    Collection<VehicleEntity> findDistinctFirs7tByNameAndActiveIsTrue(String name);
 
     // @Query("select v from VehicleEntity v where v.id between ?2 and ?3 and v.name = ?1")   // без анализа семантики, не анализирует имя findByConditions
     // Collection<VehicleEntity> findByConditions(String name, Long idFrom, Long idTo);

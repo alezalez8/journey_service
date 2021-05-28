@@ -8,13 +8,8 @@ import org.hillel.persistence.entity.VehicleFreeSeatsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
@@ -194,6 +189,10 @@ public class TicketClient {
 
     public Collection<VehicleEntity> findByName(String name) {
         return vehicleService.findByName(name);
+    }
+
+    public Collection<VehicleEntity> findVehicleName(String name){
+        return vehicleService.findVehicleName(name);
     }
 
 

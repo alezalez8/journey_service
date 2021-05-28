@@ -83,7 +83,8 @@ public class Starter {
         System.out.println(ticketClient.findByName("City 88"));
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println(ticketClient.findAllStops());
-
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(ticketClient.findVehicleName("City 88"));
         // All find by criteria builder
         /*System.out.println("=========== find All by criteria builder ===============");
         System.out.println(ticketClient.findAllVehicleAsCriteria());

@@ -5,13 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "stop_additional_info")
 @Getter
 @Setter
 @NoArgsConstructor
-public class StopAddInfoEntity {
+public class StopAddInfoEntity extends  AbstractModifyEntity<Long> implements Serializable {
 
     @Id
     @GeneratedValue()
