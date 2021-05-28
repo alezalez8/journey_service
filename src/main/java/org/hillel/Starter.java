@@ -3,10 +3,9 @@ package org.hillel;
 import org.hillel.config.RootConfig;
 import org.hillel.persistence.entity.*;
 import org.hillel.persistence.entity.enums.DirectionType;
-import org.hillel.persistence.repository.JourneyRepository;
 import org.hillel.service.TicketClient;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -79,32 +78,24 @@ public class Starter {
         System.out.println('\n');
 
 
+        System.out.println("===================== Vehicle =====================");
         System.out.println(ticketClient.findAllVehiclesJpa());
-        System.out.println(ticketClient.findByName("City 88"));
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println(ticketClient.findAllStops());
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println(ticketClient.findVehicleName("City 88"));
-        // All find by criteria builder
-        /*System.out.println("=========== find All by criteria builder ===============");
-        System.out.println(ticketClient.findAllVehicleAsCriteria());
-        System.out.println(ticketClient.findAllJourneyAsCriteria());*/
-
-
-
-       /* System.out.println("------------------findAllVehicles-------------------------------------" + '\n');
-        System.out.println(ticketClient.findAllVehicles(2, 3, "active", false));
-        System.out.println("------------------findAllStops----------------------------------------" + '\n');
-        System.out.println(ticketClient.findAllStops(1, 3, "id", true));
-        System.out.println("------------------findAllJourneys-------------------------------------" + '\n');
-        System.out.println(ticketClient.findAllJourneys(0, 3, "id", true));
-
-
-        System.out.println("-------------------find MIN -------------------------------------------" + '\n');
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println(ticketClient.findMinSeats());
-        System.out.println("-------------------find MAX -------------------------------------------" + '\n');
-        System.out.println(ticketClient.findMaxSeats());*/
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("===================== Journey =====================");
+        System.out.println(ticketClient.findAllJourneys());
+        System.out.println(ticketClient.findAllBySpecification("Odessa", "Dnipro"));
+        System.out.println("====================== Stop =======================");
+        System.out.println(ticketClient.findAllStops());
+
+
+
     }
+
+
 
 
     private static JourneyEntity buildJourney(final String stationFrom, final String stationTo,
@@ -141,13 +132,6 @@ public class Starter {
         return stopEntity;
     }
 
-
-    /*private static CommonInfo buildAddInfo(final String name, final String description) {
-        final CommonInfo commonInfo = new CommonInfo();
-        commonInfo.setName(name);
-        commonInfo.setDescription(description);
-        return commonInfo;
-    }*/
 
     private static VehicleEntity buildVehicle(final String name) {
         final VehicleEntity vehicleEntity = new VehicleEntity();

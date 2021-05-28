@@ -1,12 +1,12 @@
 package org.hillel.service;
 
 import org.hillel.persistence.entity.JourneyEntity;
-import org.hillel.persistence.entity.VehicleEntity;
+import org.hillel.persistence.jpa.repository.JourneyJpaRepository;
+import org.hillel.persistence.jpa.repository.specification.JourneySpecification;
 import org.hillel.persistence.repository.JourneyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import java.util.Collection;
 import java.util.Optional;
@@ -17,6 +17,25 @@ public class TransactionalJourneyService {
 
     @Autowired
     private JourneyRepository journeyRepository;
+
+
+    @Autowired
+    private JourneyJpaRepository journeyJpaRepository;
+
+
+    @Transactional(readOnly = true)
+    public Collection<JourneyEntity> findAll() {
+        return journeyJpaRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<JourneyEntity> findAllBySpecification(String from, String to) {
+        return journeyJpaRepository.findAll(JourneySpecification.allJorneysBySpecification(from, to));
+    }
+
+
+
+
 
 
     @Transactional
@@ -54,11 +73,6 @@ public class TransactionalJourneyService {
     @Transactional
     public void removeById(Long journeyId) {
         journeyRepository.removeById(journeyId);
-    }
-
-    @Transactional(readOnly = true)
-    public Collection<JourneyEntity> findAll() {
-        return journeyRepository.findAll();
     }
 
     @Transactional(readOnly = true)
