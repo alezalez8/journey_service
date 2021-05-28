@@ -3,10 +3,9 @@ package org.hillel;
 import org.hillel.config.RootConfig;
 import org.hillel.persistence.entity.*;
 import org.hillel.persistence.entity.enums.DirectionType;
-import org.hillel.persistence.repository.JourneyRepository;
 import org.hillel.service.TicketClient;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -85,6 +84,8 @@ public class Starter {
         System.out.println(ticketClient.findAllStops());
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println(ticketClient.findVehicleName("City 88"));
+        System.out.println(ticketClient.findMinSeats());
+
         // All find by criteria builder
         /*System.out.println("=========== find All by criteria builder ===============");
         System.out.println(ticketClient.findAllVehicleAsCriteria());

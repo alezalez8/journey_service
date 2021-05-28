@@ -11,9 +11,11 @@ public interface VehicleSpecification {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(VehicleEntity_.NAME), criteriaBuilder.literal(name));
     }
 
+
     static Specification<VehicleEntity> onlyActive() {
         return (root, query, criteriaBuilder) -> criteriaBuilder.isTrue(root.get(VehicleEntity_.ACTIVE));
     }
+
 
     static Specification<VehicleEntity> byNameAndActive(final String name) {
         return ((root, criteriaQuery, criteriaBuilder) -> {

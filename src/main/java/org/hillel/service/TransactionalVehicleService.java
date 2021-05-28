@@ -20,8 +20,38 @@ public class TransactionalVehicleService {
     private VehicleJpaRepository vehicleJpaRepository;
 
 
+    // ==================================== get transaction with use jpa ====================================
+
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findAllVehiclesJpa() {
+        return vehicleJpaRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findByName(String name) {
+        return vehicleJpaRepository.findByName(name);
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findVehicleName(String name) {
+        return vehicleJpaRepository.findAll(VehicleSpecification.byName(name));
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findVehicleWithMinSeats() {
+        return vehicleJpaRepository.findVehicleWithMinSeats();
+    }
+
+
+
+
+
+    // ==================================== this is old ====================================
+
+
     @Transactional
     public VehicleEntity createOrUpdate(VehicleEntity vehicleEntity) {
+
         return vehicleRepository.createOrUpdate(vehicleEntity);
     }
 
@@ -31,10 +61,10 @@ public class TransactionalVehicleService {
     }
 
 
-    @Transactional(readOnly = true)
+   /* @Transactional(readOnly = true)
     public Collection<VehicleEntity> findVehicleWithMinSeats() {
         return vehicleRepository.findVehicleWithMinSeats();
-    }
+    }*/
 
     @Transactional(readOnly = true)
     public Collection<VehicleEntity> findVehicleWithMaxSeats() {
@@ -69,21 +99,6 @@ public class TransactionalVehicleService {
     }
 
     // ======================================================================================
-    @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findAllVehiclesJpa() {
 
-        //VehicleEntity vehicleEntity = new VehicleEntity();
-        //vehicleEntity.setName(name);
-        return vehicleJpaRepository.findAll();
-    }
 
-    @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findByName(String name) {
-        return vehicleJpaRepository.findByName(name);
-    }
-
-    @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findVehicleName(String name){
-        return vehicleJpaRepository.findAll(VehicleSpecification.byName(name));
-    }
 }
