@@ -1,7 +1,6 @@
 package org.hillel.persistence.jpa.repository;
 
 import org.hillel.persistence.entity.VehicleEntity;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -22,7 +21,7 @@ public interface VehicleJpaRepository extends CommonJpaRepository<VehicleEntity,
 
     @Query(value = "select v.* from vehicle v where v.id between :id_from and :id_to and v.name = :name",
             countQuery = "select count(v.id) from  vehicle v", nativeQuery = true)
-    Page<VehicleEntity> findByConditions(@Param("name") String name,
+    List<VehicleEntity> findByConditions(@Param("name") String name,
                                          @Param("id_from") Long idFrom,
                                          @Param("id_to") Long idTo, Pageable page);
 

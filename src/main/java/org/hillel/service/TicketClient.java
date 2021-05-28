@@ -33,7 +33,7 @@ public class TicketClient {
     @Autowired
     private TranscactionalVehicleSeatsService vehicleSeatsService;
 
-    //    @Autowired
+    //@Autowired
     private Environment environment;
 
     @Value("${datasource.url}")
@@ -57,6 +57,10 @@ public class TicketClient {
         return vehicleService.findVehicleWithMinSeats();
     }
 
+    public Collection<VehicleEntity> findVehiclesByCondition(String name) {
+        return vehicleService.findByCondition(name);
+    }
+
 
     public Collection<StopEntity> findAllStops() {
         return stopService.findAll();
@@ -69,15 +73,6 @@ public class TicketClient {
     public Collection<JourneyEntity> findAllBySpecification(String from, String to) {
         return journeyService.findAllBySpecification(from, to);
     }
-
-
-
-
-
-
-
-
-
 
 
 // ============================== old methods =================================================
@@ -112,7 +107,6 @@ public class TicketClient {
     public void removeById(Long journeyId) {
         journeyService.removeById(journeyId);
     }
-
 
 
 }

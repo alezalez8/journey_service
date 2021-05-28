@@ -83,7 +83,9 @@ public class Starter {
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println(ticketClient.findVehicleName("City 88"));
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println(ticketClient.findMinSeats());
+        System.out.println(ticketClient.findVehiclesByCondition("City 88"));
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
+                System.out.println(ticketClient.findMinSeats());
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("===================== Journey =====================");
         System.out.println(ticketClient.findAllJourneys());

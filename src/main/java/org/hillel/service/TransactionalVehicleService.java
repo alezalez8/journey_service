@@ -1,10 +1,12 @@
 package org.hillel.service;
 
 import org.hillel.persistence.entity.VehicleEntity;
+import org.hillel.persistence.entity.VehicleEntity_;
 import org.hillel.persistence.jpa.repository.VehicleJpaRepository;
 import org.hillel.persistence.jpa.repository.specification.VehicleSpecification;
-import org.hillel.persistence.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +14,6 @@ import java.util.Collection;
 
 @Service
 public class TransactionalVehicleService {
-
-    @Autowired
-    private VehicleRepository vehicleRepository;
 
     @Autowired
     private VehicleJpaRepository vehicleJpaRepository;
@@ -39,62 +38,20 @@ public class TransactionalVehicleService {
     }
 
 
-
-
-
-    // ==================================== this is old ====================================
-
-
-    @Transactional
+    @Transactional(rollbackFor = IllegalArgumentException.class)
     public VehicleEntity createOrUpdate(VehicleEntity vehicleEntity) {
 
-        return vehicleRepository.createOrUpdate(vehicleEntity);
+        return vehicleJpaRepository.save(vehicleEntity);
     }
 
     @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findAll() {
-        return vehicleRepository.findAll();
-    }
-
-
-   /* @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findVehicleWithMinSeats() {
-        return vehicleRepository.findVehicleWithMinSeats();
-    }*/
-
-    @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findVehicleWithMaxSeats() {
-        return vehicleRepository.findVehicleWithMaxSeats();
-    }
-
-    @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findAllAsNative() {
-        return vehicleRepository.findAllAsNative();
+    public Collection<VehicleEntity> findByCondition(String name) {
+        final Collection<VehicleEntity> byName = vehicleJpaRepository.findByConditions(
+                name,
+                1l,
+                4l,
+                PageRequest.of(0, 2, Sort.by(VehicleEntity_.NAME)));
+          return byName;
 
     }
-
-    @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findAllAsCriteria() {
-        return vehicleRepository.findAllAsCriteria();
-    }
-
-    @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findAllAsNamed() {
-        return vehicleRepository.findAllAsNamed();
-    }
-
-    @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findAllAsStoredProcedure() {
-        return vehicleRepository.findAllAsStoredProcedure();
-    }
-
-
-    @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findAllVehicles(SearchQueryParam searchQueryParam) {
-        return vehicleRepository.findAllAsCriteriaBuildWithParams(searchQueryParam);
-    }
-
-    // ======================================================================================
-
-
 }
